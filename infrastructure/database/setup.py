@@ -11,6 +11,8 @@ def create_engine(db: DbConfig, echo=False):
         max_overflow=200,
         future=True,
         echo=echo,
+        # Vaqtlar (ariza vaqti, "bugun" statistikasi) server qayerda bo'lishidan qat'i nazar Toshkent vaqtida
+        connect_args={"server_settings": {"timezone": "Asia/Tashkent"}},
     )
     return engine
 

@@ -62,3 +62,10 @@ venv.bak/
 .idea/
 .env
 cache/
+# Loyiha
+.DS_Store
+# Admin /media orqali yuklaydigan rasm va PDF lar (serverning o'zida saqlanadi)
+media/
+files/
+# PyCharm namunasi
+main.py

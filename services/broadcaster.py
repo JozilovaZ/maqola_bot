@@ -80,6 +80,39 @@ async def broadcast(
     return count
 
 
+async def copy_to_users(
+        bot: Bot,
+        user_ids: list[int],
+        from_chat_id: int,
+        message_id: int,
+) -> tuple[int, list[int], int]:
+    """
+    Admin yuborgan xabarni (matn, rasm, video, fayl ...) o'zgarishsiz har bir foydalanuvchiga nusxalaydi.
+
+    :return: (yuborilganlar soni, botni bloklaganlar ID lari, boshqa xatolar soni)
+    """
+    sent, blocked, failed = 0, [], 0
+    for user_id in user_ids:
+        try:
+            await bot.copy_message(user_id, from_chat_id, message_id)
+            sent += 1
+        except exceptions.TelegramRetryAfter as e:
+            await asyncio.sleep(e.retry_after)
+            try:
+                await bot.copy_message(user_id, from_chat_id, message_id)
+                sent += 1
+            except exceptions.TelegramAPIError:
+                failed += 1
+        except exceptions.TelegramForbiddenError:
+            blocked.append(user_id)
+        except exceptions.TelegramAPIError as e:
+            logging.error(f"Rassilka [ID:{user_id}]: {e}")
+            failed += 1
+        await asyncio.sleep(0.05)  # Telegram cheklovi: soniyada 20 ta xabar
+    logging.info(f"Rassilka: {sent} yuborildi, {len(blocked)} bloklagan, {failed} xato")
+    return sent, blocked, failed
+
+
 # Qo‘shimcha: Inline klaviatura yaratish uchun misol
 def create_broadcast_keyboard():
     """Ommaviy xabar uchun inline klaviatura yaratadi."""

@@ -1,4 +1,11 @@
 venv/
+.venv/
 .idea/
+.git/
 cache/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+research/
 README.MD

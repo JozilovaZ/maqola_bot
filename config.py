@@ -123,9 +123,38 @@ class Miscellaneous:
 
 
 @dataclass
+class Scopus:
+    """Elsevier Scopus API (dev.elsevier.com). Kalit bo'sh bo'lsa, jurnal "topilmadi" deb javob beriladi."""
+    api_key: str
+
+    @staticmethod
+    def from_env(env: Env):
+        return Scopus(api_key=env.str("SCOPUS_API_KEY", default=""))
+
+
+@dataclass
+class Links:
+    """Mini App (web app) havolalari. https bo'lishi shart; bo'sh bo'lsa tugma ko'rsatilmaydi."""
+    blog: str
+    services: dict[str, str]
+
+    @staticmethod
+    def from_env(env: Env):
+        return Links(
+            blog=env.str("URL_BLOG", default=""),
+            services={
+                key: env.str(f"URL_{key.upper()}", default="")
+                for key in ("scopus", "wos", "oak", "diss", "hirsh", "conf")
+            },
+        )
+
+
+@dataclass
 class Config:
     tg_bot: TgBot
     misc: Miscellaneous
+    links: Links
+    scopus: Scopus
     db: Optional[DbConfig] = None
     redis: Optional[RedisConfig] = None
 
@@ -143,7 +172,9 @@ def load_config(path: str = None) -> Config:
         config = Config(
             tg_bot=TgBot.from_env(env),
             misc=Miscellaneous(),
-            # db=DbConfig.from_env(env),  # Agar ma'lumotlar bazasi ishlatilsa
+            links=Links.from_env(env),
+            scopus=Scopus.from_env(env),
+            db=DbConfig.from_env(env),
             # redis=RedisConfig.from_env(env),  # Agar Redis ishlatilsa
         )
         logging.info("Konfiguratsiya muvaffaqiyatli yuklandi")

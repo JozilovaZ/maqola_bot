@@ -1,33 +1,24 @@
-from aiogram import types, Router, F
-from aiogram.filters import StateFilter
-from aiogram.fsm.context import FSMContext
-from aiogram.utils.markdown import hcode
+from aiogram import Bot, Router, types
+
+from config import Config
+from misc import texts
+from services.notify import forward_to_admins
 
 echo_router = Router()
 
-@echo_router.message(F.text, StateFilter(None))
-async def bot_echo(message: types.Message):
-    """
-    Foydalanuvchi hech qanday holatda (state) bo‘lmaganda yuborgan matnli xabarga javob beradi.
-    Xabar foydalanuvchining yuborgan matnini qaytaradi.
-    """
-    text = [
-        "🎈 Salom Siz hech qanday holatda emassiz!",
-        "📩 Sizning xabaringiz:",
-        f"{hcode(message.text)}"
-    ]
-    await message.answer("\n".join(text), parse_mode="Markdown")
 
-@echo_router.message(F.text)
-async def bot_echo_all(message: types.Message, state: FSMContext):
+@echo_router.message()
+async def any_message(message: types.Message, bot: Bot, config: Config):
     """
-    Foydalanuvchi biron holatda (state) bo‘lganda yuborgan matnli xabarga javob beradi.
-    Xabar foydalanuvchining holatini va yuborgan matnini ko‘rsatadi.
+    Bo'limlarga tegishli bo'lmagan har qanday xabar (matn, rasm, fayl, ovozli xabar ...).
+    Foydalanuvchiga javob beriladi, xabar esa adminlarga yuboriladi — menejer o'zi bog'lanadi.
     """
-    state_name = await state.get_state() or "Noma'lum"
-    text = [
-        f" Salom! Siz hozir {hcode(state_name)} holatidasiz!",
-        "📬 Sizning xabaringiz:",
-        f"{hcode(message.text)}"
-    ]
-    await message.answer("\n".join(text), parse_mode="Markdown")
+    await message.answer(texts.FALLBACK)
+    if message.from_user.id not in config.tg_bot.admin_ids:
+        await forward_to_admins(bot, config.tg_bot.admin_ids, message)
+
+
+@echo_router.callback_query()
+async def stale_button(call: types.CallbackQuery):
+    """Eski yoki noma'lum tugma bosilganda "soat" belgisi aylanib qolmasligi uchun."""
+    await call.answer()

@@ -9,12 +9,17 @@ from aiogram.fsm.storage.redis import RedisStorage, DefaultKeyBuilder
 
 from config import load_config, Config
 from handlers.users import routers_list
+from infrastructure.database.setup import create_engine, create_session_pool
 from middlewares.config import ConfigMiddleware
+from middlewares.database import DatabaseMiddleware
+from middlewares.reset_state import ResetStateMiddleware
+from misc.bot_commands import set_default_commands
 
 from services import broadcaster
 
 
 async def on_startup(bot: Bot, admin_ids: list[int]):
+    await set_default_commands(bot, admin_ids)
     await broadcaster.broadcast(bot, admin_ids, "Bot ishga tushdi ")
 
 
@@ -31,12 +36,16 @@ def register_global_middlewares(dp: Dispatcher, config: Config, session_pool=Non
     """
     middleware_types = [
         ConfigMiddleware(config),
-        # DatabaseMiddleware(session_pool),
+        DatabaseMiddleware(session_pool),
     ]
 
     for middleware_type in middleware_types:
         dp.message.outer_middleware(middleware_type)
         dp.callback_query.outer_middleware(middleware_type)
+
+    reset_state = ResetStateMiddleware()
+    dp.message.outer_middleware(reset_state)
+    dp.callback_query.outer_middleware(reset_state)
 
 
 def setup_logging():
@@ -93,11 +102,15 @@ async def main():
 
 
     bot = Bot(token=config.tg_bot.token, default=DefaultBotProperties(parse_mode="HTML"))
-    dp = Dispatcher(storage=storage)
+    engine = create_engine(config.db)
+    session_pool = create_session_pool(engine)
+
+    # session_pool handlerlarga ham beriladi: rassilka fonda o'z sessiyasi bilan ishlaydi
+    dp = Dispatcher(storage=storage, session_pool=session_pool)
 
     dp.include_routers(*routers_list)
 
-    register_global_middlewares(dp, config)
+    register_global_middlewares(dp, config, session_pool)
 
     await on_startup(bot, config.tg_bot.admin_ids)
     await dp.start_polling(bot)
@@ -107,4 +120,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
-        logging.error("Бот був вимкнений!")
+        logging.error("Bot to'xtatildi!")

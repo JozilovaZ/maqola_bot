@@ -1,0 +1,13 @@
+>>> Dolzarb mavzularni ko‘rish
+#51879
+Sizni qaysi bilim sohasi qiziqtiradi?
+  [Energetika va qurilish]
+  [Agronomiya]
+  [Tibbiyot]
+  [Ta’lim]
+  [Biologiya]
+  [Iqtisodiyot]
+  [Biznes va menejment]
+  [Kiberxavfsizlik]
+  [Moliya va bank ishi]
+  [Boshqa soha]

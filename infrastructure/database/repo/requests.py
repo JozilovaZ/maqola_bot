@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from infrastructure.database.repo.leads import LeadRepo
+from infrastructure.database.repo.topics import TopicRepo
 from infrastructure.database.repo.users import UserRepo
 from infrastructure.database.setup import create_engine
 
@@ -22,6 +24,20 @@ class RequestsRepo:
         The User repository sessions are required to manage user operations.
         """
         return UserRepo(self.session)
+
+    @property
+    def leads(self) -> LeadRepo:
+        """
+        Arizalar (telefon raqamlar, takliflar) bilan ishlash.
+        """
+        return LeadRepo(self.session)
+
+    @property
+    def topics(self) -> TopicRepo:
+        """
+        Hammualliflik sohalari, mavzulari va muallif o'rinlari.
+        """
+        return TopicRepo(self.session)
 
 
 if __name__ == "__main__":

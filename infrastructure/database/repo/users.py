@@ -1,5 +1,6 @@
 from typing import Optional
 
+from sqlalchemy import func, select, text, update
 from sqlalchemy.dialects.postgresql import insert
 
 from infrastructure.database.models import User
@@ -29,13 +30,16 @@ class UserRepo(BaseRepo):
                 user_id=user_id,
                 username=username,
                 full_name=full_name,
-                language=language,
+                # Telegram tilni har doim ham bermaydi, ustun esa NULL qabul qilmaydi
+                language=language or "en",
             )
             .on_conflict_do_update(
                 index_elements=[User.user_id],
                 set_=dict(
                     username=username,
                     full_name=full_name,
+                    # Botni bloklab, keyin yana yozgan foydalanuvchi rassilkaga qaytadi
+                    active=True,
                 ),
             )
             .returning(User)
@@ -44,3 +48,26 @@ class UserRepo(BaseRepo):
 
         await self.session.commit()
         return result.scalar_one()
+
+    async def active_ids(self) -> list[int]:
+        """Rassilka uchun: botni bloklamagan foydalanuvchilar."""
+        return list(await self.session.scalars(select(User.user_id).where(User.active)))
+
+    async def set_inactive(self, user_ids: list[int]) -> None:
+        """Botni bloklagan (xabar yetib bormagan) foydalanuvchilarni belgilash."""
+        if user_ids:
+            await self.session.execute(update(User).where(User.user_id.in_(user_ids)).values(active=False))
+            await self.session.commit()
+
+    async def stats(self) -> dict[str, int]:
+        today = func.date(User.created_at) == func.current_date()
+        week = User.created_at >= func.now() - text("interval '7 days'")
+        row = (await self.session.execute(
+            select(
+                func.count(),
+                func.count().filter(today),
+                func.count().filter(week),
+                func.count().filter(User.active.is_(False)),
+            )
+        )).one()
+        return {"total": row[0], "today": row[1], "week": row[2], "blocked": row[3]}
