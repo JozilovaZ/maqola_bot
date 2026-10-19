@@ -418,21 +418,14 @@ REG_ROLES = {
 
 # Yo'nalish tugmalari (bazada matni saqlanadi). Ro'yxatni shu yerda o'zgartirish mumkin.
 REG_DIRECTIONS = [
-    "Pedagogika va psixologiya",
-    "Iqtisodiyot va moliya",
-    "Axborot texnologiyalari",
-    "Texnika va muhandislik",
-    "Tibbiyot va farmatsiya",
-    "Filologiya va tillar",
-    "Tarix va ijtimoiy fanlar",
-    "Huquqshunoslik",
-    "Matematika va fizika",
-    "Kimyo va biologiya",
-    "Qishloq xo‘jaligi",
-    "Arxitektura va qurilish",
+    "🧬 Tibbiyot va biologiya",
+    "🔭 Aniq va tabiiy fanlar",
+    "📚 Ta’lim va pedagogika",
+    "💼 Iqtisodiyot va biznes",
+    "💻 Texnika va IT",
+    "🏛 Ijtimoiy va gumanitar",
+    "🌐 Ko‘p tarmoqli",
 ]
-# Ro'yxatda yo'q yo'nalishni qo'lda yozish uchun tugma
-REG_DIRECTION_OTHER = "✍️ Boshqa yo‘nalish"
 
 REG_START = GREETING + (
     "Botdan foydalanish uchun qisqa ro‘yxatdan o‘ting — bu 1 daqiqa vaqt oladi.\n\n"
@@ -452,13 +445,27 @@ REG_ROLE = "👤 <b>Faoliyat yo‘nalishingizni tanlang:</b>"
 REG_CHOOSE_BUTTON = "Iltimos, pastdagi tugmalardan birini tanlang 👇"
 
 REG_STUDY_PLACE = {
-    "student": "🏛 <b>Qaysi oliy ta’lim muassasasida o‘qiysiz?</b>\n<i>Namuna: TDTU, SamDU, TATU</i>",
-    "young_scientist": "🏛 <b>Qaysi muassasada tahsil olasiz yoki ishlaysiz?</b>\n<i>Namuna: TDTU, Fanlar akademiyasi</i>",
-    "professor": "🏛 <b>Qayerda ishlaysiz?</b>\n<i>Namuna: TDTU, Fanlar akademiyasi</i>",
+    "student": "🏛 <b>Qaysi oliy ta’lim muassasasida o‘qiysiz?</b>",
+    "young_scientist": "🏛 <b>Qaysi muassasada tahsil olasiz yoki ishlaysiz?</b>",
+    "professor": "🏛 <b>Qayerda ishlaysiz?</b>",
 }
+REG_STUDY_PLACE_HINT = "\n\nRo‘yxatda bo‘lmasa — «{other}» tugmasini bosing."
+
+# OTM tugmalari (bazada matni saqlanadi). Ro'yxatni shu yerda o'zgartirish mumkin.
+REG_UNIVERSITIES = [
+    "O‘zMU", "TDTU", "TATU",
+    "TDIU", "TDPU", "TTA",
+    "TDYU", "O‘zDJTU", "TDSHU",
+    "TAQU", "TDAU", "TIQXMMI",
+    "SamDU", "BuxDU", "FarDU",
+    "AndDU", "NamDU", "QarDU",
+    "TerDU", "UrDU", "GulDU",
+    "JDPU", "QQDU", "Fanlar akademiyasi",
+]
+REG_UNIVERSITY_OTHER = "✍️ Boshqa muassasa"
+REG_STUDY_PLACE_CUSTOM = "✍️ Muassasa nomini yozing:\n<i>Namuna: Toshkent farmatsevtika instituti</i>"
 
 REG_DIRECTION = "📖 <b>Yo‘nalishingizni tanlang:</b>"
-REG_DIRECTION_CUSTOM = "✍️ Yo‘nalishingizni yozing:\n<i>Namuna: Ekologiya, Sport</i>"
 
 REG_TEXT_INVALID = "Iltimos, javobni matn ko‘rinishida qisqa yozing."
 REG_TEXT_ONLY = "Iltimos, savolga javobni matn ko‘rinishida yozing."

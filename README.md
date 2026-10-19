@@ -31,8 +31,8 @@ SQLAlchemy 2, Alembic, Docker.
 Matnlar: `misc/texts.py`. Yangi arizalar adminlarga holat tugmalari bilan keladi.
 
 **Ro'yxatdan o'tish** — birinchi `/start` da foydalanuvchi ism-familiya va telefonni kiritadi, faoliyat
-yo'nalishini (talabalar, yosh tadqiqotchilar, professor-o'qituvchilar va olimlar) va yo'nalishini tugmalardan tanlaydi, o'qish/ish joyini yozadi.
-Tugmalar ro'yxati: `misc/texts.py` dagi `REG_ROLES` va `REG_DIRECTIONS`. Ro'yxatdan o'tmaguncha bot bo'limlari ochilmaydi.
+yo'nalishini (talabalar, yosh tadqiqotchilar, professor-o'qituvchilar va olimlar), OTM va yo'nalishini tugmalardan tanlaydi (OTM ro'yxatda
+bo'lmasa "Boshqa" bosib yozadi). Tugmalar ro'yxati: `misc/texts.py` dagi `REG_ROLES`, `REG_UNIVERSITIES`, `REG_DIRECTIONS`. Ro'yxatdan o'tmaguncha bot bo'limlari ochilmaydi.
 Har bir yangi foydalanuvchi adminlarga xabar qilinadi, ro'yxat — `/export` ning "Foydalanuvchilar" varag'ida.
 
 ## Kompyuterda ishga tushirish
