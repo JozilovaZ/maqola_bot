@@ -151,12 +151,25 @@ class Links:
 
 @dataclass
 class Subscription:
-    """Majburiy obuna guruh/kanallari (@username yoki -100... ID). Bo'sh bo'lsa, obuna so'ralmaydi."""
+    """Majburiy obuna guruh/kanallari (@username, https://t.me/username yoki -100... ID).
+    Bo'sh bo'lsa, obuna so'ralmaydi."""
     chat_ids: list[str]
 
     @staticmethod
+    def normalize(chat: str) -> str:
+        # "https://t.me/kanal", "t.me/kanal", "@https://t.me/kanal" -> "@kanal"
+        chat = chat.strip().lstrip("@")
+        for prefix in ("https://", "http://"):
+            chat = chat.removeprefix(prefix)
+        chat = chat.removeprefix("t.me/").removeprefix("telegram.me/").strip("/")
+        if chat.lstrip("-").isdigit():
+            return chat
+        return "@" + chat
+
+    @staticmethod
     def from_env(env: Env):
-        return Subscription(chat_ids=[c.strip() for c in env.list("REQUIRED_CHATS", default=[]) if c.strip()])
+        chats = [c for c in env.list("REQUIRED_CHATS", default=[]) if c.strip()]
+        return Subscription(chat_ids=[Subscription.normalize(c) for c in chats])
 
 
 @dataclass
