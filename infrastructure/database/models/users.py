@@ -20,7 +20,6 @@ class User(Base, TimestampMixin, TableNameMixin):
     real_name: Mapped[Optional[str]] = mapped_column(String(128))
     phone: Mapped[Optional[str]] = mapped_column(String(32))
     role: Mapped[Optional[str]] = mapped_column(String(16))  # student, young_scientist, professor — misc.texts.REG_ROLES
-    study_place: Mapped[Optional[str]] = mapped_column(String(256))  # OTM yoki ish joyi
     direction: Mapped[Optional[str]] = mapped_column(String(256))  # yo'nalish / mutaxassislik
     registered_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP)  # NULL — hali ro'yxatdan o'tmagan
 

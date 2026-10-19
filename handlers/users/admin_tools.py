@@ -181,17 +181,17 @@ async def cmd_export(message: Message, repo: RequestsRepo):
 
     users = await repo.users.registered()
     sheet = workbook.create_sheet("Foydalanuvchilar")
-    sheet.append(["Ro‘yxatdan o‘tgan", "Ism-familiya", "Telefon", "Faoliyat yo‘nalishi", "O‘qish/ish joyi", "Yo‘nalishi",
+    sheet.append(["Ro‘yxatdan o‘tgan", "Ism-familiya", "Telefon", "Faoliyat yo‘nalishi", "Yo‘nalishi",
                   "Telegram ismi", "Username", "Telegram ID"])
     for user in users:
         sheet.append([
             fmt_time(user.registered_at), user.real_name, user.phone, REG_ROLES.get(user.role, user.role),
-            user.study_place, user.direction, user.full_name, f"@{user.username}" if user.username else "",
+            user.direction, user.full_name, f"@{user.username}" if user.username else "",
             user.user_id,
         ])
     for cell in sheet[1]:
         cell.font = Font(bold=True)
-    for column, width in zip("ABCDEFGHI", [17, 28, 16, 16, 32, 32, 25, 18, 14]):
+    for column, width in zip("ABCDEFGH", [17, 28, 16, 34, 26, 25, 18, 14]):
         sheet.column_dimensions[column].width = width
     sheet.freeze_panes = "A2"
 

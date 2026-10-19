@@ -29,9 +29,8 @@ class AddTopic(StatesGroup):
 
 
 class Registration(StatesGroup):
-    """Birinchi /start: ism-familiya → telefon → faoliyat yo'nalishi → o'qish/ish joyi → yo'nalish."""
+    """Birinchi /start: ism-familiya → telefon → faoliyat yo'nalishi → yo'nalish."""
     full_name = State()
     phone = State()
     role = State()
-    study_place = State()
     direction = State()

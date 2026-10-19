@@ -444,27 +444,6 @@ REG_PHONE_INVALID = "Raqam noto‘g‘ri. «Kontaktni ulashish» tugmasini bosin
 REG_ROLE = "👤 <b>Faoliyat yo‘nalishingizni tanlang:</b>"
 REG_CHOOSE_BUTTON = "Iltimos, pastdagi tugmalardan birini tanlang 👇"
 
-REG_STUDY_PLACE = {
-    "student": "🏛 <b>Qaysi oliy ta’lim muassasasida o‘qiysiz?</b>",
-    "young_scientist": "🏛 <b>Qaysi muassasada tahsil olasiz yoki ishlaysiz?</b>",
-    "professor": "🏛 <b>Qayerda ishlaysiz?</b>",
-}
-REG_STUDY_PLACE_HINT = "\n\nRo‘yxatda bo‘lmasa — «{other}» tugmasini bosing."
-
-# OTM tugmalari (bazada matni saqlanadi). Ro'yxatni shu yerda o'zgartirish mumkin.
-REG_UNIVERSITIES = [
-    "O‘zMU", "TDTU", "TATU",
-    "TDIU", "TDPU", "TTA",
-    "TDYU", "O‘zDJTU", "TDSHU",
-    "TAQU", "TDAU", "TIQXMMI",
-    "SamDU", "BuxDU", "FarDU",
-    "AndDU", "NamDU", "QarDU",
-    "TerDU", "UrDU", "GulDU",
-    "JDPU", "QQDU", "Fanlar akademiyasi",
-]
-REG_UNIVERSITY_OTHER = "✍️ Boshqa muassasa"
-REG_STUDY_PLACE_CUSTOM = "✍️ Muassasa nomini yozing:\n<i>Namuna: Toshkent farmatsevtika instituti</i>"
-
 REG_DIRECTION = "📖 <b>Yo‘nalishingizni tanlang:</b>"
 
 REG_TEXT_INVALID = "Iltimos, javobni matn ko‘rinishida qisqa yozing."

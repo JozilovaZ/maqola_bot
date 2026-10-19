@@ -93,7 +93,6 @@ def render_user(user: User) -> str:
         f"Ism-familiya: {escape(user.real_name)}",
         f"Telefon: {escape(user.phone)}",
         f"Faoliyat yo‘nalishi: {REG_ROLES.get(user.role, user.role)}",
-        f"O‘qish/ish joyi: {escape(user.study_place)}",
         f"Yo‘nalishi: {escape(user.direction)}",
         "",
         format_user(user.user_id, user.full_name, user.username),

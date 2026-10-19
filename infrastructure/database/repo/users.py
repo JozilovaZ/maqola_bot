@@ -50,14 +50,13 @@ class UserRepo(BaseRepo):
         return result.scalar_one()
 
     async def register(
-        self, user_id: int, real_name: str, phone: str, role: str, study_place: str, direction: str
+        self, user_id: int, real_name: str, phone: str, role: str, direction: str
     ) -> User:
         """Ro'yxatdan o'tish ma'lumotlarini saqlash."""
         user = await self.session.get(User, user_id)
         user.real_name = real_name
         user.phone = phone
         user.role = role
-        user.study_place = study_place
         user.direction = direction
         user.registered_at = func.now()
         await self.session.commit()
