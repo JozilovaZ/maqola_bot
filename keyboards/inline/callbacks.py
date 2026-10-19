@@ -53,3 +53,7 @@ class AdminTopic(CallbackData, prefix="adm_t"):
     """
     action: str
     id: int = 0
+
+
+class CheckSub(CallbackData, prefix="sub"):
+    """Majburiy obuna: "✅ Tekshirish" tugmasi."""

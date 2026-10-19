@@ -150,11 +150,22 @@ class Links:
 
 
 @dataclass
+class Subscription:
+    """Majburiy obuna guruh/kanallari (@username yoki -100... ID). Bo'sh bo'lsa, obuna so'ralmaydi."""
+    chat_ids: list[str]
+
+    @staticmethod
+    def from_env(env: Env):
+        return Subscription(chat_ids=[c.strip() for c in env.list("REQUIRED_CHATS", default=[]) if c.strip()])
+
+
+@dataclass
 class Config:
     tg_bot: TgBot
     misc: Miscellaneous
     links: Links
     scopus: Scopus
+    subscription: Subscription
     db: Optional[DbConfig] = None
     redis: Optional[RedisConfig] = None
 
@@ -174,6 +185,7 @@ def load_config(path: str = None) -> Config:
             misc=Miscellaneous(),
             links=Links.from_env(env),
             scopus=Scopus.from_env(env),
+            subscription=Subscription.from_env(env),
             db=DbConfig.from_env(env),
             # redis=RedisConfig.from_env(env),  # Agar Redis ishlatilsa
         )

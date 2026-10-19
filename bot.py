@@ -13,6 +13,7 @@ from infrastructure.database.setup import create_engine, create_session_pool
 from middlewares.config import ConfigMiddleware
 from middlewares.database import DatabaseMiddleware
 from middlewares.reset_state import ResetStateMiddleware
+from middlewares.subscription import SubscriptionMiddleware
 from misc.bot_commands import set_default_commands
 
 from services import broadcaster
@@ -46,6 +47,10 @@ def register_global_middlewares(dp: Dispatcher, config: Config, session_pool=Non
     reset_state = ResetStateMiddleware()
     dp.message.outer_middleware(reset_state)
     dp.callback_query.outer_middleware(reset_state)
+
+    subscription = SubscriptionMiddleware(config.subscription.chat_ids)
+    dp.message.outer_middleware(subscription)
+    dp.callback_query.outer_middleware(subscription)
 
 
 def setup_logging():

@@ -406,3 +406,12 @@ CONTACT_NOT_OWN = "Iltimos, pastdagi «Kontaktni ulashish» tugmasi orqali o‘z
 
 # Bo'limlarga tegishli bo'lmagan har qanday xabarga javob
 FALLBACK = "Rahmat; biz odatda bir necha soat ichida javob beramiz."
+
+# ---------- Majburiy obuna ----------
+
+SUBSCRIBE = (
+    "Botdan foydalanish uchun quyidagi guruhga a’zo bo‘ling 👇\n\n"
+    "A’zo bo‘lgach, <b>✅ Tekshirish</b> tugmasini bosing."
+)
+SUBSCRIBE_NOT_YET = "❌ Siz hali guruhga a’zo bo‘lmadingiz. Avval a’zo bo‘ling, so‘ng «Tekshirish»ni bosing."
+SUBSCRIBE_DONE = "✅ Rahmat! Obuna tasdiqlandi."

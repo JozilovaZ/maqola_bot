@@ -30,6 +30,10 @@ SQLAlchemy 2, Alembic, Docker.
 
 Matnlar: `misc/texts.py`. Yangi arizalar adminlarga holat tugmalari bilan keladi.
 
+**Majburiy obuna** — `.env` dagi `REQUIRED_CHATS` ga guruh/kanal `@username` yoki ID sini (`-100...`) yozing
+(bir nechtasi vergul bilan). Foydalanuvchi a'zo bo'lmaguncha bot faqat obuna xabarini ko'rsatadi; adminlar
+tekshirilmaydi. Bot o'sha guruhda **admin** bo'lishi shart (yopiq guruh uchun "Taklif qilish" huquqi bilan).
+
 ## Kompyuterda ishga tushirish
 
 ```bash
