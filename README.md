@@ -1,6 +1,6 @@
-# Maqola bot
+# Fihria Academic bot
 
-Ilmiy maqolalar bo'yicha Telegram bot: foydali materiallar, xizmatlar, Scopus'da jurnalni tekshirish,
+Ilmiy maqolalar bo'yicha Telegram bot: xizmatlar, Scopus'da jurnalni tekshirish,
 hammualliflik mavzulari va arizalar (telefon raqamlar) yig'ish. @Mirzo_MA_bot asosida yaratilgan.
 
 [aiogram_3_shablon](https://github.com/davronovuz/aiogram_3_shablon) shabloni asosida: aiogram 3, PostgreSQL,
@@ -8,10 +8,9 @@ SQLAlchemy 2, Alembic, Docker.
 
 ## Imkoniyatlar
 
-**Foydalanuvchi uchun** — `/start` (`/hero`), `/guides`, `/about`, `/services`, `/help`, `/scopus_check`,
+**Foydalanuvchi uchun** — `/start` (`/hero`), `/about`, `/services`, `/help`, `/scopus_check`,
 `/co_authorship`:
-- Foydali materiallar: chek-listlar (PDF) va blog (Mini App)
-- Akademiya haqida, 6 ta xizmat, buyurtma va bepul maslahat — telefon raqam "Kontaktni ulashish" orqali
+- Fihria Academic haqida, 6 ta xizmat, buyurtma va bepul maslahat — telefon raqam "Kontaktni ulashish" orqali
 - Scopus'da jurnalni ISSN yoki nom bo'yicha tekshirish (Elsevier API)
 - Hammualliflik: sohalar → mavzular (narx, bo'sh o'rinlar) → buyurtma yoki mavzu taklifi
 - Boshqa har qanday xabar adminlarga yuboriladi

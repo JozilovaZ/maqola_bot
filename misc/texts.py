@@ -1,109 +1,32 @@
-# Botning barcha matnlari (original @Mirzo_MA_bot dan aynan). {name} — foydalanuvchining to'liq ismi.
+# Botning barcha matnlari (dastlab @Mirzo_MA_bot asosida yozilgan). {name} — foydalanuvchining to'liq ismi.
 
 GREETING = (
     "Assalomu alaykum, {name}! 👋\n\n"
-    "Men — Oʻzbekiston tadqiqotchilari uchun Maqolalar akademiyasi yordamchisi Mirzoman.\n\n"
+    "Men — Oʻzbekiston tadqiqotchilari uchun Fihria Academic yordamchisiman.\n\n"
 )
 
 MAIN_MENU = GREETING + (
     "Xush kelibsiz! Menyuda siz:\n\n"
-    "📝 Foydali maqola va materiallarni o‘qishingiz\n\n"
-    "🏛 Maqolalar akademiyasi haqida batafsil ma’lumot olishingiz mumkin\n\n"
+    "🏛 Fihria Academic haqida batafsil ma’lumot olishingiz mumkin\n\n"
     "🔎 Jurnalning Scopus’dagi holatini tekshirishingiz\n\n"
-    "📌 Akademiyaning dolzarb xizmatlari bilan tanishishingiz\n\n"
+    "📌 Fihria Academic’ning dolzarb xizmatlari bilan tanishishingiz\n\n"
     "🤝 Scopus/Web of Science tizimlarida hammualliflik bo‘yicha dolzarb mavzularni ko‘rib chiqish\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
 )
 
-# ---------- Foydali materiallar ----------
-
-GUIDES = (
-    "📚 Foydali materiallar\n\n"
-    "Bu yerda Maqolalar akademiyasining maqolalari va chek-listlari jamlangan — nashr qilish, jurnal tanlash, "
-    "dissertatsiyalar va ilmiy rivojlanish bo‘yicha sodda tushuntirishlar.\n\n"
-    "Sizni qiziqtirgan bo‘limni tanlang 👇"
-)
-
-CHECKLISTS = (
-    "Maqola tayyorlash, jurnal tanlash, dissertatsiya ustida ishlash yoki ilmiy profilingizni rivojlantirish "
-    "jarayonida hech narsani e’tibordan chetda qoldirmaslikka yordam beradigan bosqichma-bosqich "
-    "chek-listlarni jamladik.\n\n"
-    "Quyidagi kerakli chek-listni tanlang 👇"
-)
-
-CHECKLIST_TEXTS = {
-    "phd": (
-        "Xush kelibsiz! PhD himoyasiga chiqish uchun hujjatlar checklisti allaqachon shu yerda 📁\n\n"
-        "Instagram'da va'da berganimizdek — OAK nizomining 2893-sonli 2-ilovasiga muvofiq rasmiy to'plamni "
-        "yubormoqdamiz.\n\n"
-        "Doktorantlarning ko'pchiligi 6 dan 12 oygacha vaqtni ilmiy qism tufayli emas, balki rasmiy xatolar "
-        "tufayli yo'qotishadi: noto'g'ri tasdiqlangan joriy etish dalolatnomasi, ishlar ro'yxatining eskirgan "
-        "shakli yoki hammualliflarning yozma roziligi yo'qligi.\n\n"
-        "Hozir nima qilish kerak:\n\n"
-        "Quyidagi faylni yuklab ol ⬇️\n"
-        "Ilmiy kotibga tashrifdan oldin papkangni band-band tekshirib chiq.\n"
-        "Agar kamida bitta hujjat yetishmasa — bu masalani oldindan hal qilib qo'y."
-    ),
-    "rejected": (
-        "📘 Maqolangiz rad etildimi? Keyingi qadamni to‘g‘ri tanlang\n"
-        "Rad javobi — tadqiqotning yakuni emas. Muhimi, muharrir va taqrizchi izohlarini to‘g‘ri tahlil qilib, "
-        "maqolani qayta topshirishga tayyorlash.\n"
-        "Siz uchun «Maqolangiz rad etildimi? 5 qadamli harakat rejasi» chek-listini tayyorladik.\n"
-        "Unda siz:\n"
-        "✅ muharrir qarorining turini aniqlaysiz;\n"
-        "✅ taqrizchi izohlarini tizimlashtirasiz;\n"
-        "✅ har bir izohga to‘g‘ri javob tayyorlaysiz;\n"
-        "✅ shu jurnalda qolish yoki boshqasini tanlashni hal qilasiz;\n"
-        "✅ maqolani qayta yuborishdan oldin tekshirasiz.\n"
-        "Chek-listni saqlab qo‘ying va qayta topshirishdan oldin barcha bosqichlarni tekshiring 👇"
-    ),
-    "reply": (
-        "🤖 Salom! Men Mirzo — Maqolalar akademiyasi yordamchi botiman.\n"
-        "Maqolangizga taqrizchilar izoh berdimi?\n\n"
-        "Javob xatini qanday tuzishni bilmasangiz, siz uchun tayyor chek-list bor.\n\n"
-        "Unda:\n"
-        "✅ har bir izohga qanday javob berish\n"
-        "✅ o‘zgarishlarni qanday ko‘rsatish\n"
-        "✅ rozi bo‘lmaganda qanday muloyim argument qilish\n"
-        "✅ javob xatini yuborishdan oldin nimalarni tekshirish\n\n"
-        "📌 Chek-listni saqlab qo‘ying — retsenziya kelganda tayyor qo‘llanma bo‘ladi."
-    ),
-    "redflags": (
-        "🤖 Salom! Men Mirzo — Maqolalar akademiyasi yordamchi botiman.\n\n"
-        "Maqolangizni Scopus jurnaliga yubormoqchimisiz? Avval jurnalni tekshirib oling.\n\n"
-        "Siz uchun «Scopus jurnalini tanlash: 7 ta xavf belgisi» chek-listini tayyorladik.\n"
-        "Unda:\n\n"
-        "✅ nashrlar sonining shubhali o‘sishini aniqlash\n"
-        "✅ maqolalarning jurnal yo‘nalishi va sifatiga e’tibor berish\n"
-        "✅ haddan tashqari tez nashr va’dalari va tinimsiz taklif xatlarini baholash\n"
-        "✅ aniqlangan belgilar asosida xavf darajasini tekshirish\n\n"
-        "📌 Chek-listni saqlab qo‘ying — maqolangizni yuborishdan oldin jurnalni tekshirishda yordam beradi."
-    ),
-}
-
-BLOG = (
-    "Blogimizda olimlar uchun dolzarb va amaliy materiallar jamlangan:\n\n"
-    "• Oʻzbekiston Respublikasi OAKdagi yangilanishlar hamda dissertatsiya himoyasi yoki ilmiy unvon olish "
-    "uchun nashr talablari;\n"
-    "• Scopus, Web of Science va OAK jurnallarida maqola chop etish xususiyatlari;\n"
-    "• maqolani yuborish bo‘yicha tavsiyalar, odatiy xatolar va jurnal tanlashdagi muhim jihatlar;\n"
-    "• Hirsh indeksi, ORCID va ilmiy rivojlanish uchun boshqa vositalar.\n\n"
-    "Quyidagi sizni qiziqtirgan maqolani tanlang 👇"
-)
-
-# ---------- Akademiya haqida ----------
+# ---------- Fihria Academic haqida ----------
 
 ABOUT = GREETING + (
-    "Xizmatni tanlashdan oldin Maqolalar akademiyasi — jamoamiz, ish yondashuvimiz va mijozlar uchun "
+    "Xizmatni tanlashdan oldin Fihria Academic — jamoamiz, ish yondashuvimiz va mijozlar uchun "
     "kafolatlarimiz bilan yaqindan tanishib chiqishni taklif qilaman.\n\n"
     "Ilmiy maqolangizni, dissertatsiyangizni yoki boshqa muhim loyihangizni kimga ishonib topshirayotganingizni "
     "yaxshi tushunishingiz biz uchun muhim.\n\n"
-    "Quyidagi bo‘limni tanlang — olimlar nima uchun Maqolalar akademiyasini tanlashlarini bilib oling 👇"
+    "Quyidagi bo‘limni tanlang — olimlar nima uchun Fihria Academic’ni tanlashlarini bilib oling 👇"
 )
 
 # Originalda matn "bo‘y" so'zida kesilib qolgan — oxiri to'ldirildi
 ABOUT_WHY = (
-    "⭐ Nega olimlar Maqolalar akademiyasini tanlashadi?\n\n"
+    "⭐ Nega olimlar Fihria Academic’ni tanlashadi?\n\n"
     "Biz shaffof ishlaymiz, mijozlarni har bir bosqichda qo‘llab-quvvatlaymiz va hatto noodatiy ilmiy "
     "vazifalar uchun ham yechim topishga yordam beramiz.\n\n"
     "Bizning afzalliklarimiz:\n\n"
@@ -134,7 +57,7 @@ ABOUT_REVIEWS = (
 
 SERVICES = (
     "Assalomu alaykum, {name}! 👋\n\n"
-    "Men — Maqolalar akademiyasi yordamchisi Mirzoman.\n\n"
+    "Men — Fihria Academic yordamchisiman.\n\n"
     "Bu yerda nashr qilishni rejalashtirayotgan, hammualliflik izlayotgan yoki professional yordamga muhtoj "
     "bo‘lganlar uchun barcha xizmatlarimiz jamlangan.\n\n"
     "Menyudan kerakli xizmatni tanlang — batafsil ma’lumot, shartlar va keyingi qadamlar bilan tanishing."
@@ -143,7 +66,7 @@ SERVICES = (
 SERVICE_TEXTS = {
     "scopus": (
         "📚 Scopus’da maqola chop etish\n\n"
-        "Scopus bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Maqolalar akademiyasi "
+        "Scopus bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria Academic "
         "maqola yozilishidan boshlab, uning Scopus bazasida indekslanishigacha bo‘lgan butun jarayonni kuzatib "
         "boradi.\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
@@ -162,8 +85,8 @@ SERVICE_TEXTS = {
     ),
     "wos": (
         "🔬 Web of Science’da maqola chop etish\n\n"
-        "Web of Science bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Maqolalar "
-        "akademiyasi maqola yozilishidan boshlab, uning Web of Science bazasida indekslanishigacha bo‘lgan butun "
+        "Web of Science bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria "
+        "Academic maqola yozilishidan boshlab, uning Web of Science bazasida indekslanishigacha bo‘lgan butun "
         "jarayonni kuzatib boradi.\n\n"
         "Xizmat quyidagilarni o‘z ichiga oladi:\n\n"
         "• nashr talablarini hisobga olgan holda maqolani yozish yoki auditdan o‘tkazish;\n"
@@ -182,7 +105,7 @@ SERVICE_TEXTS = {
     "oak": (
         "🎓 OAK jurnallarida maqola chop etish\n\n"
         "Oʻzbekiston Respublikasi OAKning amaldagi roʻyxatidagi jurnalda maqola chop etishni rejalashtiryapsizmi? "
-        "Maqolalar akademiyasi material tayyorlashdan boshlab, maqolaning rasmiy nashr qilinishigacha bo‘lgan "
+        "Fihria Academic material tayyorlashdan boshlab, maqolaning rasmiy nashr qilinishigacha bo‘lgan "
         "butun jarayonni kuzatib boradi.\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
         "• mavzuingiz bo‘yicha sifatli ilmiy maqola yozish yoki tayyor matnni professional auditdan o‘tkazish;\n"
@@ -257,12 +180,12 @@ ORDER = (
     "📝 Arizangiz uchun rahmat!\n\n"
     "Menejer siz bilan bog‘lanib, xizmat tafsilotlarini muhokama qilishi uchun quyidagi tugma orqali telefon "
     "raqamingizni qoldiring 👇\n\n"
-    "Maqolalar akademiyasi menejeri yaqin vaqt ichida sizga qo‘ng‘iroq qiladi."
+    "Fihria Academic menejeri yaqin vaqt ichida sizga qo‘ng‘iroq qiladi."
 )
 
 CONSULT = (
     "Savolingiz bo‘yicha bepul maslahat olish uchun quyidagi tugma orqali telefon raqamingizni qoldiring 👇\n\n"
-    "Maqolalar akademiyasi menejeri yaqin vaqt ichida siz bilan bog‘lanadi va barcha savollaringizga javob "
+    "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va barcha savollaringizga javob "
     "beradi.\n\n"
     "📱 Telefon raqamini yuborish"
 )
@@ -276,7 +199,7 @@ CONTACT_ARROW = "⬇⁣"
 COAUTH = GREETING + (
     "Hammualliflik variantlari mutaxassisligingiz, mavzuingiz va nashr maqsadingizni inobatga olgan holda "
     "individual tarzda tanlanadi.\n\n"
-    "O‘zingizga qulay aloqa ma’lumotini qoldiring — Akademiya mutaxassisi siz bilan bog‘lanib, mos variantni "
+    "O‘zingizga qulay aloqa ma’lumotini qoldiring — Fihria Academic mutaxassisi siz bilan bog‘lanib, mos variantni "
     "tanlashga yordam beradi.\n\n"
     "Quyidagi qulay variantni tanlang 👇"
 )
@@ -284,7 +207,7 @@ COAUTH = GREETING + (
 COAUTH_INDIVIDUAL = (
     "✅ Siz hammualliflik uchun bepul individual mavzular tanlovini tanladingiz.\n\n"
     "Telefon raqamingizni quyidagi tugma orqali qoldiring 👇\n\n"
-    "Maqolalar akademiyasi menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik uchun dolzarb "
+    "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik uchun dolzarb "
     "mavzalarni taklif qiladi.\n\n"
     "⬇"
 )
@@ -333,7 +256,7 @@ SCOPUS_INTRO = (
     "🔎 Scopus’da jurnalni tekshirish\n\n"
     "Jurnalda maqola chop etishni rejalashtiryapsizmi? Maqolani yuborishdan oldin nashr haqidagi dolzarb "
     "ma’lumotlarni Scopus’da tekshiring.\n\n"
-    "Mirzo sizga quyidagilarni aniqlashga yordam beradi:\n\n"
+    "Men sizga quyidagilarni aniqlashga yordam beraman:\n\n"
     "• jurnalning Scopus’dagi maqomi;\n"
     "• qamrov yillari;\n"
     "• nashriyotchi;\n"
@@ -383,19 +306,19 @@ CONTACT_THANKS = "✅ Rahmat, {name}! Telefon raqamingiz qabul qilindi.\n\n{tail
 # Javob oxiri raqam qaysi bo'limdan qoldirilganiga bog'liq (reason)
 CONTACT_TAILS = {
     "consult": (
-        "Maqolalar akademiyasi menejeri yaqin vaqt ichida siz bilan bog‘lanadi va barcha savollaringizga "
+        "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va barcha savollaringizga "
         "javob beradi."
     ),
     "order": (
-        "Maqolalar akademiyasi menejeri yaqin vaqt ichida sizga qo‘ng‘iroq qiladi va xizmat tafsilotlarini "
+        "Fihria Academic menejeri yaqin vaqt ichida sizga qo‘ng‘iroq qiladi va xizmat tafsilotlarini "
         "muhokama qiladi."
     ),
     "coauth": (
-        "Maqolalar akademiyasi menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik uchun dolzarb "
+        "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik uchun dolzarb "
         "mavzalarni taklif qiladi."
     ),
     "coauth_order": (
-        "Maqolalar akademiyasi menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik tafsilotlarini "
+        "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik tafsilotlarini "
         "muhokama qiladi."
     ),
     "scopus": "Mutaxassis jurnalni qo‘lda tekshirib, yaqin vaqt ichida siz bilan bog‘lanadi.",

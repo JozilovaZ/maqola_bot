@@ -2,13 +2,8 @@ from aiogram.filters.callback_data import CallbackData
 
 
 class Nav(CallbackData, prefix="nav"):
-    """Bo'limlar orasida o'tish. to — bo'lim nomi: main, guides, about, consult, scopus, services, coauth."""
+    """Bo'limlar orasida o'tish. to — bo'lim nomi: main, about, consult, scopus, services, coauth."""
     to: str
-
-
-class Checklist(CallbackData, prefix="cl"):
-    """key: phd, rejected, reply, redflags"""
-    key: str
 
 
 class Service(CallbackData, prefix="svc"):
@@ -34,7 +29,7 @@ class LeadStatus(CallbackData, prefix="adm_l"):
 
 
 class MediaSlot(CallbackData, prefix="adm_m"):
-    """/media: action — list, open, delete; key — misc.media dagi joy nomi (hero, checklist_phd ...)."""
+    """/media: action — list, open, delete; key — misc.media dagi joy nomi (hero, about ...)."""
     action: str
     key: str = ""
 

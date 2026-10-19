@@ -135,13 +135,11 @@ class Scopus:
 @dataclass
 class Links:
     """Mini App (web app) havolalari. https bo'lishi shart; bo'sh bo'lsa tugma ko'rsatilmaydi."""
-    blog: str
     services: dict[str, str]
 
     @staticmethod
     def from_env(env: Env):
         return Links(
-            blog=env.str("URL_BLOG", default=""),
             services={
                 key: env.str(f"URL_{key.upper()}", default="")
                 for key in ("scopus", "wos", "oak", "diss", "hirsh", "conf")

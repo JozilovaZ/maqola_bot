@@ -2,7 +2,7 @@
 
 Rasmlar media/ papkasida, PDF'lar files/ papkasida nomi bo'yicha qidiriladi (hero.jpg, hero.png —
 kengaytmasi farqi yo'q). Fayl bo'lmasa, hech narsa yuborilmaydi.
-PDF admin yuklagan asl nomi bilan saqlanadi: checklist_phd__<asl nom>.pdf — foydalanuvchi asl nomni ko'radi.
+PDF admin yuklagan asl nomi bilan saqlanadi: <joy>__<asl nom>.pdf — foydalanuvchi asl nomni ko'radi.
 Telegram qaytargan file_id keshlanadi, fayl qayta yuklanmaydi.
 """
 from pathlib import Path
@@ -18,8 +18,7 @@ FILES_DIR = BASE_DIR / "files"
 # /media da ko'rinadigan joylar: nom → admin uchun tavsif
 PHOTO_SLOTS = {
     "hero": "🏠 Bosh sahifa",
-    "guides": "🎁 Foydali materiallar",
-    "about": "🏛 Akademiya haqida",
+    "about": "🏛 Fihria Academic haqida",
     "services": "💼 Xizmatlar",
     "svc_scopus": "📝 Xizmat: Scopus",
     "svc_wos": "📝 Xizmat: Web of Science",
@@ -31,12 +30,8 @@ PHOTO_SLOTS = {
     "coauth_topics": "🎯 Dolzarb mavzular",
     "coauth_field": "📌 Soha mavzulari",
 }
-PDF_SLOTS = {
-    "checklist_phd": "📁 PDF: PhD hujjatlari checklisti",
-    "checklist_rejected": "📘 PDF: Rad etilgandan keyingi 5 qadam",
-    "checklist_reply": "📝 PDF: Taqrizchiga javob xati",
-    "checklist_redflags": "🔎 PDF: 7 ta xavf belgisi",
-}
+# PDF joylari (files/ papkasi): hozircha yo'q, kerak bo'lsa shu yerga qo'shiladi
+PDF_SLOTS: dict[str, str] = {}
 
 _file_ids: dict[Path, str] = {}
 

@@ -1,13 +1,12 @@
 from aiogram import Bot
 from aiogram.types import BotCommand, BotCommandScopeChat, BotCommandScopeDefault
 
-# Original @Mirzo_MA_bot dagi buyruqlar menyusi
+# Buyruqlar menyusi
 COMMANDS = [
     BotCommand(command="hero", description="🏠 Bosh sahifa"),
-    BotCommand(command="guides", description="🎁 Foydali materiallar"),
     BotCommand(command="scopus_check", description="🔎 Scopus’da jurnalni tekshirish"),
-    BotCommand(command="about", description="🏛 Maqolalar akademiyasi haqida"),
-    BotCommand(command="services", description="💼 Maqolalar akademiyasi xizmatlari"),
+    BotCommand(command="about", description="🏛 Fihria Academic haqida"),
+    BotCommand(command="services", description="💼 Fihria Academic xizmatlari"),
     BotCommand(command="help", description="💬 Bepul maslahat"),
     BotCommand(command="co_authorship", description="🤝 Scopus/WoS hammuallifligi"),
 ]
