@@ -6,8 +6,9 @@ from typing import Optional
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, Message
 
-from infrastructure.database.models import Lead
+from infrastructure.database.models import Lead, User
 from keyboards.inline.admin import lead_status_kb
+from misc.texts import REG_ROLES
 
 REASON_TITLES = {
     "consult": "💬 Bepul maslahat",
@@ -83,3 +84,23 @@ async def forward_to_admins(bot: Bot, admin_ids: list[int], message: Message) ->
 
 async def notify_new_lead(bot: Bot, admin_ids: list[int], lead: Lead, full_name: str, username: Optional[str]) -> None:
     await notify_admins(bot, admin_ids, render_lead(lead, full_name, username), reply_markup=lead_status_kb(lead.id))
+
+
+def render_user(user: User) -> str:
+    """Ro'yxatdan o'tgan foydalanuvchi kartochkasi."""
+    return "\n".join([
+        f"👤 <b>Yangi foydalanuvchi ro‘yxatdan o‘tdi</b> · {fmt_time(user.registered_at)}",
+        f"Ism-familiya: {escape(user.real_name)}",
+        f"Telefon: {escape(user.phone)}",
+        f"Faoliyat yo‘nalishi: {REG_ROLES.get(user.role, user.role)}",
+        f"O‘qish/ish joyi: {escape(user.study_place)}",
+        f"Yo‘nalishi: {escape(user.direction)}",
+        "",
+        format_user(user.user_id, user.full_name, user.username),
+        "",
+        REPLY_HINT,
+    ])
+
+
+async def notify_new_user(bot: Bot, admin_ids: list[int], user: User) -> None:
+    await notify_admins(bot, admin_ids, render_user(user))

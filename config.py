@@ -150,35 +150,11 @@ class Links:
 
 
 @dataclass
-class Subscription:
-    """Majburiy obuna guruh/kanallari (@username, https://t.me/username yoki -100... ID).
-    Bo'sh bo'lsa, obuna so'ralmaydi."""
-    chat_ids: list[str]
-
-    @staticmethod
-    def normalize(chat: str) -> str:
-        # "https://t.me/kanal", "t.me/kanal", "@https://t.me/kanal" -> "@kanal"
-        chat = chat.strip().lstrip("@")
-        for prefix in ("https://", "http://"):
-            chat = chat.removeprefix(prefix)
-        chat = chat.removeprefix("t.me/").removeprefix("telegram.me/").strip("/")
-        if chat.lstrip("-").isdigit():
-            return chat
-        return "@" + chat
-
-    @staticmethod
-    def from_env(env: Env):
-        chats = [c for c in env.list("REQUIRED_CHATS", default=[]) if c.strip()]
-        return Subscription(chat_ids=[Subscription.normalize(c) for c in chats])
-
-
-@dataclass
 class Config:
     tg_bot: TgBot
     misc: Miscellaneous
     links: Links
     scopus: Scopus
-    subscription: Subscription
     db: Optional[DbConfig] = None
     redis: Optional[RedisConfig] = None
 
@@ -198,7 +174,6 @@ def load_config(path: str = None) -> Config:
             misc=Miscellaneous(),
             links=Links.from_env(env),
             scopus=Scopus.from_env(env),
-            subscription=Subscription.from_env(env),
             db=DbConfig.from_env(env),
             # redis=RedisConfig.from_env(env),  # Agar Redis ishlatilsa
         )

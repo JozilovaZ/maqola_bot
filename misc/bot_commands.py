@@ -16,7 +16,7 @@ COMMANDS = [
 # Faqat adminlarga ko'rinadigan qo'shimcha buyruqlar
 ADMIN_COMMANDS = [
     BotCommand(command="leads", description="📋 Ochiq arizalar"),
-    BotCommand(command="export", description="📥 Arizalar Excel faylda"),
+    BotCommand(command="export", description="📥 Arizalar va foydalanuvchilar Excel faylda"),
     BotCommand(command="topics", description="🛠 Hammualliflik mavzularini boshqarish"),
     BotCommand(command="media", description="🖼 Rasm va PDF'larni yuklash"),
     BotCommand(command="stat", description="📊 Statistika"),

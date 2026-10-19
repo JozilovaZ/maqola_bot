@@ -19,6 +19,7 @@ from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.admin import broadcast_confirm_kb, lead_status_kb, media_list_kb, media_slot_kb
 from keyboards.inline.callbacks import Broadcast, LeadStatus, MediaSlot
 from misc import media
+from misc.texts import REG_ROLES
 from misc.media import PDF_SLOTS, PHOTO_SLOTS
 from misc.states import BroadcastState, MediaUpload
 from services.broadcaster import copy_to_users
@@ -42,6 +43,7 @@ async def cmd_stat(message: Message, repo: RequestsRepo):
         "",
         "👥 <b>Foydalanuvchilar</b>",
         f"Jami: {users['total']}",
+        f"Ro‘yxatdan o‘tgan: {users['registered']}",
         f"Bugun qo‘shilgan: {users['today']}",
         f"Oxirgi 7 kunda: {users['week']}",
         f"Botni bloklagan: {users['blocked']}",
@@ -177,12 +179,28 @@ async def cmd_export(message: Message, repo: RequestsRepo):
         sheet.column_dimensions[column].width = width
     sheet.freeze_panes = "A2"
 
+    users = await repo.users.registered()
+    sheet = workbook.create_sheet("Foydalanuvchilar")
+    sheet.append(["Ro‘yxatdan o‘tgan", "Ism-familiya", "Telefon", "Faoliyat yo‘nalishi", "O‘qish/ish joyi", "Yo‘nalishi",
+                  "Telegram ismi", "Username", "Telegram ID"])
+    for user in users:
+        sheet.append([
+            fmt_time(user.registered_at), user.real_name, user.phone, REG_ROLES.get(user.role, user.role),
+            user.study_place, user.direction, user.full_name, f"@{user.username}" if user.username else "",
+            user.user_id,
+        ])
+    for cell in sheet[1]:
+        cell.font = Font(bold=True)
+    for column, width in zip("ABCDEFGHI", [17, 28, 16, 16, 32, 32, 25, 18, 14]):
+        sheet.column_dimensions[column].width = width
+    sheet.freeze_panes = "A2"
+
     buffer = BytesIO()
     workbook.save(buffer)
     filename = f"arizalar_{datetime.date.today():%Y-%m-%d}.xlsx"
     await message.answer_document(
         BufferedInputFile(buffer.getvalue(), filename=filename),
-        caption=f"📊 Jami arizalar: {len(leads)}",
+        caption=f"📊 Jami arizalar: {len(leads)}\n👤 Ro‘yxatdan o‘tganlar: {len(users)}",
     )
 
 

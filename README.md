@@ -21,7 +21,7 @@ SQLAlchemy 2, Alembic, Docker.
 | Buyruq | Vazifasi |
 |---|---|
 | `/leads`, `/lead_N` | Ochiq arizalar; holat: 📞 Bog‘lanildi / ✅ Yopildi / ❌ Rad etildi |
-| `/export` | Barcha arizalar Excel faylida |
+| `/export` | Barcha arizalar va ro'yxatdan o'tganlar Excel faylida |
 | `/stat` | Foydalanuvchilar va arizalar statistikasi |
 | `/broadcast` | Hammaga xabar yuborish (ko'rib chiqib, tasdiqlab) |
 | `/topics` | Hammualliflik sohalari va mavzularini boshqarish |
@@ -30,9 +30,10 @@ SQLAlchemy 2, Alembic, Docker.
 
 Matnlar: `misc/texts.py`. Yangi arizalar adminlarga holat tugmalari bilan keladi.
 
-**Majburiy obuna** — `.env` dagi `REQUIRED_CHATS` ga guruh/kanal `@username` yoki ID sini (`-100...`) yozing
-(bir nechtasi vergul bilan). Foydalanuvchi a'zo bo'lmaguncha bot faqat obuna xabarini ko'rsatadi; adminlar
-tekshirilmaydi. Bot o'sha guruhda **admin** bo'lishi shart (yopiq guruh uchun "Taklif qilish" huquqi bilan).
+**Ro'yxatdan o'tish** — birinchi `/start` da foydalanuvchi ism-familiya va telefonni kiritadi, faoliyat
+yo'nalishini (talabalar, yosh tadqiqotchilar, professor-o'qituvchilar va olimlar) va yo'nalishini tugmalardan tanlaydi, o'qish/ish joyini yozadi.
+Tugmalar ro'yxati: `misc/texts.py` dagi `REG_ROLES` va `REG_DIRECTIONS`. Ro'yxatdan o'tmaguncha bot bo'limlari ochilmaydi.
+Har bir yangi foydalanuvchi adminlarga xabar qilinadi, ro'yxat — `/export` ning "Foydalanuvchilar" varag'ida.
 
 ## Kompyuterda ishga tushirish
 

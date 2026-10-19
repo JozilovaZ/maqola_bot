@@ -407,11 +407,60 @@ CONTACT_NOT_OWN = "Iltimos, pastdagi «Kontaktni ulashish» tugmasi orqali o‘z
 # Bo'limlarga tegishli bo'lmagan har qanday xabarga javob
 FALLBACK = "Rahmat; biz odatda bir necha soat ichida javob beramiz."
 
-# ---------- Majburiy obuna ----------
+# ---------- Ro'yxatdan o'tish (birinchi /start) ----------
 
-SUBSCRIBE = (
-    "Botdan foydalanish uchun quyidagi guruhga a’zo bo‘ling 👇\n\n"
-    "A’zo bo‘lgach, <b>✅ Tekshirish</b> tugmasini bosing."
+# Kalit bazada saqlanadi (users.role), qiymat — tugma matni
+REG_ROLES = {
+    "student": "🎓 Talabalar",
+    "young_scientist": "🔬 Yosh tadqiqotchilar",
+    "professor": "👨‍🏫 Professor-o‘qituvchilar va olimlar",
+}
+
+# Yo'nalish tugmalari (bazada matni saqlanadi). Ro'yxatni shu yerda o'zgartirish mumkin.
+REG_DIRECTIONS = [
+    "Pedagogika va psixologiya",
+    "Iqtisodiyot va moliya",
+    "Axborot texnologiyalari",
+    "Texnika va muhandislik",
+    "Tibbiyot va farmatsiya",
+    "Filologiya va tillar",
+    "Tarix va ijtimoiy fanlar",
+    "Huquqshunoslik",
+    "Matematika va fizika",
+    "Kimyo va biologiya",
+    "Qishloq xo‘jaligi",
+    "Arxitektura va qurilish",
+]
+# Ro'yxatda yo'q yo'nalishni qo'lda yozish uchun tugma
+REG_DIRECTION_OTHER = "✍️ Boshqa yo‘nalish"
+
+REG_START = GREETING + (
+    "Botdan foydalanish uchun qisqa ro‘yxatdan o‘ting — bu 1 daqiqa vaqt oladi.\n\n"
+    "✍️ <b>Ism va familiyangizni</b> yozing:\n"
+    "<i>Namuna: Aliyev Vali</i>"
 )
-SUBSCRIBE_NOT_YET = "❌ Siz hali guruhga a’zo bo‘lmadingiz. Avval a’zo bo‘ling, so‘ng «Tekshirish»ni bosing."
-SUBSCRIBE_DONE = "✅ Rahmat! Obuna tasdiqlandi."
+REG_NAME_INVALID = "Iltimos, ism va familiyangizni to‘liq yozing.\n<i>Namuna: Aliyev Vali</i>"
+
+REG_PHONE = (
+    "📱 <b>Telefon raqamingizni</b> yuboring.\n\n"
+    "Pastdagi «Kontaktni ulashish» tugmasini bosing yoki raqamni yozing.\n"
+    "<i>Namuna: +998901234567</i>"
+)
+REG_PHONE_INVALID = "Raqam noto‘g‘ri. «Kontaktni ulashish» tugmasini bosing yoki shunday yozing: +998901234567"
+
+REG_ROLE = "👤 <b>Faoliyat yo‘nalishingizni tanlang:</b>"
+REG_CHOOSE_BUTTON = "Iltimos, pastdagi tugmalardan birini tanlang 👇"
+
+REG_STUDY_PLACE = {
+    "student": "🏛 <b>Qaysi oliy ta’lim muassasasida o‘qiysiz?</b>\n<i>Namuna: TDTU, SamDU, TATU</i>",
+    "young_scientist": "🏛 <b>Qaysi muassasada tahsil olasiz yoki ishlaysiz?</b>\n<i>Namuna: TDTU, Fanlar akademiyasi</i>",
+    "professor": "🏛 <b>Qayerda ishlaysiz?</b>\n<i>Namuna: TDTU, Fanlar akademiyasi</i>",
+}
+
+REG_DIRECTION = "📖 <b>Yo‘nalishingizni tanlang:</b>"
+REG_DIRECTION_CUSTOM = "✍️ Yo‘nalishingizni yozing:\n<i>Namuna: Ekologiya, Sport</i>"
+
+REG_TEXT_INVALID = "Iltimos, javobni matn ko‘rinishida qisqa yozing."
+REG_TEXT_ONLY = "Iltimos, savolga javobni matn ko‘rinishida yozing."
+
+REG_DONE = "✅ Rahmat, {name}! Siz muvaffaqiyatli ro‘yxatdan o‘tdingiz."

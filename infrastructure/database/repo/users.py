@@ -49,6 +49,27 @@ class UserRepo(BaseRepo):
         await self.session.commit()
         return result.scalar_one()
 
+    async def register(
+        self, user_id: int, real_name: str, phone: str, role: str, study_place: str, direction: str
+    ) -> User:
+        """Ro'yxatdan o'tish ma'lumotlarini saqlash."""
+        user = await self.session.get(User, user_id)
+        user.real_name = real_name
+        user.phone = phone
+        user.role = role
+        user.study_place = study_place
+        user.direction = direction
+        user.registered_at = func.now()
+        await self.session.commit()
+        await self.session.refresh(user)
+        return user
+
+    async def registered(self) -> list[User]:
+        """/export uchun: ro'yxatdan o'tgan foydalanuvchilar, yangilari birinchi."""
+        return list(await self.session.scalars(
+            select(User).where(User.registered_at.is_not(None)).order_by(User.registered_at.desc())
+        ))
+
     async def active_ids(self) -> list[int]:
         """Rassilka uchun: botni bloklamagan foydalanuvchilar."""
         return list(await self.session.scalars(select(User.user_id).where(User.active)))
@@ -68,6 +89,7 @@ class UserRepo(BaseRepo):
                 func.count().filter(today),
                 func.count().filter(week),
                 func.count().filter(User.active.is_(False)),
+                func.count().filter(User.registered_at.is_not(None)),
             )
         )).one()
-        return {"total": row[0], "today": row[1], "week": row[2], "blocked": row[3]}
+        return {"total": row[0], "today": row[1], "week": row[2], "blocked": row[3], "registered": row[4]}

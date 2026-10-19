@@ -12,8 +12,8 @@ from handlers.users import routers_list
 from infrastructure.database.setup import create_engine, create_session_pool
 from middlewares.config import ConfigMiddleware
 from middlewares.database import DatabaseMiddleware
+from middlewares.registration import RegistrationMiddleware
 from middlewares.reset_state import ResetStateMiddleware
-from middlewares.subscription import SubscriptionMiddleware
 from misc.bot_commands import set_default_commands
 
 from services import broadcaster
@@ -48,9 +48,10 @@ def register_global_middlewares(dp: Dispatcher, config: Config, session_pool=Non
     dp.message.outer_middleware(reset_state)
     dp.callback_query.outer_middleware(reset_state)
 
-    subscription = SubscriptionMiddleware(config.subscription.chat_ids)
-    dp.message.outer_middleware(subscription)
-    dp.callback_query.outer_middleware(subscription)
+    # ResetState'dan keyin: /start holatni tozalasa, ro'yxatdan o'tish boshidan boshlanadi
+    registration = RegistrationMiddleware()
+    dp.message.outer_middleware(registration)
+    dp.callback_query.outer_middleware(registration)
 
 
 def setup_logging():

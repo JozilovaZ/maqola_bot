@@ -26,3 +26,12 @@ class AddTopic(StatesGroup):
     base = State()
     title = State()
     prices = State()
+
+
+class Registration(StatesGroup):
+    """Birinchi /start: ism-familiya → telefon → faoliyat yo'nalishi → o'qish/ish joyi → yo'nalish."""
+    full_name = State()
+    phone = State()
+    role = State()
+    study_place = State()
+    direction = State()

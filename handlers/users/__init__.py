@@ -5,13 +5,13 @@ from handlers.users.coauthor import coauthor_router
 from handlers.users.contact import contact_router
 from handlers.users.echo import echo_router
 from handlers.users.guides import guides_router
+from handlers.users.registration import registration_router
 from handlers.users.scopus_check import scopus_router
 from handlers.users.services import services_router
 from handlers.users.start import user_router
-from handlers.users.subscription import subscription_router
 
 routers_list = [
-    subscription_router,
+    registration_router,
     admin_router,
     admin_tools_router,
     user_router,
