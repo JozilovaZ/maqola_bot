@@ -177,6 +177,35 @@ SERVICE_TEXTS = {
         "Tezislarni chop etishga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
         "Quyidagi kerakli tugmani tanlang 👇"
     ),
+    "edit": (
+        "✏️ Maqolani tahrirlash\n\n"
+        "Maqolangiz tayyor, lekin jurnal talablariga to‘liq javob berishiga ishonchingiz komil emasmi? Fihria "
+        "Academic mutaxassislari matnni ilmiy va texnik jihatdan tahrir qilib, nashrga tayyorlab beradi.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• imlo, grammatika va uslub xatolarini tuzatish;\n"
+        "• ilmiy matn tuzilishini (IMRAD: kirish, usullar, natijalar, muhokama) takomillashtirish;\n"
+        "• annotatsiya, kalit so‘zlar va sarlavhani jurnal talablariga moslashtirish;\n"
+        "• adabiyotlar ro‘yxati va iqtiboslarni kerakli standartda (APA, Vancouver, GOST va b.) rasmiylashtirish;\n"
+        "• jadval, rasm va formulalarni tartibga keltirish;\n"
+        "• taqrizchilar izohlari bo‘yicha tuzatishlar kiritishda yordam.\n\n"
+        "Narx va muddat matn hajmi hamda tahrir darajasiga qarab belgilanadi.\n\n"
+        "Tahrirga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
+        "Quyidagi kerakli tugmani tanlang 👇"
+    ),
+    "translate": (
+        "🌐 Maqolani tarjima qilish\n\n"
+        "Maqolangizni xalqaro jurnalga yubormoqchimisiz? Fihria Academic ilmiy matnlarni soha terminologiyasini "
+        "saqlagan holda professional tarjima qiladi.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• o‘zbek, rus va ingliz tillari o‘rtasida ilmiy tarjima;\n"
+        "• yo‘nalishingiz bo‘yicha mutaxassis-tarjimon tomonidan ishlash;\n"
+        "• ilmiy terminlarning to‘g‘ri va bir xil qo‘llanishini nazorat qilish;\n"
+        "• tarjimadan keyin akademik ingliz tilida yakuniy tahrir (proofreading);\n"
+        "• annotatsiya, kalit so‘zlar, jadval va rasmlar izohlarini ham tarjima qilish.\n\n"
+        "Narx va muddat matn hajmi va til juftligiga qarab belgilanadi.\n\n"
+        "Tarjimaga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
+        "Quyidagi kerakli tugmani tanlang 👇"
+    ),
 }
 
 ORDER = (

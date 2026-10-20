@@ -10,6 +10,8 @@ SERVICE_BUTTONS = {
     "diss": "📚 Dissertatsiyalar bo‘yicha xizmatlar",
     "hirsh": "📈 Hirsh indeksini oshirish",
     "conf": "🎤 Konferensiya tezislarini chop etish",
+    "edit": "✏️ Maqolani tahrirlash",
+    "translate": "🌐 Maqolani tarjima qilish",
 }
 
 
@@ -17,7 +19,6 @@ def services_kb() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
     for key, text in SERVICE_BUTTONS.items():
         keyboard.button(text=text, callback_data=Service(key=key))
-    keyboard.button(text="🤝 Scopus / Web of Science’da hammualliflik", callback_data=Nav(to="coauth"))
     keyboard.adjust(1)
     return keyboard.as_markup()
 

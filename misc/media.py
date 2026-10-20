@@ -26,6 +26,8 @@ PHOTO_SLOTS = {
     "svc_diss": "📚 Xizmat: Dissertatsiya",
     "svc_hirsh": "📈 Xizmat: Hirsh indeksi",
     "svc_conf": "🎤 Xizmat: Konferensiya",
+    "svc_edit": "✏️ Xizmat: Tahrirlash",
+    "svc_translate": "🌐 Xizmat: Tarjima",
     "coauth": "🤝 Hammualliflik",
     "coauth_topics": "🎯 Dolzarb mavzular",
     "coauth_field": "📌 Soha mavzulari",
