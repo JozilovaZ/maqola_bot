@@ -19,6 +19,7 @@ REASON_TITLES = {
     "scopus": "🔎 Scopus — jurnalni qo‘lda tekshirish",
     "audit": "📝 Maqola auditi (Scopus tekshiruvidan)",
     "plagiat": "🧾 Plagiatga tekshirish",
+    "coauth_article": "🤝 Maqolaga hammuallif bo‘lish",
 }
 
 STATUS_TITLES = {
@@ -43,14 +44,24 @@ def fmt_time(value: Optional[datetime]) -> str:
     return value.strftime("%d.%m.%Y %H:%M") if value else ""
 
 
-def render_lead(lead: Lead, full_name: str, username: Optional[str]) -> str:
-    """Ariza kartochkasi: yangi ariza xabari, /lead_N va holat o'zgarganda bir xil ko'rinadi."""
+def render_lead(lead: Lead, full_name: str, username: Optional[str], profile: Optional[User] = None) -> str:
+    """Ariza kartochkasi: yangi ariza xabari, /lead_N va holat o'zgarganda bir xil ko'rinadi.
+
+    profile — bazadagi foydalanuvchi: berilsa va u ro'yxatdan o'tgan bo'lsa, ro'yxatdan o'tish ma'lumotlari ham
+    qo'shiladi (direction oldindan yuklangan bo'lishi kerak).
+    """
     lines = [
         f"🆕 <b>Ariza #{lead.id}</b> · {fmt_time(lead.created_at)}",
         f"Bo‘lim: {REASON_TITLES.get(lead.reason, lead.reason)}",
     ]
     if lead.details:
         lines.append(f"Tafsilot: {escape(lead.details)}")
+    if profile is not None and profile.registered_at:
+        lines += [
+            f"Ism-familiya: {escape(profile.real_name or '—')}",
+            f"Faoliyat yo‘nalishi: {REG_ROLES.get(profile.role, profile.role or '—')}",
+            f"Yo‘nalishi: {escape(profile.direction.title if profile.direction else '—')}",
+        ]
     lines.append(format_user(lead.user_id, full_name, username))
     if lead.phone:
         lines.append(f"Telefon: {escape(lead.phone)}")
@@ -83,19 +94,20 @@ async def forward_to_admins(bot: Bot, admin_ids: list[int], message: Message) ->
             logging.error(f"Xabar adminga yuborilmadi [ID:{admin_id}]: {e}")
 
 
-async def notify_new_lead(bot: Bot, admin_ids: list[int], lead: Lead, full_name: str, username: Optional[str]) -> None:
-    await notify_admins(bot, admin_ids, render_lead(lead, full_name, username), reply_markup=lead_status_kb(lead.id))
-
-
-async def notify_new_file_lead(
-    bot: Bot, admin_ids: list[int], lead: Lead, full_name: str, username: Optional[str], file_id: str
+async def notify_new_lead(
+    bot: Bot, admin_ids: list[int], lead: Lead, full_name: str, username: Optional[str], profile: Optional[User] = None
 ) -> None:
+    await notify_admins(
+        bot, admin_ids, render_lead(lead, full_name, username, profile=profile), reply_markup=lead_status_kb(lead.id)
+    )
+
+
+async def notify_new_file_lead(bot: Bot, admin_ids: list[int], lead: Lead, user: User, file_id: str) -> None:
     """Fayl bilan kelgan ariza (plagiatga tekshirish): fayl yuboriladi, ariza kartochkasi — uning izohida."""
+    caption = render_lead(lead, user.full_name, user.username, profile=user)
     for admin_id in admin_ids:
         try:
-            await bot.send_document(
-                admin_id, file_id, caption=render_lead(lead, full_name, username), reply_markup=lead_status_kb(lead.id)
-            )
+            await bot.send_document(admin_id, file_id, caption=caption, reply_markup=lead_status_kb(lead.id))
         except Exception as e:
             logging.error(f"Fayl adminga yuborilmadi [ID:{admin_id}]: {e}")
 

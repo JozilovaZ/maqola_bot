@@ -66,9 +66,9 @@ async def plagiat_file(message: Message, state: FSMContext, bot: Bot, config: Co
 
     # Foydalanuvchi ro'yxatdan o'tgan — telefon raqami bazada bor
     lead = await repo.leads.add_lead(user.user_id, "plagiat", phone=user.phone, details=document.file_name[:200])
-    await notify_new_file_lead(
-        bot, config.tg_bot.admin_ids, lead, message.from_user.full_name, message.from_user.username, document.file_id
-    )
+    # Adminga yo'nalish nomi ham boradi — u foydalanuvchi bilan birga yuklanmagan bo'lishi mumkin
+    await repo.session.refresh(user, ["direction"])
+    await notify_new_file_lead(bot, config.tg_bot.admin_ids, lead, user, document.file_id)
     await message.answer(texts.PLAGIAT_DONE.format(name=escape(user.real_name or message.from_user.full_name)))
     await show_main_menu(message, message.from_user)
 

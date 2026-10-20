@@ -7,6 +7,9 @@ from keyboards.inline.callbacks import FieldPage, Nav
 
 def coauth_kb() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
+    keyboard.button(text="📖 Hammualliflik uchun maqolalar", callback_data=Nav(to="articles"))
+    keyboard.button(text="📝 Maqola joylash", callback_data=Nav(to="article_submit"))
+    keyboard.button(text="🗂 Mening maqolalarim", callback_data=Nav(to="my_articles"))
     keyboard.button(text="🎯 Individual tanlov", callback_data=Nav(to="coauth_individual"))
     keyboard.button(text="🎯 Dolzarb mavzalar tanlovini olish", callback_data=Nav(to="coauth_topics"))
     keyboard.adjust(1)

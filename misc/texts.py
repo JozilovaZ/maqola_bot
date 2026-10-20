@@ -335,6 +335,9 @@ MONTHS = [
 
 CONTACT_THANKS = "✅ Rahmat, {name}! Telefon raqamingiz qabul qilindi.\n\n{tail}"
 
+# Ro'yxatdan o'tgan foydalanuvchi ariza qoldirganda (raqam qayta so'ralmaydi)
+LEAD_THANKS = "✅ Rahmat, {name}! Arizangiz qabul qilindi.\n\n{tail}\n\n📱 Bog‘lanish uchun raqamingiz: {phone}"
+
 # Javob oxiri raqam qaysi bo'limdan qoldirilganiga bog'liq (reason)
 CONTACT_TAILS = {
     "consult": (
@@ -354,6 +357,10 @@ CONTACT_TAILS = {
         "muhokama qiladi."
     ),
     "scopus": "Mutaxassis jurnalni qo‘lda tekshirib, yaqin vaqt ichida siz bilan bog‘lanadi.",
+    "coauth_article": (
+        "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va hammualliflik shartlarini "
+        "muhokama qiladi."
+    ),
     "audit": "Mutaxassis yaqin vaqt ichida bog‘lanadi va maqolangiz bo‘yicha bepul maslahat beradi.",
 }
 
@@ -411,11 +418,63 @@ PLAGIAT = (
     "🧾 <b>Plagiatga tekshirish</b>\n\n"
     "Maqolangizni plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirib beramiz.\n\n"
     "📎 Faylni shu yerga yuboring — <b>Word (.doc, .docx)</b> yoki <b>PDF</b>, 20 MB gacha.\n\n"
-    "Fihria Academic mutaxassisi faylni ko‘rib chiqib, natijani shu bot orqali yuboradi."
+    "Tekshiruv natijasi tayyor bo‘lgach, adminlarimiz siz bilan bog‘lanadi."
 )
 PLAGIAT_WRONG = "Iltimos, maqolani <b>Word (.doc, .docx)</b> yoki <b>PDF</b> fayl ko‘rinishida yuboring."
 PLAGIAT_TOO_BIG = "Fayl 20 MB dan katta. Iltimos, kichikroq fayl yuboring."
 PLAGIAT_DONE = (
     "✅ Rahmat, {name}! Faylingiz qabul qilindi.\n\n"
-    "Mutaxassis uni tekshirib, natijani shu bot orqali yuboradi."
+    "Natija tayyor bo‘lganida siz bilan adminlarimiz bog‘lanadi."
 )
+
+# ---------- Hammualliflik: foydalanuvchilar maqolalari ----------
+
+ARTICLE_SUBMIT = (
+    "📝 <b>Hammualliflik uchun maqola joylash</b>\n\n"
+    "Maqolangizni yuboring — Fihria Academic mutaxassislari ko‘rib chiqadi va tasdiqlangach, u hammualliflik "
+    "bo‘limiga joylanadi. Hammuallif bo‘lishni istaganlar bilan adminlarimiz bog‘lanadi.\n\n"
+    "🔒 Boshqa foydalanuvchilarga faqat <b>sarlavha, annotatsiya, baza va o‘rinlar soni</b> ko‘rinadi. "
+    "Maqola fayli va ismingiz faqat adminlarga ko‘rinadi.\n\n"
+    "1️⃣ Maqola <b>sarlavhasini</b> yozing:"
+)
+ARTICLE_TITLE_INVALID = "Sarlavha 5 dan 300 belgigacha bo‘lsin. Qaytadan yozing:"
+ARTICLE_DIRECTION = "2️⃣ Maqola qaysi <b>yo‘nalishga</b> tegishli?"
+ARTICLE_BASE = "3️⃣ Maqola qaysi <b>bazadagi</b> jurnalga mo‘ljallangan?"
+ARTICLE_ANNOTATION = (
+    "4️⃣ Maqolaning qisqa <b>annotatsiyasini</b> yozing (30–1000 belgi).\n\n"
+    "<i>Bu matn boshqa foydalanuvchilarga ko‘rinadi — unga ism, telefon va boshqa shaxsiy ma’lumotlarni "
+    "yozmang.</i>"
+)
+ARTICLE_ANNOTATION_INVALID = "Annotatsiya 30 dan 1000 belgigacha bo‘lsin. Qaytadan yozing:"
+ARTICLE_SLOTS = "5️⃣ Maqolaga nechta <b>hammuallif</b> kerak?"
+ARTICLE_FILE = (
+    "6️⃣ Maqola <b>faylini</b> yuboring — Word (.doc, .docx) yoki PDF, 20 MB gacha.\n\n"
+    "<i>Fayl faqat adminlarga ko‘rinadi.</i>"
+)
+ARTICLE_CONFIRM = "Ma’lumotlarni tekshiring:\n\n{summary}\n\nAdminlarga ko‘rib chiqish uchun yuboraymi?"
+ARTICLE_SENT = (
+    "✅ Rahmat! Maqolangiz <b>#{id}</b> ko‘rib chiqish uchun adminlarga yuborildi.\n\n"
+    "Tasdiqlangach yoki rad etilsa, shu bot orqali xabar beramiz. Holatini «🗂 Mening maqolalarim» bo‘limida "
+    "ko‘rishingiz mumkin."
+)
+ARTICLE_CANCELLED = "❌ Maqola yuborish bekor qilindi."
+ARTICLE_EXPIRED = "Ma’lumotlar topilmadi. Iltimos, maqola joylashni qaytadan boshlang."
+
+ARTICLES = (
+    "📖 <b>Hammualliflik uchun maqolalar</b>\n\n"
+    "Bu yerda Fihria Academic tasdiqlagan, hammuallif izlayotgan maqolalar joylangan. Qiziqtirgan maqola ostidagi "
+    "«🤝 Hammuallif bo‘lish» tugmasini bosing — adminlarimiz siz bilan bog‘lanadi.\n\n"
+    "Yo‘nalishni tanlang (qavs ichida — maqolalar soni) 👇"
+)
+ARTICLES_EMPTY = "Bu yo‘nalish bo‘yicha hozircha maqola yo‘q. Tez orada yangilari qo‘shiladi."
+ARTICLE_APPLY = "🤝 Hammuallif bo‘lish uchun telefon raqamingizni qoldiring 👇"
+ARTICLE_OWN = "Bu o‘zingizning maqolangiz 🙂"
+ARTICLE_UNAVAILABLE = "Bu maqola endi mavjud emas yoki o‘rinlar to‘lgan."
+
+MY_ARTICLES_EMPTY = "Siz hali maqola joylamagansiz."
+
+ARTICLE_APPROVED = (
+    "✅ Maqolangiz <b>#{id}</b> tasdiqlandi va hammualliflik bo‘limiga joylandi!\n\n"
+    "«{title}»\n\nHammuallif bo‘lishni istaganlar paydo bo‘lishi bilan adminlarimiz siz bilan bog‘lanadi."
+)
+ARTICLE_REJECTED = "❌ Afsuski, maqolangiz <b>#{id}</b> tasdiqlanmadi.\n\n«{title}»{reason}"

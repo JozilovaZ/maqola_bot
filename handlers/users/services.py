@@ -1,15 +1,17 @@
 from html import escape
 
-from aiogram import F, Router
+from aiogram import Bot, F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, User
 
 from config import Config
+from infrastructure.database.models import User as DbUser
+from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.callbacks import Nav, Order, Service
 from keyboards.inline.services import SERVICE_BUTTONS, service_kb, services_kb
 from misc import texts
-from misc.contact import ask_contact
+from misc.contact import request_lead
 from misc.media import send_photo
 
 services_router = Router()
@@ -40,19 +42,21 @@ async def show_service(call: CallbackQuery, callback_data: Service, config: Conf
 
 
 @services_router.callback_query(Order.filter())
-async def order_service(call: CallbackQuery, callback_data: Order, state: FSMContext):
+async def order_service(call: CallbackQuery, callback_data: Order, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
-    await ask_contact(call.message, state, texts.ORDER, reason="order", details=SERVICE_BUTTONS[callback_data.key])
+    await request_lead(
+        call.message, state, user, repo, bot, config, texts.ORDER, reason="order", details=SERVICE_BUTTONS[callback_data.key]
+    )
 
 
 # ---------- Bepul maslahat ----------
 
 @services_router.message(Command("help"))
-async def cmd_help(message: Message, state: FSMContext):
-    await ask_contact(message, state, texts.CONSULT, reason="consult")
+async def cmd_help(message: Message, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
+    await request_lead(message, state, user, repo, bot, config, texts.CONSULT, reason="consult")
 
 
 @services_router.callback_query(Nav.filter(F.to == "consult"))
-async def nav_consult(call: CallbackQuery, state: FSMContext):
+async def nav_consult(call: CallbackQuery, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
-    await ask_contact(call.message, state, texts.CONSULT, reason="consult")
+    await request_lead(call.message, state, user, repo, bot, config, texts.CONSULT, reason="consult")

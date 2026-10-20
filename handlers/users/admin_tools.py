@@ -158,8 +158,14 @@ async def change_lead_status(call: CallbackQuery, callback_data: LeadStatus, rep
         await call.answer("Ariza topilmadi", show_alert=True)
         return
     lead, user = found
+    await repo.session.refresh(user, ["direction"])
     await call.answer(f"Holat: {STATUS_TITLES[lead.status]}")
-    await call.message.edit_text(render_lead(lead, user.full_name, user.username), reply_markup=lead_status_kb(lead.id))
+    text = render_lead(lead, user.full_name, user.username, profile=user)
+    if call.message.document:
+        # Plagiat arizasi — fayl, kartochka uning izohida
+        await call.message.edit_caption(caption=text, reply_markup=lead_status_kb(lead.id))
+    else:
+        await call.message.edit_text(text, reply_markup=lead_status_kb(lead.id))
 
 
 @admin_tools_router.message(Command("leads"))
@@ -186,7 +192,8 @@ async def cmd_lead(message: Message, match: re.Match, repo: RequestsRepo):
         await message.answer("Ariza topilmadi.")
         return
     lead, user = found
-    await message.answer(render_lead(lead, user.full_name, user.username), reply_markup=lead_status_kb(lead.id))
+    await repo.session.refresh(user, ["direction"])
+    await message.answer(render_lead(lead, user.full_name, user.username, profile=user), reply_markup=lead_status_kb(lead.id))
 
 
 def write_users_sheet(sheet, users: list[User]) -> None:

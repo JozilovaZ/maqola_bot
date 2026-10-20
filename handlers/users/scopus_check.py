@@ -1,16 +1,18 @@
 import datetime
 from html import escape
 
-from aiogram import F, Router
+from aiogram import Bot, F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from config import Config
+from infrastructure.database.models import User as DbUser
+from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.callbacks import Nav
 from keyboards.inline.scopus import scopus_found_kb, scopus_intro_kb, scopus_not_found_kb
 from misc import texts
-from misc.contact import ask_contact
+from misc.contact import ask_contact, request_lead
 from misc.states import ScopusCheck
 from services.scopus import find_journal
 
@@ -29,9 +31,13 @@ async def nav_scopus(call: CallbackQuery):
 
 
 @scopus_router.callback_query(Nav.filter(F.to == "scopus_start"))
-async def scopus_start(call: CallbackQuery, state: FSMContext):
+async def scopus_start(call: CallbackQuery, state: FSMContext, user: DbUser):
     await call.answer()
-    await ask_contact(call.message, state, texts.SCOPUS_ASK, reason="scopus")
+    if user.phone:
+        # Raqam ro'yxatdan o'tishda olingan — faqat jurnal so'raladi
+        await call.message.answer(texts.SCOPUS_ASK)
+    else:
+        await ask_contact(call.message, state, texts.SCOPUS_ASK, reason="scopus")
     await state.set_state(ScopusCheck.query)
 
 
@@ -63,14 +69,19 @@ async def scopus_query(message: Message, state: FSMContext, config: Config):
 
 
 @scopus_router.callback_query(Nav.filter(F.to == "scopus_audit"))
-async def scopus_audit(call: CallbackQuery, state: FSMContext):
+async def scopus_audit(call: CallbackQuery, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
     data = await state.get_data()
-    await ask_contact(call.message, state, texts.SCOPUS_AUDIT, reason="audit", details=data.get("details"))
+    await request_lead(
+        call.message, state, user, repo, bot, config, texts.SCOPUS_AUDIT, reason="audit", details=data.get("details")
+    )
 
 
 @scopus_router.callback_query(Nav.filter(F.to == "scopus_manual"))
-async def scopus_manual(call: CallbackQuery, state: FSMContext):
+async def scopus_manual(call: CallbackQuery, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
     data = await state.get_data()
-    await ask_contact(call.message, state, texts.SCOPUS_LEAVE_NUMBER, reason="scopus", details=data.get("details"))
+    await request_lead(
+        call.message, state, user, repo, bot, config, texts.SCOPUS_LEAVE_NUMBER, reason="scopus",
+        details=data.get("details"),
+    )

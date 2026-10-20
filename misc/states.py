@@ -43,6 +43,18 @@ class EditJournal(StatesGroup):
     value = State()
 
 
+class ArticleSubmit(StatesGroup):
+    """Hammualliflik uchun maqola: sarlavha → yo'nalish → baza → annotatsiya → o'rinlar → fayl → tasdiq."""
+    title = State()
+    annotation = State()
+    file = State()
+
+
+class ArticleReject(StatesGroup):
+    """Admin: rad etish sababi. Maqola id'si FSM data'da: reject_id."""
+    reason = State()
+
+
 class Registration(StatesGroup):
     """Birinchi /start: ism-familiya → telefon → faoliyat yo'nalishi → yo'nalish."""
     full_name = State()

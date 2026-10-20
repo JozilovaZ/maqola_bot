@@ -6,13 +6,14 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, User
 
 from config import Config
+from infrastructure.database.models import User as DbUser
 from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.callbacks import FieldPage, Nav
 from keyboards.inline.coauth import (
     coauth_final_kb, coauth_kb, coauth_topics_kb, fields_kb, suggest_done_kb, topics_page_kb,
 )
 from misc import texts
-from misc.contact import ask_contact
+from misc.contact import ask_contact, request_lead
 from misc.media import send_photo
 from misc.states import CoauthSuggest
 from misc.topics import render_topic
@@ -41,9 +42,9 @@ async def nav_coauth(call: CallbackQuery):
 
 
 @coauthor_router.callback_query(Nav.filter(F.to == "coauth_individual"))
-async def individual(call: CallbackQuery, state: FSMContext):
+async def individual(call: CallbackQuery, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
-    await ask_contact(call.message, state, texts.COAUTH_INDIVIDUAL, reason="coauth")
+    await request_lead(call.message, state, user, repo, bot, config, texts.COAUTH_INDIVIDUAL, reason="coauth")
 
 
 @coauthor_router.callback_query(Nav.filter(F.to == "coauth_topics"))
@@ -87,23 +88,29 @@ async def field_topics(call: CallbackQuery, callback_data: FieldPage, state: FSM
 
 
 @coauthor_router.callback_query(Nav.filter(F.to == "coauth_order"))
-async def coauth_order(call: CallbackQuery, state: FSMContext):
+async def coauth_order(call: CallbackQuery, state: FSMContext, user: DbUser, repo: RequestsRepo, bot: Bot, config: Config):
     await call.answer()
     data = await state.get_data()
-    await ask_contact(call.message, state, texts.COAUTH_ORDER, reason="coauth_order", details=data.get("field"))
+    await request_lead(
+        call.message, state, user, repo, bot, config, texts.COAUTH_ORDER, reason="coauth_order", details=data.get("field")
+    )
 
 
 @coauthor_router.callback_query(Nav.filter(F.to == "coauth_suggest"))
-async def suggest(call: CallbackQuery, state: FSMContext):
+async def suggest(call: CallbackQuery, state: FSMContext, user: DbUser):
     await call.answer()
-    await ask_contact(call.message, state, texts.COAUTH_SUGGEST, reason="coauth")
+    if user.phone:
+        # Raqam ro'yxatdan o'tishda olingan — faqat kalit so'zlar so'raladi
+        await call.message.answer(texts.COAUTH_SUGGEST)
+    else:
+        await ask_contact(call.message, state, texts.COAUTH_SUGGEST, reason="coauth")
     await state.set_state(CoauthSuggest.keywords)
 
 
 @coauthor_router.message(CoauthSuggest.keywords, F.text)
-async def suggest_keywords(message: Message, state: FSMContext, bot: Bot, config: Config, repo: RequestsRepo):
+async def suggest_keywords(message: Message, state: FSMContext, bot: Bot, config: Config, repo: RequestsRepo, user: DbUser):
     await state.set_state(None)
-    user = message.from_user
-    lead = await repo.leads.add_lead(user.id, "suggest", details=message.text)
-    await notify_new_lead(bot, config.tg_bot.admin_ids, lead, user.full_name, user.username)
+    lead = await repo.leads.add_lead(user.user_id, "suggest", phone=user.phone, details=message.text)
+    await repo.session.refresh(user, ["direction"])
+    await notify_new_lead(bot, config.tg_bot.admin_ids, lead, user.full_name, user.username, profile=user)
     await message.answer(texts.COAUTH_SUGGEST_THANKS, reply_markup=suggest_done_kb())

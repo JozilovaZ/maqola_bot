@@ -69,3 +69,30 @@ class AdminJournal(CallbackData, prefix="adm_j"):
     """
     action: str
     id: int = 0
+
+
+class ArticleForm(CallbackData, prefix="art_f"):
+    """Hammualliflik uchun maqola yuborish: tugma bilan tanlanadigan qadamlar.
+
+    field: direction (value = direction_id), base (value = misc.articles.BASES indeksi), slots (value = soni),
+           send, cancel
+    """
+    field: str
+    value: int = 0
+
+
+class ArticleBrowse(CallbackData, prefix="art_b"):
+    """Hammualliflik uchun maqolalar: yo'nalishdagi sahifa (0 dan boshlanadi)."""
+    direction_id: int
+    page: int = 0
+
+
+class ArticleApply(CallbackData, prefix="art_a"):
+    """Foydalanuvchi maqolaga hammuallif bo'lmoqchi."""
+    id: int
+
+
+class AdminArticle(CallbackData, prefix="adm_a"):
+    """Admin: maqola holati. action: approve (qayta joylash ham), reject, close"""
+    action: str
+    id: int

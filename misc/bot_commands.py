@@ -20,6 +20,7 @@ ADMIN_COMMANDS = [
     BotCommand(command="export", description="📥 Arizalar va foydalanuvchilar Excel faylda"),
     BotCommand(command="topics", description="🛠 Hammualliflik mavzularini boshqarish"),
     BotCommand(command="shelf", description="📚 Jurnallar javonini boshqarish"),
+    BotCommand(command="articles", description="🤝 Hammualliflik maqolalarini ko‘rib chiqish"),
     BotCommand(command="media", description="🖼 Rasm va PDF'larni yuklash"),
     BotCommand(command="stat", description="📊 Statistika"),
     BotCommand(command="broadcast", description="📣 Hammaga xabar yuborish"),

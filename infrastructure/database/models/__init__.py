@@ -1,3 +1,4 @@
+from .articles import Article
 from .base import Base
 from .directions import Direction
 from .journals import Journal

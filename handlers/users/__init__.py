@@ -1,4 +1,6 @@
 from handlers.users.about import about_router
+from handlers.users.admin_articles import admin_articles_router
+from handlers.users.articles import articles_router
 from handlers.users.admin import admin_router
 from handlers.users.admin_journals import admin_journals_router
 from handlers.users.admin_tools import admin_tools_router
@@ -17,10 +19,12 @@ routers_list = [
     admin_router,
     admin_tools_router,
     admin_journals_router,
+    admin_articles_router,
     user_router,
     about_router,
     services_router,
     coauthor_router,
+    articles_router,
     scopus_router,
     journals_router,
     plagiat_router,
