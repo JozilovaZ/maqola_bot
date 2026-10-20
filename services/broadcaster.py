@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Union
+from typing import Any, Awaitable, Callable, Union
 from aiogram import Bot, exceptions
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
@@ -80,26 +80,24 @@ async def broadcast(
     return count
 
 
-async def copy_to_users(
-        bot: Bot,
+async def deliver(
         user_ids: list[int],
-        from_chat_id: int,
-        message_id: int,
+        send: Callable[[int], Awaitable[Any]],
 ) -> tuple[int, list[int], int]:
     """
-    Admin yuborgan xabarni (matn, rasm, video, fayl ...) o'zgarishsiz har bir foydalanuvchiga nusxalaydi.
+    send(user_id) ni har bir foydalanuvchi uchun chaqiradi: flood limitda kutadi, soniyada 20 tadan oshirmaydi.
 
     :return: (yuborilganlar soni, botni bloklaganlar ID lari, boshqa xatolar soni)
     """
     sent, blocked, failed = 0, [], 0
     for user_id in user_ids:
         try:
-            await bot.copy_message(user_id, from_chat_id, message_id)
+            await send(user_id)
             sent += 1
         except exceptions.TelegramRetryAfter as e:
             await asyncio.sleep(e.retry_after)
             try:
-                await bot.copy_message(user_id, from_chat_id, message_id)
+                await send(user_id)
                 sent += 1
             except exceptions.TelegramAPIError:
                 failed += 1
@@ -111,6 +109,26 @@ async def copy_to_users(
         await asyncio.sleep(0.05)  # Telegram cheklovi: soniyada 20 ta xabar
     logging.info(f"Rassilka: {sent} yuborildi, {len(blocked)} bloklagan, {failed} xato")
     return sent, blocked, failed
+
+
+async def copy_to_users(
+        bot: Bot,
+        user_ids: list[int],
+        from_chat_id: int,
+        message_id: int,
+) -> tuple[int, list[int], int]:
+    """Admin yuborgan xabarni (matn, rasm, video, fayl ...) o'zgarishsiz har bir foydalanuvchiga nusxalaydi."""
+    return await deliver(user_ids, lambda user_id: bot.copy_message(user_id, from_chat_id, message_id))
+
+
+async def send_to_users(
+        bot: Bot,
+        user_ids: list[int],
+        text: str,
+        reply_markup: InlineKeyboardMarkup = None,
+) -> tuple[int, list[int], int]:
+    """Bot o'zi tuzgan xabarni (masalan, yangi maqola haqida) tugmalari bilan har bir foydalanuvchiga yuboradi."""
+    return await deliver(user_ids, lambda user_id: bot.send_message(user_id, text, reply_markup=reply_markup))
 
 
 # Qo‘shimcha: Inline klaviatura yaratish uchun misol

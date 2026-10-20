@@ -477,4 +477,8 @@ ARTICLE_APPROVED = (
     "✅ Maqolangiz <b>#{id}</b> tasdiqlandi va hammualliflik bo‘limiga joylandi!\n\n"
     "«{title}»\n\nHammuallif bo‘lishni istaganlar paydo bo‘lishi bilan adminlarimiz siz bilan bog‘lanadi."
 )
+ARTICLE_ANNOUNCE = (
+    "🆕 <b>Yo‘nalishingizda hammualliflik uchun yangi maqola!</b>\n\n{card}\n\n"
+    "Hammuallif bo‘lishni istasangiz, quyidagi tugmani bosing — adminlarimiz siz bilan bog‘lanadi 👇"
+)
 ARTICLE_REJECTED = "❌ Afsuski, maqolangiz <b>#{id}</b> tasdiqlanmadi.\n\n«{title}»{reason}"

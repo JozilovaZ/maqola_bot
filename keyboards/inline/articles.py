@@ -88,6 +88,17 @@ def browse_page_kb(direction_id: int, page: int, articles: list[Article], has_ne
     return keyboard.as_markup()
 
 
+def announce_kb(article: Article) -> InlineKeyboardMarkup:
+    """Yangi maqola haqidagi xabar ostida."""
+    keyboard = InlineKeyboardBuilder()
+    keyboard.button(text="🤝 Hammuallif bo‘lish", callback_data=ArticleApply(id=article.id))
+    keyboard.button(
+        text="📖 Yo‘nalishdagi boshqa maqolalar", callback_data=ArticleBrowse(direction_id=article.direction_id or 0)
+    )
+    keyboard.adjust(1)
+    return keyboard.as_markup()
+
+
 # ---------- Admin ----------
 
 def admin_article_kb(article: Article) -> InlineKeyboardMarkup:

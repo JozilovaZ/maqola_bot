@@ -1,3 +1,4 @@
+import asyncio
 import re
 from html import escape
 
@@ -6,14 +7,16 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
+from config import Config
 from filters.admin import AdminFilter
 from infrastructure.database.models import Article, User
 from infrastructure.database.repo.requests import RequestsRepo
-from keyboards.inline.articles import admin_article_kb
+from keyboards.inline.articles import admin_article_kb, announce_kb
 from keyboards.inline.callbacks import AdminArticle
 from misc import texts
-from misc.articles import STATUS_TITLES, cut, render_admin
+from misc.articles import STATUS_TITLES, cut, render_admin, render_public
 from misc.states import ArticleReject
+from services.broadcaster import send_to_users
 
 admin_articles_router = Router()
 admin_articles_router.message.filter(AdminFilter())
@@ -34,6 +37,24 @@ async def notify_author(bot: Bot, article: Article, text: str) -> None:
     except Exception:
         # Muallif botni bloklagan bo'lsa ham holat saqlanadi
         pass
+
+
+async def announce_article(bot: Bot, session_pool, article_id: int, admin_id: int, skip_ids: set[int]):
+    """Yangi tasdiqlangan maqola haqida shu yo'nalishdagi foydalanuvchilarga xabar. Fonda ishlaydi."""
+    async with session_pool() as session:
+        repo = RequestsRepo(session)
+        article = await repo.articles.get(article_id)
+        if article is None or article.direction_id is None:
+            return
+        user_ids = [uid for uid in await repo.users.active_ids(article.direction_id) if uid not in skip_ids]
+        text = texts.ARTICLE_ANNOUNCE.format(card=render_public(article))
+        sent, blocked, failed = await send_to_users(bot, user_ids, text, reply_markup=announce_kb(article))
+        await repo.users.set_inactive(blocked)
+    await bot.send_message(
+        admin_id,
+        f"📣 Maqola #{article_id} haqida yo‘nalishdagilarga xabar yuborildi: {sent} ta"
+        + (f" (botni bloklagan: {len(blocked)}, xato: {failed})" if blocked or failed else ""),
+    )
 
 
 @admin_articles_router.message(Command("articles"))
@@ -69,16 +90,28 @@ async def update_card(message: Message, repo: RequestsRepo, article_id: int) -> 
 
 
 @admin_articles_router.callback_query(AdminArticle.filter(F.action == "approve"))
-async def approve(call: CallbackQuery, callback_data: AdminArticle, bot: Bot, repo: RequestsRepo):
+async def approve(
+    call: CallbackQuery, callback_data: AdminArticle, bot: Bot, repo: RequestsRepo, config: Config, session_pool
+):
     found = await load(repo, callback_data.id)
     if found is None:
         await call.answer("Maqola topilmadi", show_alert=True)
         return
     article, _ = found
+    if article.status == "approved":
+        # Boshqa admin allaqachon tasdiqlagan — muallif va yo'nalishdagilarga ikkinchi marta xabar bormasin
+        await call.answer("Maqola allaqachon joylangan")
+        await update_card(call.message, repo, article.id)
+        return
+    first_time = article.status == "pending"
     await repo.articles.set_status(article.id, "approved", call.from_user.full_name)
     await call.answer("Maqola joylandi")
     await update_card(call.message, repo, article.id)
     await notify_author(bot, article, texts.ARTICLE_APPROVED.format(id=article.id, title=escape(article.title)))
+    if first_time:
+        # Qayta joylanganda (yopilgan/rad etilgandan keyin) e'lon takrorlanmaydi
+        skip_ids = {article.author_id, *config.tg_bot.admin_ids}
+        asyncio.create_task(announce_article(bot, session_pool, article.id, call.from_user.id, skip_ids))
 
 
 @admin_articles_router.callback_query(AdminArticle.filter(F.action == "close"))
