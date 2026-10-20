@@ -4,7 +4,7 @@ import re
 from html import escape
 from io import BytesIO
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Optional, Union
 
 from aiogram import Bot, F, Router
 from aiogram.exceptions import TelegramAPIError, TelegramForbiddenError
@@ -15,9 +15,12 @@ from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from filters.admin import AdminFilter
+from infrastructure.database.models import User
 from infrastructure.database.repo.requests import RequestsRepo
-from keyboards.inline.admin import broadcast_confirm_kb, lead_status_kb, media_list_kb, media_slot_kb
-from keyboards.inline.callbacks import Broadcast, LeadStatus, MediaSlot
+from keyboards.inline.admin import (
+    broadcast_confirm_kb, broadcast_target_kb, lead_status_kb, media_list_kb, media_slot_kb,
+)
+from keyboards.inline.callbacks import Broadcast, BroadcastTarget, LeadStatus, MediaSlot
 from misc import media
 from misc.texts import REG_ROLES
 from misc.media import PDF_SLOTS, PHOTO_SLOTS
@@ -57,13 +60,37 @@ async def cmd_stat(message: Message, repo: RequestsRepo):
     await message.answer("\n".join(lines))
 
 
-# ---------- /broadcast — hammaga xabar yuborish ----------
+# ---------- /broadcast — hammaga yoki bitta yo'nalishga xabar yuborish ----------
+
+async def broadcast_target_title(repo: RequestsRepo, direction_id: Optional[int]) -> str:
+    if direction_id is None:
+        return "👥 Hammaga"
+    direction = await repo.directions.get(direction_id)
+    return direction.title if direction else "?"
+
 
 @admin_tools_router.message(Command("broadcast"))
-async def cmd_broadcast(message: Message, state: FSMContext):
-    await state.set_state(BroadcastState.message)
+async def cmd_broadcast(message: Message, state: FSMContext, repo: RequestsRepo):
+    await state.set_state(None)
+    await state.update_data(broadcast_message_id=None)
+    directions = await repo.directions.list_all()
+    counts = await repo.users.count_active_by_direction()
+    total = len(await repo.users.active_ids())
     await message.answer(
-        "📣 Hammaga yubormoqchi bo‘lgan xabarni yuboring: matn, rasm, video, fayl — istalgani.\n\n"
+        "📣 <b>Rassilka</b>\n\nKimga yuboramiz? Qavs ichida — botni bloklamagan foydalanuvchilar soni.",
+        reply_markup=broadcast_target_kb(directions, counts, total),
+    )
+
+
+@admin_tools_router.callback_query(BroadcastTarget.filter())
+async def broadcast_target(call: CallbackQuery, callback_data: BroadcastTarget, state: FSMContext, repo: RequestsRepo):
+    direction_id = callback_data.direction_id or None
+    await state.set_state(BroadcastState.message)
+    await state.update_data(broadcast_direction_id=direction_id)
+    await call.answer()
+    await call.message.edit_text(
+        f"📣 Kimga: <b>{await broadcast_target_title(repo, direction_id)}</b>\n\n"
+        "Yubormoqchi bo‘lgan xabarni yuboring: matn, rasm, video, fayl — istalgani.\n\n"
         "Yuborishdan oldin uni sizga ko‘rsatib, tasdiqlash so‘rayman.\nBekor qilish: /cancel"
     )
 
@@ -72,20 +99,22 @@ async def cmd_broadcast(message: Message, state: FSMContext):
 async def broadcast_preview(message: Message, state: FSMContext, bot: Bot, repo: RequestsRepo):
     await state.set_state(None)
     await state.update_data(broadcast_message_id=message.message_id)
-    recipients = [uid for uid in await repo.users.active_ids() if uid != message.from_user.id]
+    direction_id = (await state.get_data()).get("broadcast_direction_id")
+    recipients = [uid for uid in await repo.users.active_ids(direction_id) if uid != message.from_user.id]
     await message.answer("👇 Foydalanuvchilar xabarni shunday ko‘radi:")
     await bot.copy_message(message.chat.id, message.chat.id, message.message_id)
     await message.answer(
+        f"Kimga: <b>{await broadcast_target_title(repo, direction_id)}</b>\n"
         f"Shu xabar <b>{len(recipients)}</b> ta foydalanuvchiga yuboriladi. Tasdiqlaysizmi?",
         reply_markup=broadcast_confirm_kb(),
     )
 
 
-async def run_broadcast(bot: Bot, session_pool, admin_id: int, message_id: int):
+async def run_broadcast(bot: Bot, session_pool, admin_id: int, message_id: int, direction_id: Optional[int]):
     """Rassilka fonda ishlaydi — bot bu vaqtda boshqa foydalanuvchilarga javob berishda davom etadi."""
     async with session_pool() as session:
         repo = RequestsRepo(session)
-        user_ids = [uid for uid in await repo.users.active_ids() if uid != admin_id]
+        user_ids = [uid for uid in await repo.users.active_ids(direction_id) if uid != admin_id]
         sent, blocked, failed = await copy_to_users(bot, user_ids, admin_id, message_id)
         await repo.users.set_inactive(blocked)
     await bot.send_message(
@@ -107,7 +136,9 @@ async def broadcast_send(call: CallbackQuery, state: FSMContext, bot: Bot, sessi
     await state.update_data(broadcast_message_id=None)
     await call.answer()
     await call.message.edit_text("⏳ Rassilka boshlandi. Tugagach hisobot yuboraman.")
-    asyncio.create_task(run_broadcast(bot, session_pool, call.from_user.id, message_id))
+    asyncio.create_task(
+        run_broadcast(bot, session_pool, call.from_user.id, message_id, data.get("broadcast_direction_id"))
+    )
 
 
 @admin_tools_router.callback_query(Broadcast.filter(F.action == "cancel"))
@@ -158,6 +189,22 @@ async def cmd_lead(message: Message, match: re.Match, repo: RequestsRepo):
     await message.answer(render_lead(lead, user.full_name, user.username), reply_markup=lead_status_kb(lead.id))
 
 
+def write_users_sheet(sheet, users: list[User]) -> None:
+    sheet.append(["Ro‘yxatdan o‘tgan", "Ism-familiya", "Telefon", "Faoliyat yo‘nalishi", "Yo‘nalishi",
+                  "Telegram ismi", "Username", "Telegram ID"])
+    for user in users:
+        sheet.append([
+            fmt_time(user.registered_at), user.real_name, user.phone, REG_ROLES.get(user.role, user.role),
+            user.direction.title if user.direction else "", user.full_name,
+            f"@{user.username}" if user.username else "", user.user_id,
+        ])
+    for cell in sheet[1]:
+        cell.font = Font(bold=True)
+    for column, width in zip("ABCDEFGH", [17, 28, 16, 34, 26, 25, 18, 14]):
+        sheet.column_dimensions[column].width = width
+    sheet.freeze_panes = "A2"
+
+
 @admin_tools_router.message(Command("export"))
 async def cmd_export(message: Message, repo: RequestsRepo):
     leads = await repo.leads.list_with_users()
@@ -180,20 +227,13 @@ async def cmd_export(message: Message, repo: RequestsRepo):
     sheet.freeze_panes = "A2"
 
     users = await repo.users.registered()
-    sheet = workbook.create_sheet("Foydalanuvchilar")
-    sheet.append(["Ro‘yxatdan o‘tgan", "Ism-familiya", "Telefon", "Faoliyat yo‘nalishi", "Yo‘nalishi",
-                  "Telegram ismi", "Username", "Telegram ID"])
-    for user in users:
-        sheet.append([
-            fmt_time(user.registered_at), user.real_name, user.phone, REG_ROLES.get(user.role, user.role),
-            user.direction, user.full_name, f"@{user.username}" if user.username else "",
-            user.user_id,
-        ])
-    for cell in sheet[1]:
-        cell.font = Font(bold=True)
-    for column, width in zip("ABCDEFGH", [17, 28, 16, 34, 26, 25, 18, 14]):
-        sheet.column_dimensions[column].width = width
-    sheet.freeze_panes = "A2"
+    write_users_sheet(workbook.create_sheet("Foydalanuvchilar"), users)
+    for direction in await repo.directions.list_all():
+        # Excel varag'i nomi 31 belgidan oshmasligi kerak
+        write_users_sheet(
+            workbook.create_sheet(direction.name[:31]),
+            [user for user in users if user.direction_id == direction.id],
+        )
 
     buffer = BytesIO()
     workbook.save(buffer)

@@ -1,6 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
+from infrastructure.database.models import Direction
 from misc import texts
 
 
@@ -12,9 +13,9 @@ def role_kb() -> ReplyKeyboardMarkup:
     return keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True)
 
 
-def direction_kb() -> ReplyKeyboardMarkup:
+def direction_kb(directions: list[Direction]) -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardBuilder()
-    for title in texts.REG_DIRECTIONS:
-        keyboard.button(text=title)
+    for direction in directions:
+        keyboard.button(text=direction.title)
     keyboard.adjust(2)
     return keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True)

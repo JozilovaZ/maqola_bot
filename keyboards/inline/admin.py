@@ -1,8 +1,8 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from infrastructure.database.models import Field, Topic
-from keyboards.inline.callbacks import AdminTopic, Broadcast, LeadStatus, MediaSlot
+from infrastructure.database.models import Direction, Field, Topic
+from keyboards.inline.callbacks import AdminTopic, Broadcast, BroadcastTarget, LeadStatus, MediaSlot
 from misc import media
 from misc.media import PDF_SLOTS, PHOTO_SLOTS
 
@@ -87,6 +87,19 @@ def admin_topic_kb(topic: Topic) -> InlineKeyboardMarkup:
     keyboard.row(InlineKeyboardButton(
         text="⬅️ Orqaga", callback_data=AdminTopic(action="field", id=topic.field_id).pack()
     ))
+    return keyboard.as_markup()
+
+
+def broadcast_target_kb(directions: list[Direction], counts: dict[int, int], total: int) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardBuilder()
+    keyboard.button(text=f"👥 Hammaga ({total})", callback_data=BroadcastTarget(direction_id=0))
+    for direction in directions:
+        keyboard.button(
+            text=f"{direction.title} ({counts.get(direction.id, 0)})",
+            callback_data=BroadcastTarget(direction_id=direction.id),
+        )
+    keyboard.button(text="❌ Bekor qilish", callback_data=Broadcast(action="cancel"))
+    keyboard.adjust(1)
     return keyboard.as_markup()
 
 

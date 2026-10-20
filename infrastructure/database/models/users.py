@@ -1,11 +1,12 @@
 from datetime import datetime
 from typing import Optional
-from sqlalchemy import String
+from sqlalchemy import ForeignKey, String
 from sqlalchemy import text, BIGINT, Boolean, true
 from sqlalchemy.dialects.postgresql import TIMESTAMP
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base, TimestampMixin, TableNameMixin
+from .directions import Direction
 
 
 class User(Base, TimestampMixin, TableNameMixin):
@@ -20,8 +21,10 @@ class User(Base, TimestampMixin, TableNameMixin):
     real_name: Mapped[Optional[str]] = mapped_column(String(128))
     phone: Mapped[Optional[str]] = mapped_column(String(32))
     role: Mapped[Optional[str]] = mapped_column(String(16))  # student, young_scientist, professor — misc.texts.REG_ROLES
-    direction: Mapped[Optional[str]] = mapped_column(String(256))  # yo'nalish / mutaxassislik
+    direction_id: Mapped[Optional[int]] = mapped_column(ForeignKey("directions.id", ondelete="SET NULL"), index=True)
     registered_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP)  # NULL — hali ro'yxatdan o'tmagan
+
+    direction: Mapped[Optional[Direction]] = relationship(lazy="selectin")
 
     def __repr__(self):
         return f"<User {self.user_id} {self.username} {self.full_name}>"

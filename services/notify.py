@@ -18,6 +18,7 @@ REASON_TITLES = {
     "suggest": "💡 Hammualliflik — mavzu taklifi (kalit so‘zlar)",
     "scopus": "🔎 Scopus — jurnalni qo‘lda tekshirish",
     "audit": "📝 Maqola auditi (Scopus tekshiruvidan)",
+    "plagiat": "🧾 Plagiatga tekshirish",
 }
 
 STATUS_TITLES = {
@@ -86,6 +87,19 @@ async def notify_new_lead(bot: Bot, admin_ids: list[int], lead: Lead, full_name:
     await notify_admins(bot, admin_ids, render_lead(lead, full_name, username), reply_markup=lead_status_kb(lead.id))
 
 
+async def notify_new_file_lead(
+    bot: Bot, admin_ids: list[int], lead: Lead, full_name: str, username: Optional[str], file_id: str
+) -> None:
+    """Fayl bilan kelgan ariza (plagiatga tekshirish): fayl yuboriladi, ariza kartochkasi — uning izohida."""
+    for admin_id in admin_ids:
+        try:
+            await bot.send_document(
+                admin_id, file_id, caption=render_lead(lead, full_name, username), reply_markup=lead_status_kb(lead.id)
+            )
+        except Exception as e:
+            logging.error(f"Fayl adminga yuborilmadi [ID:{admin_id}]: {e}")
+
+
 def render_user(user: User) -> str:
     """Ro'yxatdan o'tgan foydalanuvchi kartochkasi."""
     return "\n".join([
@@ -93,7 +107,7 @@ def render_user(user: User) -> str:
         f"Ism-familiya: {escape(user.real_name)}",
         f"Telefon: {escape(user.phone)}",
         f"Faoliyat yo‘nalishi: {REG_ROLES.get(user.role, user.role)}",
-        f"Yo‘nalishi: {escape(user.direction)}",
+        f"Yo‘nalishi: {escape(user.direction.title if user.direction else '—')}",
         "",
         format_user(user.user_id, user.full_name, user.username),
         "",

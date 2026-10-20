@@ -7,10 +7,13 @@ GREETING = (
 
 MAIN_MENU = GREETING + (
     "Xush kelibsiz! Menyuda siz:\n\n"
-    "🏛 Fihria Academic haqida batafsil ma’lumot olishingiz mumkin\n\n"
-    "🔎 Jurnalning Scopus’dagi holatini tekshirishingiz\n\n"
-    "📌 Fihria Academic’ning dolzarb xizmatlari bilan tanishishingiz\n\n"
-    "🤝 Scopus/Web of Science tizimlarida hammualliflik bo‘yicha dolzarb mavzularni ko‘rib chiqish\n\n"
+    "🏛 Fihria Academic haqida batafsil ma’lumot olishingiz\n"
+    "💼 Xizmatlarimiz bilan tanishishingiz\n"
+    "🔎 Jurnalning Scopus’dagi holatini tekshirishingiz\n"
+    "💬 Bepul maslahat olishingiz\n"
+    "📚 Yo‘nalishingiz bo‘yicha jurnallar ro‘yxatini ko‘rishingiz\n"
+    "🧾 Maqolangizni plagiatga tekshirtirishingiz\n"
+    "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz mumkin\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
 )
 
@@ -339,17 +342,6 @@ REG_ROLES = {
     "professor": "👨‍🏫 Professor-o‘qituvchilar va olimlar",
 }
 
-# Yo'nalish tugmalari (bazada matni saqlanadi). Ro'yxatni shu yerda o'zgartirish mumkin.
-REG_DIRECTIONS = [
-    "🧬 Tibbiyot va biologiya",
-    "🔭 Aniq va tabiiy fanlar",
-    "📚 Ta’lim va pedagogika",
-    "💼 Iqtisodiyot va biznes",
-    "💻 Texnika va IT",
-    "🏛 Ijtimoiy va gumanitar",
-    "🌐 Ko‘p tarmoqli",
-]
-
 REG_START = GREETING + (
     "Botdan foydalanish uchun qisqa ro‘yxatdan o‘ting — bu 1 daqiqa vaqt oladi.\n\n"
     "✍️ <b>Ism va familiyangizni</b> yozing:\n"
@@ -373,3 +365,28 @@ REG_TEXT_INVALID = "Iltimos, javobni matn ko‘rinishida qisqa yozing."
 REG_TEXT_ONLY = "Iltimos, savolga javobni matn ko‘rinishida yozing."
 
 REG_DONE = "✅ Rahmat, {name}! Siz muvaffaqiyatli ro‘yxatdan o‘tdingiz."
+
+# ---------- Jurnallar javoni ----------
+
+JOURNALS = (
+    "📚 <b>Jurnallar javoni</b>\n\n"
+    "Bu yerda Fihria Academic mutaxassislari tanlagan ishonchli jurnallar yo‘nalishlar bo‘yicha jamlangan.\n\n"
+    "Yo‘nalishni tanlang (qavs ichida — jurnallar soni) 👇"
+)
+JOURNALS_EMPTY = "Bu yo‘nalish bo‘yicha hozircha jurnal qo‘shilmagan. Tez orada to‘ldiriladi."
+JOURNALS_HINT = "\nMaqolangiz uchun mos jurnal tanlashda yordam kerakmi? Bepul maslahat oling 👇"
+
+# ---------- Plagiatga tekshirish ----------
+
+PLAGIAT = (
+    "🧾 <b>Plagiatga tekshirish</b>\n\n"
+    "Maqolangizni plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirib beramiz.\n\n"
+    "📎 Faylni shu yerga yuboring — <b>Word (.doc, .docx)</b> yoki <b>PDF</b>, 20 MB gacha.\n\n"
+    "Fihria Academic mutaxassisi faylni ko‘rib chiqib, natijani shu bot orqali yuboradi."
+)
+PLAGIAT_WRONG = "Iltimos, maqolani <b>Word (.doc, .docx)</b> yoki <b>PDF</b> fayl ko‘rinishida yuboring."
+PLAGIAT_TOO_BIG = "Fayl 20 MB dan katta. Iltimos, kichikroq fayl yuboring."
+PLAGIAT_DONE = (
+    "✅ Rahmat, {name}! Faylingiz qabul qilindi.\n\n"
+    "Mutaxassis uni tekshirib, natijani shu bot orqali yuboradi."
+)

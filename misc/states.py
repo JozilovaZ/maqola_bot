@@ -28,6 +28,21 @@ class AddTopic(StatesGroup):
     prices = State()
 
 
+class PlagiatCheck(StatesGroup):
+    file = State()
+
+
+class AddJournal(StatesGroup):
+    title = State()
+    base = State()
+    url = State()
+
+
+class EditJournal(StatesGroup):
+    """Admin: jurnalning bitta qiymatini yozib yuborish. Nima tahrirlanayotgani FSM data'da: edit, edit_id."""
+    value = State()
+
+
 class Registration(StatesGroup):
     """Birinchi /start: ism-familiya → telefon → faoliyat yo'nalishi → yo'nalish."""
     full_name = State()

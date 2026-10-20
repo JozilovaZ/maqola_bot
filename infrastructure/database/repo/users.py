@@ -50,14 +50,14 @@ class UserRepo(BaseRepo):
         return result.scalar_one()
 
     async def register(
-        self, user_id: int, real_name: str, phone: str, role: str, direction: str
+        self, user_id: int, real_name: str, phone: str, role: str, direction_id: int
     ) -> User:
         """Ro'yxatdan o'tish ma'lumotlarini saqlash."""
         user = await self.session.get(User, user_id)
         user.real_name = real_name
         user.phone = phone
         user.role = role
-        user.direction = direction
+        user.direction_id = direction_id
         user.registered_at = func.now()
         await self.session.commit()
         await self.session.refresh(user)
@@ -69,9 +69,21 @@ class UserRepo(BaseRepo):
             select(User).where(User.registered_at.is_not(None)).order_by(User.registered_at.desc())
         ))
 
-    async def active_ids(self) -> list[int]:
-        """Rassilka uchun: botni bloklamagan foydalanuvchilar."""
-        return list(await self.session.scalars(select(User.user_id).where(User.active)))
+    async def active_ids(self, direction_id: Optional[int] = None) -> list[int]:
+        """Rassilka uchun: botni bloklamagan foydalanuvchilar; direction_id berilsa — faqat shu yo'nalishdagilar."""
+        query = select(User.user_id).where(User.active)
+        if direction_id is not None:
+            query = query.where(User.direction_id == direction_id)
+        return list(await self.session.scalars(query))
+
+    async def count_active_by_direction(self) -> dict[int, int]:
+        """{direction_id: botni bloklamagan foydalanuvchilar soni} — rassilka tugmalari uchun."""
+        result = await self.session.execute(
+            select(User.direction_id, func.count())
+            .where(User.active, User.direction_id.is_not(None))
+            .group_by(User.direction_id)
+        )
+        return dict(result.all())
 
     async def set_inactive(self, user_ids: list[int]) -> None:
         """Botni bloklagan (xabar yetib bormagan) foydalanuvchilarni belgilash."""

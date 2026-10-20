@@ -75,21 +75,21 @@ async def reg_phone_text(message: Message, state: FSMContext):
 
 
 @registration_router.message(Registration.role, F.text)
-async def reg_role(message: Message, state: FSMContext):
+async def reg_role(message: Message, state: FSMContext, repo: RequestsRepo):
     role = next((key for key, title in texts.REG_ROLES.items() if title == message.text), None)
     if not role:
         await message.answer(texts.REG_CHOOSE_BUTTON, reply_markup=role_kb())
         return
     await state.update_data(role=role)
     await state.set_state(Registration.direction)
-    await message.answer(texts.REG_DIRECTION, reply_markup=direction_kb())
+    await message.answer(texts.REG_DIRECTION, reply_markup=direction_kb(await repo.directions.list_all()))
 
 
 @registration_router.message(Registration.direction, F.text)
 async def reg_direction(message: Message, state: FSMContext, bot: Bot, config: Config, repo: RequestsRepo):
-    direction = message.text
-    if direction not in texts.REG_DIRECTIONS:
-        await message.answer(texts.REG_CHOOSE_BUTTON, reply_markup=direction_kb())
+    direction = await repo.directions.get_by_title(message.text)
+    if direction is None:
+        await message.answer(texts.REG_CHOOSE_BUTTON, reply_markup=direction_kb(await repo.directions.list_all()))
         return
     data = await state.get_data()
     await state.clear()
@@ -99,7 +99,7 @@ async def reg_direction(message: Message, state: FSMContext, bot: Bot, config: C
         real_name=data["real_name"],
         phone=data["phone"],
         role=data["role"],
-        direction=direction,
+        direction_id=direction.id,
     )
     await message.answer(texts.REG_DONE.format(name=escape(user.real_name)), reply_markup=ReplyKeyboardRemove())
     await notify_new_user(bot, config.tg_bot.admin_ids, user)

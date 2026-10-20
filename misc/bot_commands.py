@@ -9,6 +9,8 @@ COMMANDS = [
     BotCommand(command="services", description="💼 Fihria Academic xizmatlari"),
     BotCommand(command="help", description="💬 Bepul maslahat"),
     BotCommand(command="co_authorship", description="🤝 Scopus/WoS hammuallifligi"),
+    BotCommand(command="journals", description="📚 Jurnallar javoni"),
+    BotCommand(command="plagiat", description="🧾 Plagiatga tekshirish"),
 ]
 
 
@@ -17,6 +19,7 @@ ADMIN_COMMANDS = [
     BotCommand(command="leads", description="📋 Ochiq arizalar"),
     BotCommand(command="export", description="📥 Arizalar va foydalanuvchilar Excel faylda"),
     BotCommand(command="topics", description="🛠 Hammualliflik mavzularini boshqarish"),
+    BotCommand(command="shelf", description="📚 Jurnallar javonini boshqarish"),
     BotCommand(command="media", description="🖼 Rasm va PDF'larni yuklash"),
     BotCommand(command="stat", description="📊 Statistika"),
     BotCommand(command="broadcast", description="📣 Hammaga xabar yuborish"),
