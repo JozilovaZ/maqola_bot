@@ -24,6 +24,13 @@ class ArticleRepo(BaseRepo):
         )
         await self.session.commit()
 
+    async def set_prices(self, article_id: int, prices: list[int]) -> None:
+        """O'rinlar soni narxlar soniga teng bo'ladi."""
+        await self.session.execute(
+            update(Article).where(Article.id == article_id).values(prices=prices, slots=len(prices))
+        )
+        await self.session.commit()
+
     async def count_approved_by_direction(self) -> dict[int, int]:
         """{direction_id: joylangan maqolalar soni}"""
         result = await self.session.execute(

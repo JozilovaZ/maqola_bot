@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import BIGINT, ForeignKey, Integer, String, Text
-from sqlalchemy.dialects.postgresql import TIMESTAMP
+from sqlalchemy.dialects.postgresql import ARRAY, TIMESTAMP
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base, TableNameMixin, TimestampMixin, int_pk
@@ -22,7 +22,8 @@ class Article(Base, TimestampMixin, TableNameMixin):
     base: Mapped[str] = mapped_column(String(64))  # Scopus, Web of Science, OAK, Boshqa
     title: Mapped[str] = mapped_column(Text)
     annotation: Mapped[str] = mapped_column(Text)
-    slots: Mapped[int] = mapped_column(Integer)  # nechta hammuallif kerak
+    slots: Mapped[int] = mapped_column(Integer)  # nechta hammuallif kerak (= len(prices))
+    prices: Mapped[Optional[list[int]]] = mapped_column(ARRAY(Integer))  # har bir o'rin narxi ($); NULL — kelishiladi
     file_id: Mapped[str] = mapped_column(String(256))
     file_name: Mapped[Optional[str]] = mapped_column(String(256))
 

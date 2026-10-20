@@ -44,10 +44,16 @@ class EditJournal(StatesGroup):
 
 
 class ArticleSubmit(StatesGroup):
-    """Hammualliflik uchun maqola: sarlavha → yo'nalish → baza → annotatsiya → o'rinlar → fayl → tasdiq."""
+    """Hammualliflik uchun maqola: sarlavha → yo'nalish → baza → annotatsiya → o'rinlar narxi → fayl → tasdiq."""
     title = State()
     annotation = State()
+    prices = State()
     file = State()
+
+
+class ArticlePrices(StatesGroup):
+    """Admin: maqola narxlarini o'zgartirish. Maqola id'si FSM data'da: prices_id."""
+    value = State()
 
 
 class ArticleReject(StatesGroup):

@@ -74,8 +74,7 @@ class AdminJournal(CallbackData, prefix="adm_j"):
 class ArticleForm(CallbackData, prefix="art_f"):
     """Hammualliflik uchun maqola yuborish: tugma bilan tanlanadigan qadamlar.
 
-    field: direction (value = direction_id), base (value = misc.articles.BASES indeksi), slots (value = soni),
-           send, cancel
+    field: direction (value = direction_id), base (value = misc.articles.BASES indeksi), send, cancel
     """
     field: str
     value: int = 0
@@ -93,6 +92,6 @@ class ArticleApply(CallbackData, prefix="art_a"):
 
 
 class AdminArticle(CallbackData, prefix="adm_a"):
-    """Admin: maqola holati. action: approve (qayta joylash ham), reject, close"""
+    """Admin: maqola holati va narxlari. action: approve (qayta joylash ham), reject, close, prices"""
     action: str
     id: int

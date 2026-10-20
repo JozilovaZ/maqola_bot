@@ -446,7 +446,16 @@ ARTICLE_ANNOTATION = (
     "yozmang.</i>"
 )
 ARTICLE_ANNOTATION_INVALID = "Annotatsiya 30 dan 1000 belgigacha bo‘lsin. Qaytadan yozing:"
-ARTICLE_SLOTS = "5️⃣ Maqolaga nechta <b>hammuallif</b> kerak?"
+ARTICLE_PRICES = (
+    "5️⃣ Hammualliflar uchun <b>o‘rinlar narxini</b> ($) yozing — 1-o‘rindan boshlab, bo‘sh joy bilan. "
+    "Nechta narx yozsangiz, shuncha hammuallif o‘rni bo‘ladi (10 tagacha).\n\n"
+    "Masalan: <code>550 540 530</code> — 3 ta o‘rin: 1-o‘rin 550$, 2-o‘rin 540$, 3-o‘rin 530$.\n\n"
+    "<i>Bu sizning taklifingiz — adminlar ko‘rib chiqib, kerak bo‘lsa siz bilan kelishadi.</i>"
+)
+ARTICLE_PRICES_INVALID = (
+    "Narxlarni faqat raqam bilan, bo‘sh joy qo‘yib yozing (1 dan 10 tagacha o‘rin).\n"
+    "Masalan: <code>550 540 530</code>"
+)
 ARTICLE_FILE = (
     "6️⃣ Maqola <b>faylini</b> yuboring — Word (.doc, .docx) yoki PDF, 20 MB gacha.\n\n"
     "<i>Fayl faqat adminlarga ko‘rinadi.</i>"

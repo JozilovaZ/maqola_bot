@@ -13,11 +13,11 @@ from infrastructure.database.models import User as DbUser
 from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.articles import (
     admin_article_kb, article_bases_kb, article_cancel_kb, article_confirm_kb, article_directions_kb,
-    article_slots_kb, browse_directions_kb, browse_page_kb,
+    browse_directions_kb, browse_page_kb,
 )
 from keyboards.inline.callbacks import ArticleApply, ArticleBrowse, ArticleForm, Nav
 from misc import texts
-from misc.articles import BASES, STATUS_TITLES, cut, render_admin, render_public, render_summary
+from misc.articles import BASES, STATUS_TITLES, cut, parse_prices, render_admin, render_public, render_summary
 from misc.contact import request_lead
 from misc.states import ArticleSubmit
 
@@ -27,7 +27,7 @@ articles_router = Router()
 PAGE_SIZE = 5
 
 # Maqola yuborishda FSM'da saqlanadigan qiymatlar
-FORM_KEYS = ("art_title", "art_direction_id", "art_base", "art_annotation", "art_slots", "art_file_id", "art_file_name")
+FORM_KEYS = ("art_title", "art_direction_id", "art_base", "art_annotation", "art_prices", "art_file_id", "art_file_name")
 
 
 async def clear_form(state: FSMContext):
@@ -36,7 +36,7 @@ async def clear_form(state: FSMContext):
     await state.set_state(None)
 
 
-# ---------- Maqola yuborish: sarlavha → yo'nalish → baza → annotatsiya → o'rinlar → fayl → tasdiq ----------
+# ---------- Maqola yuborish: sarlavha → yo'nalish → baza → annotatsiya → o'rinlar narxi → fayl → tasdiq ----------
 
 @articles_router.callback_query(Nav.filter(F.to == "article_submit"))
 async def submit_start(call: CallbackQuery, state: FSMContext):
@@ -87,20 +87,19 @@ async def submit_annotation(message: Message, state: FSMContext):
         await message.answer(texts.ARTICLE_ANNOTATION_INVALID, reply_markup=article_cancel_kb())
         return
     await state.update_data(art_annotation=annotation)
-    await state.set_state(None)
-    await message.answer(texts.ARTICLE_SLOTS, reply_markup=article_slots_kb())
+    await state.set_state(ArticleSubmit.prices)
+    await message.answer(texts.ARTICLE_PRICES, reply_markup=article_cancel_kb())
 
 
-@articles_router.callback_query(ArticleForm.filter(F.field == "slots"))
-async def submit_slots(call: CallbackQuery, callback_data: ArticleForm, state: FSMContext):
-    await call.answer()
-    data = await state.get_data()
-    if not data.get("art_annotation") or callback_data.value < 1:
-        await call.message.edit_text(texts.ARTICLE_EXPIRED)
+@articles_router.message(ArticleSubmit.prices, F.text)
+async def submit_prices(message: Message, state: FSMContext):
+    prices = parse_prices(message.text)
+    if prices is None:
+        await message.answer(texts.ARTICLE_PRICES_INVALID, reply_markup=article_cancel_kb())
         return
-    await state.update_data(art_slots=callback_data.value)
+    await state.update_data(art_prices=prices)
     await state.set_state(ArticleSubmit.file)
-    await call.message.edit_text(texts.ARTICLE_FILE, reply_markup=article_cancel_kb())
+    await message.answer(texts.ARTICLE_FILE, reply_markup=article_cancel_kb())
 
 
 @articles_router.message(ArticleSubmit.file, F.document)
@@ -119,7 +118,7 @@ async def submit_file(message: Message, state: FSMContext, repo: RequestsRepo):
     direction = await repo.directions.get(data["art_direction_id"])
     summary = render_summary(
         data["art_title"], direction.title if direction else "—", data["art_base"], data["art_annotation"],
-        data["art_slots"], document.file_name,
+        data["art_prices"], document.file_name,
     )
     await message.answer(texts.ARTICLE_CONFIRM.format(summary=summary), reply_markup=article_confirm_kb())
 
@@ -129,9 +128,9 @@ async def submit_file_wrong(message: Message):
     await message.answer(texts.PLAGIAT_WRONG, reply_markup=article_cancel_kb())
 
 
-@articles_router.message(StateFilter(ArticleSubmit.title, ArticleSubmit.annotation))
+@articles_router.message(StateFilter(ArticleSubmit.title, ArticleSubmit.annotation, ArticleSubmit.prices))
 async def submit_text_wrong(message: Message):
-    """Sarlavha yoki annotatsiya o'rniga rasm, stiker va h.k. yuborilsa."""
+    """Sarlavha, annotatsiya yoki narxlar o'rniga rasm, stiker va h.k. yuborilsa."""
     await message.answer(texts.REG_TEXT_ONLY, reply_markup=article_cancel_kb())
 
 
@@ -151,7 +150,8 @@ async def submit_send(
         base=data["art_base"],
         title=data["art_title"],
         annotation=data["art_annotation"],
-        slots=data["art_slots"],
+        slots=len(data["art_prices"]),
+        prices=data["art_prices"],
         file_id=data["art_file_id"],
         file_name=data["art_file_name"],
     )
@@ -201,7 +201,8 @@ async def browse_page(call: CallbackQuery, callback_data: ArticleBrowse, repo: R
     articles = articles[:PAGE_SIZE]
 
     lines = [f"📖 <b>{escape(direction.title)}</b>"]
-    lines += [render_public(article) for article in articles] or [texts.ARTICLES_EMPTY]
+    # Telegram xabari 4096 belgigacha — ro'yxatda annotatsiya qisqaroq
+    lines += [render_public(article, annotation_limit=250) for article in articles] or [texts.ARTICLES_EMPTY]
     await call.message.edit_text("\n\n".join(lines), reply_markup=browse_page_kb(direction.id, page, articles, has_next))
 
 

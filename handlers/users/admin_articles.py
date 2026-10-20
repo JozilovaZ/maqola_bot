@@ -14,8 +14,8 @@ from infrastructure.database.repo.requests import RequestsRepo
 from keyboards.inline.articles import admin_article_kb, announce_kb
 from keyboards.inline.callbacks import AdminArticle
 from misc import texts
-from misc.articles import STATUS_TITLES, cut, render_admin, render_public
-from misc.states import ArticleReject
+from misc.articles import STATUS_TITLES, cut, parse_prices, render_admin, render_prices, render_public
+from misc.states import ArticlePrices, ArticleReject
 from services.broadcaster import send_to_users
 
 admin_articles_router = Router()
@@ -160,3 +160,49 @@ async def reject_reason(message: Message, state: FSMContext, bot: Bot, repo: Req
         pass
     tail = f"\n\nSabab: {escape(reason)}" if reason else ""
     await notify_author(bot, article, texts.ARTICLE_REJECTED.format(id=article.id, title=escape(article.title), reason=tail))
+
+
+# ---------- Narxlarni o'zgartirish ----------
+
+@admin_articles_router.callback_query(AdminArticle.filter(F.action == "prices"))
+async def prices(call: CallbackQuery, callback_data: AdminArticle, state: FSMContext, repo: RequestsRepo):
+    await call.answer()
+    article = await repo.articles.get(callback_data.id)
+    if article is None:
+        return
+    await state.set_state(ArticlePrices.value)
+    # Narxlar yozilgach, shu kartochka yangilanadi
+    await state.update_data(prices_id=article.id, prices_message_id=call.message.message_id)
+    current = " ".join(str(price) for price in article.prices) if article.prices else "—"
+    await call.message.answer(
+        f"Maqola #{article.id} uchun o‘rinlar narxini ($) 1-o‘rindan boshlab bo‘sh joy bilan yozing.\n"
+        "Nechta narx yozsangiz, shuncha o‘rin bo‘ladi (10 tagacha).\n\n"
+        f"Hozirgisi: <code>{current}</code>\n\nBekor qilish: /cancel"
+    )
+
+
+@admin_articles_router.message(ArticlePrices.value, F.text)
+async def prices_value(message: Message, state: FSMContext, bot: Bot, repo: RequestsRepo):
+    new_prices = parse_prices(message.text)
+    if new_prices is None:
+        await message.answer(texts.ARTICLE_PRICES_INVALID)
+        return
+    data = await state.get_data()
+    await state.set_state(None)
+    found = await load(repo, data.get("prices_id", 0))
+    if found is None:
+        await message.answer("Maqola topilmadi.")
+        return
+    article, author = found
+    await repo.articles.set_prices(article.id, new_prices)
+    await repo.session.refresh(article)
+
+    await message.answer(f"✅ Maqola #{article.id} narxlari saqlandi:\n{render_prices(article.prices, separator=chr(10))}")
+    try:
+        await bot.edit_message_caption(
+            chat_id=message.chat.id, message_id=data.get("prices_message_id"),
+            caption=render_admin(article, author), reply_markup=admin_article_kb(article),
+        )
+    except Exception:
+        # Kartochka o'chirilgan yoki eskirgan bo'lsa — muhim emas
+        pass

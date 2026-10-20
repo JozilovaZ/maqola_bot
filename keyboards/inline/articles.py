@@ -5,10 +5,6 @@ from infrastructure.database.models import Article, Direction
 from keyboards.inline.callbacks import AdminArticle, ArticleApply, ArticleBrowse, ArticleForm, Nav
 from misc.articles import BASES
 
-# Nechta hammuallif tanlash mumkin
-SLOT_CHOICES = range(1, 6)
-
-
 # ---------- Maqola yuborish ----------
 
 def cancel_button() -> InlineKeyboardButton:
@@ -33,15 +29,6 @@ def article_bases_kb() -> InlineKeyboardMarkup:
     for index, base in enumerate(BASES):
         keyboard.button(text=base, callback_data=ArticleForm(field="base", value=index))
     keyboard.adjust(2)
-    keyboard.row(cancel_button())
-    return keyboard.as_markup()
-
-
-def article_slots_kb() -> InlineKeyboardMarkup:
-    keyboard = InlineKeyboardBuilder()
-    for count in SLOT_CHOICES:
-        keyboard.button(text=str(count), callback_data=ArticleForm(field="slots", value=count))
-    keyboard.adjust(len(SLOT_CHOICES))
     keyboard.row(cancel_button())
     return keyboard.as_markup()
 
@@ -111,5 +98,6 @@ def admin_article_kb(article: Article) -> InlineKeyboardMarkup:
         keyboard.button(text="❌ Rad etish", callback_data=AdminArticle(action="reject", id=article.id))
     else:
         keyboard.button(text="✅ Qayta joylash", callback_data=AdminArticle(action="approve", id=article.id))
+    keyboard.button(text="💲 Narxlarni o‘zgartirish", callback_data=AdminArticle(action="prices", id=article.id))
     keyboard.adjust(1)
     return keyboard.as_markup()
