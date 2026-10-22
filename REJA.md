@@ -1,57 +1,61 @@
 # Fihria Academic bot — ish rejasi
 
-Maqsad: @Mirzo_MA_bot ning barcha bo'limlari va funksiyalarini birga-bir takrorlash.
-Tahlil: `research/MIRZO_BOT_TAHLIL.md`, xabarlarning aynan matnlari: `research/mirzo_bot_dump/`.
+Bot: @maqola_2026_bot ("Fihria Academic"). Dastlab @Mirzo_MA_bot asosida qurilgan
+(tahlil: `research/MIRZO_BOT_TAHLIL.md`), keyin Fihria Academic uchun qayta ishlangan.
 
 ## Texnologiya
 
 - Shablon: [davronovuz/aiogram_3_shablon](https://github.com/davronovuz/aiogram_3_shablon) — ishga tushirish: `python bot.py`
 - Python 3.11, aiogram 3, proyekt ichidagi `venv`
-- PostgreSQL 16 (kompyuterda o'rnatilgan, baza `maqola_bot`) + SQLAlchemy + Alembic
+- PostgreSQL 16 + SQLAlchemy + Alembic (Docker'da har ishga tushishda `alembic upgrade head`)
 - Scopus: Elsevier Serial Title API (`SCOPUS_API_KEY`)
-- `.env` — token, adminlar, baza, havolalar, Scopus kaliti
+- `.env` — token, adminlar, baza, havolalar, Scopus kaliti (namuna: `.env.dist`)
 
-## Bosqichlar
+## Serverga chiqarish
 
-1. ✅ **Asos** — baza, middleware, buyruqlar menyusi.
-2. ✅ **Bosh menyu** — rasm + salomlashuv (to'liq ism bilan) + 6 tugma.
-3. ❌ **Foydali materiallar** — chek-listlar va blog; keyinchalik bo'lim olib tashlandi.
-4. ✅ **Fihria Academic haqida** — 3 bo'lim.
-5. ✅ **Xizmatlar** — 6 xizmat sahifasi (Buyurtma / Bepul maslahat / Batafsil Web App).
-6. ✅ **Kontakt oqimi** — raqam → bazaga (`leads`) + adminga ariza.
-7. ✅ **Hammualliflik** — mavzular bazada; admin uchun /topics.
-8. ✅ **Scopus tekshiruvi** — API orqali; kalit kelganda sinaladi.
-9. ✅ **Fallback** — boshqa xabarlarga javob + adminga forward.
-10. ✅ **Sinov** — matnlar original bilan harfma-harf solishtirildi.
-11. ✅ **Admin funksiyalari**
-    - /stat — foydalanuvchilar (jami, bugun, 7 kun, bloklaganlar), arizalar (jami, bugun), bo'limlar bo'yicha.
-    - /broadcast — istalgan xabarni (matn, rasm, video, fayl) ko'rib chiqib tasdiqlagach hammaga yuborish;
-      botni bloklaganlar `users.active = false` qilinadi; oxirida hisobot.
-    - Javob yozish — admin "✉️ Foydalanuvchidan xabar" yoki "🆕 Yangi ariza" xabariga reply qilsa,
-      javob bot nomidan o'sha foydalanuvchiga boradi.
+```
+cd ~/maqola_bot && git pull && docker compose up -d --build
+```
 
-12. ✅ **Admin funksiyalari (2-qism)**
-    - **Arizalar bilan ishlash:** har bir arizada [📞 Bog‘lanildi] [✅ Yopildi] [❌ Rad etildi] tugmalari
-      (kim va qachon o'zgartirgani yoziladi); /leads — ochiq arizalar ro'yxati, /lead_N — bitta ariza;
-      /export — barcha arizalar Excel (.xlsx) faylida.
-    - **Rasm va PDF'larni bot orqali yuklash:** /media — 13 ta rasm va 4 ta PDF ro'yxati (bor/yo'q),
-      tanlab yangisini yuborish yoki o'chirish.
-    - **Mavzularni tahrirlash:** mavzuning bazasi, nomi, narxlarini o'zgartirish, yashirish/ko'rsatish;
-      soha qo'shish, nomini o'zgartirish, o'chirish.
+`.env` o'zgarsa ham `up -d` kerak (`restart` yangi `.env` ni o'qimaydi).
+`media/` va `files/` git'ga kirmaydi — rasmlar serverga `scp` yoki `/media` orqali yuklanadi.
 
-## Originaldan farqlar
+## Hozirgi holat
 
-- "Kafolatlar" va "Mijozlar fikrlari" tugmalari ishlaydi (originalda javob bermaydi).
-- "Nega aynan bizni" matnining kesilib qolgan oxiri to'ldirilgan.
-- Scopus kartochkasida "Manba: Scopus, {oy yil}" (ma'lumot API'dan jonli olinadi).
-- Admin funksiyalari: /topics, /stat, /broadcast, javob yozish.
+### Foydalanuvchi uchun
 
-## Sizdan kerak bo'ladigan narsalar
+- **Ro'yxatdan o'tish** (birinchi /start): ism → telefon → faoliyat yo'nalishi → yo'nalish (`directions` jadvali, 7 ta).
+- **Bosh menyu:** Fihria Academic haqida · Xizmatlar · Bepul maslahat · Scopus'da jurnalni tekshirish ·
+  Jurnallar javoni · Plagiatga tekshirish · Hammualliflik · Savollar.
+- **Fihria Academic haqida:** "Nega Fihria Academic" · "Qanday ishlaymiz" (4 bosqich + tamoyillar) · Savollar.
+- **Xizmatlar (11 ta):** Scopus · Web of Science · OAK · Dissertatsiya · Ilmiy profil va Hirsh indeksi ·
+  Konferensiya · Tahrirlash · Tarjima · Tahririyatga a'zolik · ISBN va DOI · EHM guvohnomasi.
+  Buyurtma va bepul maslahatda telefon qayta so'ralmaydi (ro'yxatdagi raqam ishlatiladi).
+- **Scopus tekshiruvi:** ISSN yoki nom bo'yicha, API orqali jonli.
+- **Jurnallar javoni** (/journals): yo'nalishlar bo'yicha jurnallar, havolalar URL tugmalar orqali darhol ochiladi.
+  Boshlang'ich 200 ta nashr "Ilmiy nashrlar javoni" katalogidan (migratsiya `b9e2f4a6c8d1`).
+- **Plagiatga tekshirish** (/plagiat): .doc/.docx/.pdf fayl adminlarga to'liq profil bilan boradi.
+- **Hammualliflik** (/co_authorship): foydalanuvchi maqola joylaydi (sarlavha → yo'nalish → baza → annotatsiya →
+  o'rinlar narxi → fayl), admin tasdiqlaydi; boshqalar yo'nalish bo'yicha ko'rib "Hammuallif bo'lish"ni bosadi.
+  Tasdiqlangan maqola haqida shu yo'nalishdagilarga xabar yuboriladi. Eski mavzular tizimi (/topics) ham turibdi.
+- **Savollar** (/faq): 7 ta ko'p beriladigan savol.
+- **Fallback:** boshqa xabarlarga javob + adminga forward.
 
-- [ ] **Scopus API kaliti** → `.env` dagi `SCOPUS_API_KEY`
-- [ ] **Rasmlar** (12 ta) → `media/`: hero, about, services, svc_scopus, svc_wos, svc_oak, svc_diss,
-      svc_hirsh, svc_conf, coauth, coauth_topics, coauth_field
-- [ ] **Havolalar** (https) → `.env`: URL_SCOPUS, URL_WOS, URL_OAK, URL_DISS, URL_HIRSH, URL_CONF
-- [ ] "Kafolatlar" va "Mijozlar fikrlari" matnlari
-- [ ] Hammualliflik mavzulari (/topics orqali)
-- [ ] Bot tokenini yangilash (BotFather → /revoke), serverga chiqarish
+### Admin uchun
+
+- /leads, /lead_N — arizalar; har birida [📞 Bog‘lanildi] [✅ Yopildi] [❌ Rad etildi].
+- /export — arizalar va foydalanuvchilar (har yo'nalish alohida varaq) Excel faylda.
+- /stat — statistika; /broadcast — hammaga yoki bitta yo'nalishga xabar.
+- /shelf — jurnallar javonini boshqarish; /articles, /article_N — hammualliflik maqolalari (tasdiqlash, rad etish,
+  yopish, narxlarni o'zgartirish); /topics — eski hammualliflik mavzulari.
+- /media — rasm va PDF'larni yuklash (17 ta rasm joyi).
+- Admin "✉️ Foydalanuvchidan xabar" yoki "🆕 Yangi ariza" xabariga reply qilsa, javob foydalanuvchiga boradi.
+
+## Ochiq masalalar
+
+- [ ] **Scopus API kaliti** → serverdagi `.env` dagi `SCOPUS_API_KEY`
+- [ ] **Rasmlar** serverga (`media/`): 17 ta banner tayyor, `scp` yoki `/media` orqali yuklash kerak
+- [ ] **Bot tokenini yangilash** (BotFather → /revoke), agar token biror joyda ko'ringan bo'lsa
+- [ ] **Hammualliflik:** eski mavzular tizimi (/topics) kerakmi; pullik o'rinlar "ilmiy halollik" tamoyiliga mosmi
+- [ ] **Xizmat havolalari** (ixtiyoriy, https) → `.env`: URL_SCOPUS, URL_WOS, ... (bo'sh bo'lsa tugma chiqmaydi)
+- [ ] Haqiqiy mijozlar fikrlari to'plansa — "Biz haqimizda"ga qaytarish
