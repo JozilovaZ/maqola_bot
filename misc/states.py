@@ -33,7 +33,8 @@ class PlagiatCheck(StatesGroup):
 
 
 class AlphabetConvert(StatesGroup):
-    """Yangi alifboga o'girish: fayl yoki matn kutilmoqda (bir nechta ketma-ket yuborish mumkin)."""
+    """Yangi alifbo yoki Lotin ↔ Kirill: fayl yoki matn kutilmoqda (bir nechta ketma-ket yuborish mumkin).
+    Qaysi biri — FSM data'da: alphabet (new, latcyr)."""
     text = State()
 
 

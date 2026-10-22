@@ -18,10 +18,17 @@ SERVICE_BUTTONS = {
 }
 
 
+# Bu xizmatlar ro'yxatda alohida turmaydi — "✍️ Matn bilan ishlash" bo'limi ichida (handlers/users/text_tools.py)
+TEXT_SERVICES = ("edit", "translate")
+
+
 def services_kb() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
     for key, text in SERVICE_BUTTONS.items():
-        keyboard.button(text=text, callback_data=Service(key=key))
+        if key == TEXT_SERVICES[0]:
+            keyboard.button(text="✍️ Matn bilan ishlash", callback_data=Nav(to="text_tools"))
+        if key not in TEXT_SERVICES:
+            keyboard.button(text=text, callback_data=Service(key=key))
     keyboard.adjust(1)
     return keyboard.as_markup()
 
@@ -32,5 +39,7 @@ def service_kb(key: str, url: str) -> InlineKeyboardMarkup:
     keyboard.button(text="💬 Bepul maslahat olish", callback_data=Nav(to="consult"))
     if url:
         keyboard.button(text="ℹ️ Xizmat haqida batafsil", web_app=WebAppInfo(url=url))
+    if key in TEXT_SERVICES:
+        keyboard.button(text="⬅️ Matn bilan ishlash", callback_data=Nav(to="text_tools"))
     keyboard.adjust(1)
     return keyboard.as_markup()

@@ -29,16 +29,19 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
   Jurnallar javoni · Plagiatga tekshirish · Hammualliflik · Savollar.
 - **Fihria Academic haqida:** "Nega Fihria Academic" · "Qanday ishlaymiz" (4 bosqich + tamoyillar) · Savollar.
 - **Xizmatlar (11 ta):** Scopus · Web of Science · OAK · Dissertatsiya · Ilmiy profil va Hirsh indeksi ·
-  Konferensiya · Tahrirlash · Tarjima · Tahririyatga a'zolik · ISBN va DOI · EHM guvohnomasi.
+  Konferensiya · ✍️ Matn bilan ishlash (Tahrirlash · Tarjima · Yangi alifbo · Lotin ↔ Kirill) ·
+  Tahririyatga a'zolik · ISBN va DOI · EHM guvohnomasi.
   Buyurtma va bepul maslahatda telefon qayta so'ralmaydi (ro'yxatdagi raqam ishlatiladi).
 - **Scopus tekshiruvi:** ISSN yoki nom bo'yicha, API orqali jonli.
 - **Jurnallar javoni** (/journals): yo'nalishlar bo'yicha jurnallar. Jurnal tanlansa — kartochka (qisqa ma'lumot)
   va «Zayavka qoldirish»; sayt havolasi zayavka qabul qilingandan keyin beriladi. Ma'lumot /shelf orqali yoziladi.
   Boshlang'ich 200 ta nashr "Ilmiy nashrlar javoni" katalogidan (migratsiya `b9e2f4a6c8d1`).
 - **Plagiatga tekshirish** (/plagiat): .doc/.docx/.pdf fayl adminlarga to'liq profil bilan boradi.
-- **Yangi alifboga o'girish** (/alifbo, bepul, ariza yaratmaydi): .docx (formatlash saqlanadi), .txt yoki matn →
-  oʻ→ö, gʻ→ğ, sh→ş, ch→ç (OʻRQ–1184). Inglizcha xatboshi va inglizcha ko'rinishdagi so'zlar o'tkazib yuboriladi
-  (services/alphabet.py, taxminiy). Kirill matn o'girilmaydi.
+- **✍️ Matn bilan ishlash** (/matn; bosh menyuda ham, Xizmatlar ichida ham): tahrir va tarjima (pullik, buyurtma)
+  hamda ikkita bepul vosita (ariza yaratmaydi; .docx — formatlash saqlanadi, .txt yoki matn):
+  - /alifbo — yangi alifbo: oʻ→ö, gʻ→ğ, sh→ş, ch→ç (OʻRQ–1184); kirill matn ham to'g'ridan-to'g'ri yangi alifboga.
+  - /kirill — Lotin ↔ Kirill, yo'nalish matnning qaysi yozuvi ko'pligiga qarab.
+  Inglizcha xatboshi/so'zlar, havolalar, email, ISSN/DOI o'tkazib yuboriladi (services/alphabet.py, taxminiy).
 - **Hammualliflik** (/co_authorship): foydalanuvchi maqola joylaydi (sarlavha → yo'nalish → baza → annotatsiya →
   o'rinlar narxi → fayl), admin tasdiqlaydi; boshqalar yo'nalish bo'yicha ko'rib "Hammuallif bo'lish"ni bosadi.
   Tasdiqlangan maqola haqida shu yo'nalishdagilarga xabar yuboriladi. Eski mavzular tizimi (/topics) ham turibdi.

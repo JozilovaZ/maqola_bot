@@ -1,6 +1,6 @@
 from handlers.users.about import about_router
 from handlers.users.admin_admins import admin_admins_router
-from handlers.users.alphabet import alphabet_router
+from handlers.users.text_tools import text_tools_router
 from handlers.users.admin_articles import admin_articles_router
 from handlers.users.articles import articles_router
 from handlers.users.admin import admin_router
@@ -32,7 +32,7 @@ routers_list = [
     scopus_router,
     journals_router,
     plagiat_router,
-    alphabet_router,
+    text_tools_router,
     faq_router,
     contact_router,
     echo_router,

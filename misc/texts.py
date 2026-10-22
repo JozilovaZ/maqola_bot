@@ -13,7 +13,7 @@ MAIN_MENU = GREETING + (
     "💬 Bepul maslahat olishingiz\n"
     "📚 Yo‘nalishingiz bo‘yicha jurnallar ro‘yxatini ko‘rishingiz\n"
     "🧾 Maqolangizni plagiatga tekshirtirishingiz\n"
-    "🔤 Maqolangizni yangi o‘zbek alifbosiga o‘girishingiz\n"
+    "✍️ Maqolangizni tahrir, tarjima qildirishingiz, yangi alifboga yoki Lotin ↔ Kirill o‘girishingiz\n"
     "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz\n"
     "❓ Ko‘p beriladigan savollarga javob topishingiz mumkin\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
@@ -431,16 +431,33 @@ JOURNAL_APPLY = "📝 Jurnalga zayavka qoldirish uchun telefon raqamingizni qold
 JOURNAL_UNAVAILABLE = "Bu jurnal javondan olib tashlangan."
 JOURNAL_SITE ="🔗 Kutish davomida jurnal sayti bilan tanishib chiqishingiz mumkin:"
 
-# ---------- Plagiatga tekshirish ----------
+# ---------- Matn bilan ishlash: tahrir, tarjima, yangi alifbo, Lotin ↔ Kirill ----------
 
+TEXT_TOOLS = (
+    "✍️ <b>Matn bilan ishlash</b>\n\n"
+    "✏️ <b>Maqolani tahrirlash</b> — ilmiy uslub, grammatika va jurnal talablariga moslash (mutaxassis bajaradi).\n"
+    "🌐 <b>Maqolani tarjima qilish</b> — o‘zbek, rus va ingliz tillari o‘rtasida (mutaxassis bajaradi).\n"
+    "🔤 <b>Yangi alifboga o‘girish</b> — bepul, bir zumda.\n"
+    "🔁 <b>Lotin ↔ Kirill</b> — bepul, bir zumda.\n\n"
+    "Kerakli xizmatni tanlang 👇"
+)
+
+FILE_HINT = (
+    "📎 <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring (20 MB gacha) yoki matnni shu yerga yozing. "
+    "Word faylda shrift, jadval va rasmlar joyida qoladi."
+)
 ALPHABET = (
     "🔤 <b>Yangi alifboga o‘girish</b>\n\n"
     "Maqolangizni yangi o‘zbek lotin alifbosiga bepul o‘girib beramiz "
     "(2026-yil 21-oktyabrdagi OʻRQ–1184-son Qonun).\n\n"
     "Almashtiriladi: <b>oʻ → ö</b>, <b>gʻ → ğ</b>, <b>sh → ş</b>, <b>ch → ç</b>. "
-    "Tutuq belgisi (maʼlumot, sanʼat) va «ng» o‘zgarmaydi.\n\n"
-    "📎 <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring (20 MB gacha) yoki matnni shu yerga yozing. "
-    "Word faylda shrift, jadval va rasmlar joyida qoladi."
+    "Tutuq belgisi (maʼlumot, sanʼat) va «ng» o‘zgarmaydi. Kirill yozuvidagi matn ham to‘g‘ridan-to‘g‘ri "
+    "yangi alifboga o‘giriladi.\n\n" + FILE_HINT
+)
+LATCYR = (
+    "🔁 <b>Lotin ↔ Kirill</b>\n\n"
+    "Matnni lotindan kirillga yoki kirilldan lotinga bepul o‘girib beramiz — yo‘nalish matnning o‘ziga qarab "
+    "aniqlanadi. Yangi alifbodagi (ö, ğ, ş, ç) matn ham kirillga o‘giriladi.\n\n" + FILE_HINT
 )
 ALPHABET_WRONG = (
     "Iltimos, <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring yoki matnni yozing.\n\n"
@@ -449,20 +466,23 @@ ALPHABET_WRONG = (
 )
 ALPHABET_TOO_BIG = "Fayl 20 MB dan katta. Iltimos, kichikroq fayl yuboring."
 ALPHABET_BROKEN = "Faylni ochib bo‘lmadi. U buzilmaganini tekshirib, qaytadan yuboring."
+ALPHABET_DIRECTIONS = {
+    "new": "yangi alifboga",
+    "to_lat": "kirilldan lotinga",
+    "to_cyr": "lotindan kirillga",
+}
 ALPHABET_DONE = (
-    "✅ Tayyor! {changed} ta so‘z yangi alifboga o‘girildi.\n\n"
-    "⚠️ Inglizcha matn (adabiyotlar ro‘yxati, annotatsiya) o‘zgartirilmaydi, lekin o‘zbekcha gap ichidagi "
-    "chet so‘zlar va atoqli otlarni ko‘zdan kechiring.\n\n"
+    "✅ Tayyor: {direction} {changed} ta so‘z o‘girildi.\n\n"
+    "⚠️ Inglizcha matn, havolalar va ISSN/DOI o‘zgartirilmaydi. Chet so‘zlar, ruscha o‘zlashmalar "
+    "(masalan, litsey → лицей) va atoqli otlarni ko‘zdan kechiring.\n\n"
     "Yana fayl yoki matn yuborishingiz mumkin."
 )
 ALPHABET_NOTHING = (
-    "Matnda o‘zgartiradigan harf topilmadi (oʻ, gʻ, sh, ch).\n\n"
-    "Matn allaqachon yangi alifboda yoki inglizcha bo‘lishi mumkin."
+    "Matnda o‘giradigan so‘z topilmadi.\n\n"
+    "Matn allaqachon kerakli yozuvda yoki inglizcha bo‘lishi mumkin."
 )
-ALPHABET_CYRILLIC = (
-    "Matn <b>kirill</b> yozuvida ko‘rinadi. Hozircha bot faqat amaldagi lotin yozuvidagi matnni yangi "
-    "alifboga o‘giradi."
-)
+
+# ---------- Plagiatga tekshirish ----------
 
 PLAGIAT = (
     "🧾 <b>Plagiatga tekshirish</b>\n\n"
