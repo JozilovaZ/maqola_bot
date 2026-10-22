@@ -37,7 +37,7 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
   va «Zayavka qoldirish»; sayt havolasi zayavka qabul qilingandan keyin beriladi. Ma'lumot /shelf orqali yoziladi.
   Boshlang'ich 200 ta nashr "Ilmiy nashrlar javoni" katalogidan (migratsiya `b9e2f4a6c8d1`).
 - **Plagiatga tekshirish** (/plagiat): .doc/.docx/.pdf fayl adminlarga to'liq profil bilan boradi.
-- **✍️ Matn bilan ishlash** (/matn; bosh menyuda ham, Xizmatlar ichida ham): tahrir va tarjima (pullik, buyurtma)
+- **✍️ Matn bilan ishlash** (/matn; Xizmatlar ichida): tahrir va tarjima (pullik, buyurtma)
   hamda ikkita bepul vosita (ariza yaratmaydi; .docx — formatlash saqlanadi, .txt yoki matn):
   - /alifbo — yangi alifbo: oʻ→ö, gʻ→ğ, sh→ş, ch→ç (OʻRQ–1184); kirill matn ham to'g'ridan-to'g'ri yangi alifboga.
   - /kirill — Lotin ↔ Kirill, yo'nalish matnning qaysi yozuvi ko'pligiga qarab.

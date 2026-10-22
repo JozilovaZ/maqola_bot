@@ -13,7 +13,6 @@ MAIN_MENU = GREETING + (
     "💬 Bepul maslahat olishingiz\n"
     "📚 Yo‘nalishingiz bo‘yicha jurnallar ro‘yxatini ko‘rishingiz\n"
     "🧾 Maqolangizni plagiatga tekshirtirishingiz\n"
-    "✍️ Maqolangizni tahrir, tarjima qildirishingiz, yangi alifboga yoki Lotin ↔ Kirill o‘girishingiz\n"
     "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz\n"
     "❓ Ko‘p beriladigan savollarga javob topishingiz mumkin\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
