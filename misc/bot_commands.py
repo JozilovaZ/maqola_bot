@@ -25,14 +25,27 @@ ADMIN_COMMANDS = [
     BotCommand(command="media", description="🖼 Rasm va PDF'larni yuklash"),
     BotCommand(command="stat", description="📊 Statistika"),
     BotCommand(command="broadcast", description="📣 Hammaga xabar yuborish"),
+    BotCommand(command="admins", description="👮 Adminlarni boshqarish"),
 ]
+
+
+async def set_admin_commands(bot: Bot, admin_id: int) -> None:
+    try:
+        await bot.set_my_commands(COMMANDS + ADMIN_COMMANDS, scope=BotCommandScopeChat(chat_id=admin_id))
+    except Exception:
+        # Admin botga hali /start bosmagan bo'lsa
+        pass
+
+
+async def remove_admin_commands(bot: Bot, admin_id: int) -> None:
+    """Adminlikdan olinganda: chatdagi alohida menyu o'chadi, oddiy foydalanuvchi menyusi qoladi."""
+    try:
+        await bot.delete_my_commands(scope=BotCommandScopeChat(chat_id=admin_id))
+    except Exception:
+        pass
 
 
 async def set_default_commands(bot: Bot, admin_ids: list[int]) -> None:
     await bot.set_my_commands(COMMANDS, scope=BotCommandScopeDefault())
     for admin_id in admin_ids:
-        try:
-            await bot.set_my_commands(COMMANDS + ADMIN_COMMANDS, scope=BotCommandScopeChat(chat_id=admin_id))
-        except Exception:
-            # Admin botga hali /start bosmagan bo'lsa
-            pass
+        await set_admin_commands(bot, admin_id)

@@ -1,3 +1,4 @@
+from .admins import Admin
 from .articles import Article
 from .base import Base
 from .directions import Direction

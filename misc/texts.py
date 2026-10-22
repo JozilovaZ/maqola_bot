@@ -112,6 +112,8 @@ SERVICE_TEXTS = {
         "Himoyaga tayyorlanyapsizmi? Dissertatsiya ustida ishlashning turli bosqichlarida yordam beramiz.\n\n"
         "Ish yo‘nalishlari:\n\n"
         "• mavzu, reja va tuzilma bo‘yicha maslahat;\n"
+        "• dissertatsiya mavzusi bo‘yicha ilmiy manbalar bazasini shakllantirish;\n"
+        "• ilmiy bazalardan dissertatsiyalarni topib, yuklab (skachat qilib) berish;\n"
         "• boblarni ilmiy tahrirlash va korrektura;\n"
         "• bibliografiyani APA, GOST, IEEE va boshqa uslublarda rasmiylashtirish;\n"
         "• plagiat tekshiruvi va o‘xshashlikni kamaytirish bo‘yicha tavsiyalar;\n"
@@ -366,6 +368,10 @@ CONTACT_TAILS = {
         "muhokama qiladi."
     ),
     "audit": "Mutaxassis yaqin vaqt ichida bog‘lanadi va maqolangiz bo‘yicha bepul maslahat beradi.",
+    "journal": (
+        "Fihria Academic menejeri yaqin vaqt ichida siz bilan bog‘lanadi va jurnal talablari, muddatlari "
+        "hamda narxini aytib beradi."
+    ),
 }
 
 CONTACT_NOT_OWN = "Iltimos, pastdagi «Kontaktni ulashish» tugmasi orqali o‘zingizning raqamingizni yuboring."
@@ -414,7 +420,15 @@ JOURNALS = (
     "Yo‘nalishni tanlang (qavs ichida — jurnallar soni) 👇"
 )
 JOURNALS_EMPTY = "Bu yo‘nalish bo‘yicha hozircha jurnal qo‘shilmagan. Tez orada to‘ldiriladi."
-JOURNALS_HINT = "\nMaqolangiz uchun mos jurnal tanlashda yordam kerakmi? Bepul maslahat oling 👇"
+JOURNALS_HINT = (
+    "\nJurnal haqida batafsil ma’lumot olish va zayavka qoldirish uchun uni pastdan tanlang.\n\n"
+    "Mos jurnal tanlashda yordam kerakmi? Bepul maslahat oling 👇"
+)
+JOURNAL_NO_DESCRIPTION = "Jurnalning talablari, nashr muddatlari va narxi haqida menejerimiz batafsil ma’lumot beradi."
+JOURNAL_CARD_HINT = "Shu jurnalda maqola chop etmoqchimisiz? Zayavka qoldiring 👇"
+JOURNAL_APPLY = "📝 Jurnalga zayavka qoldirish uchun telefon raqamingizni qoldiring 👇"
+JOURNAL_UNAVAILABLE = "Bu jurnal javondan olib tashlangan."
+JOURNAL_SITE ="🔗 Kutish davomida jurnal sayti bilan tanishib chiqishingiz mumkin:"
 
 # ---------- Plagiatga tekshirish ----------
 

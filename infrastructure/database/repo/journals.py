@@ -24,8 +24,10 @@ class JournalRepo(BaseRepo):
     async def get(self, journal_id: int) -> Optional[Journal]:
         return await self.session.get(Journal, journal_id)
 
-    async def add(self, direction_id: int, title: str, base: str, url: Optional[str]) -> Journal:
-        journal = Journal(direction_id=direction_id, title=title, base=base, url=url)
+    async def add(
+        self, direction_id: int, title: str, base: str, url: Optional[str], description: Optional[str] = None
+    ) -> Journal:
+        journal = Journal(direction_id=direction_id, title=title, base=base, url=url, description=description)
         self.session.add(journal)
         await self.session.commit()
         await self.session.refresh(journal)

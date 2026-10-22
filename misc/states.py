@@ -36,11 +36,22 @@ class AddJournal(StatesGroup):
     title = State()
     base = State()
     url = State()
+    description = State()
 
 
 class EditJournal(StatesGroup):
     """Admin: jurnalning bitta qiymatini yozib yuborish. Nima tahrirlanayotgani FSM data'da: edit, edit_id."""
     value = State()
+
+
+class EditDirection(StatesGroup):
+    """Admin: yo'nalish nomi (yangi yoki o'zgartirilgan). FSM data'da: dir_edit (dir_add, dir_rename), dir_id."""
+    value = State()
+
+
+class AddAdmin(StatesGroup):
+    """Admin: yangi adminning Telegram ID'si, @username'i yoki undan forward qilingan xabar."""
+    user = State()
 
 
 class ArticleSubmit(StatesGroup):

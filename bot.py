@@ -9,6 +9,7 @@ from aiogram.fsm.storage.redis import RedisStorage, DefaultKeyBuilder
 
 from config import load_config, Config
 from handlers.users import routers_list
+from infrastructure.database.repo.requests import RequestsRepo
 from infrastructure.database.setup import create_engine, create_session_pool
 from middlewares.config import ConfigMiddleware
 from middlewares.database import DatabaseMiddleware
@@ -117,6 +118,12 @@ async def main():
     dp.include_routers(*routers_list)
 
     register_global_middlewares(dp, config, session_pool)
+
+    # /admins orqali qo'shilgan adminlar .env dagilarga qo'shiladi
+    async with session_pool() as session:
+        for admin_id in await RequestsRepo(session).admins.list_ids():
+            if admin_id not in config.tg_bot.admin_ids:
+                config.tg_bot.admin_ids.append(admin_id)
 
     await on_startup(bot, config.tg_bot.admin_ids)
     await dp.start_polling(bot)

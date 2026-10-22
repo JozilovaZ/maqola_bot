@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from infrastructure.database.repo.admins import AdminRepo
 from infrastructure.database.repo.articles import ArticleRepo
 from infrastructure.database.repo.directions import DirectionRepo
 from infrastructure.database.repo.journals import JournalRepo
@@ -27,6 +28,13 @@ class RequestsRepo:
         The User repository sessions are required to manage user operations.
         """
         return UserRepo(self.session)
+
+    @property
+    def admins(self) -> AdminRepo:
+        """
+        /admins orqali qo'shilgan adminlar.
+        """
+        return AdminRepo(self.session)
 
     @property
     def articles(self) -> ArticleRepo:

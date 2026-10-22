@@ -49,6 +49,15 @@ class UserRepo(BaseRepo):
         await self.session.commit()
         return result.scalar_one()
 
+    async def get(self, user_id: int) -> Optional[User]:
+        return await self.session.get(User, user_id)
+
+    async def get_by_username(self, username: str) -> Optional[User]:
+        """@username bo'yicha (katta-kichik harf farqsiz). Faqat botga /start bosganlar topiladi."""
+        return await self.session.scalar(
+            select(User).where(func.lower(User.username) == username.lower()).limit(1)
+        )
+
     async def register(
         self, user_id: int, real_name: str, phone: str, role: str, direction_id: int
     ) -> User:

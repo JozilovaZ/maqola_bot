@@ -14,6 +14,7 @@ class Journal(Base, TimestampMixin, TableNameMixin):
     title: Mapped[str] = mapped_column(Text)
     base: Mapped[str] = mapped_column(String(64))  # masalan: "Scopus Q3", "Web of Science", "OAK"
     url: Mapped[Optional[str]] = mapped_column(String(512))  # jurnal sayti (ixtiyoriy)
+    description: Mapped[Optional[str]] = mapped_column(Text)  # foydalanuvchiga ko'rinadigan qisqa ma'lumot
 
     def __repr__(self):
         return f"<Journal {self.id} {self.base} {self.title[:30]}>"

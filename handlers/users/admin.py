@@ -13,7 +13,10 @@ from keyboards.inline.admin import (
     admin_delete_kb, admin_field_kb, admin_fields_kb, admin_topic_kb, field_delete_kb,
 )
 from keyboards.inline.callbacks import AdminTopic
-from misc.states import AddJournal, AddTopic, ArticlePrices, ArticleReject, BroadcastState, EditJournal, EditValue, MediaUpload
+from misc.states import (
+    AddAdmin, AddJournal, AddTopic, ArticlePrices, ArticleReject, BroadcastState, EditDirection, EditJournal, EditValue,
+    MediaUpload,
+)
 from misc.topics import render_topic
 
 admin_router = Router()
@@ -195,7 +198,10 @@ async def admin_edit_start(call: CallbackQuery, callback_data: AdminTopic, state
     await call.message.answer(EDIT_PROMPTS[callback_data.action] + current + "\n\nBekor qilish: /cancel")
 
 
-@admin_router.message(Command("cancel"), StateFilter(AddJournal, AddTopic, ArticlePrices, ArticleReject, BroadcastState, EditJournal, EditValue, MediaUpload))
+@admin_router.message(Command("cancel"), StateFilter(
+    AddAdmin, AddJournal, AddTopic, ArticlePrices, ArticleReject, BroadcastState, EditDirection, EditJournal, EditValue,
+    MediaUpload,
+))
 async def admin_cancel(message: Message, state: FSMContext):
     await state.set_state(None)
     await message.answer("Bekor qilindi.")

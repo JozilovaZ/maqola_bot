@@ -32,7 +32,8 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
   Konferensiya · Tahrirlash · Tarjima · Tahririyatga a'zolik · ISBN va DOI · EHM guvohnomasi.
   Buyurtma va bepul maslahatda telefon qayta so'ralmaydi (ro'yxatdagi raqam ishlatiladi).
 - **Scopus tekshiruvi:** ISSN yoki nom bo'yicha, API orqali jonli.
-- **Jurnallar javoni** (/journals): yo'nalishlar bo'yicha jurnallar, havolalar URL tugmalar orqali darhol ochiladi.
+- **Jurnallar javoni** (/journals): yo'nalishlar bo'yicha jurnallar. Jurnal tanlansa — kartochka (qisqa ma'lumot)
+  va «Zayavka qoldirish»; sayt havolasi zayavka qabul qilingandan keyin beriladi. Ma'lumot /shelf orqali yoziladi.
   Boshlang'ich 200 ta nashr "Ilmiy nashrlar javoni" katalogidan (migratsiya `b9e2f4a6c8d1`).
 - **Plagiatga tekshirish** (/plagiat): .doc/.docx/.pdf fayl adminlarga to'liq profil bilan boradi.
 - **Hammualliflik** (/co_authorship): foydalanuvchi maqola joylaydi (sarlavha → yo'nalish → baza → annotatsiya →
@@ -46,9 +47,12 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
 - /leads, /lead_N — arizalar; har birida [📞 Bog‘lanildi] [✅ Yopildi] [❌ Rad etildi].
 - /export — arizalar va foydalanuvchilar (har yo'nalish alohida varaq) Excel faylda.
 - /stat — statistika; /broadcast — hammaga yoki bitta yo'nalishga xabar.
-- /shelf — jurnallar javonini boshqarish; /articles, /article_N — hammualliflik maqolalari (tasdiqlash, rad etish,
+- /shelf — jurnallar javoni: jurnallar (nomi, baza, havola, qisqa ma'lumot, yo'nalishi; qo'shish, o'chirish) va
+  yo'nalishlar (qo'shish, nomini o'zgartirish, o'chirish — ro'yxatdan o'tishda ham shu yo'nalishlar); /articles, /article_N — hammualliflik maqolalari (tasdiqlash, rad etish,
   yopish, narxlarni o'zgartirish); /topics — eski hammualliflik mavzulari.
 - /media — rasm va PDF'larni yuklash (17 ta rasm joyi).
+- /admins — adminlar: qo'shish (kontakt tanlash, ID, @username yoki forward), adminlikdan olish. `.env` dagi
+  ADMINS — asosiy adminlar, ularni bot orqali o'chirib bo'lmaydi; qo'shilganlar `admins` jadvalida saqlanadi.
 - Admin "✉️ Foydalanuvchidan xabar" yoki "🆕 Yangi ariza" xabariga reply qilsa, javob foydalanuvchiga boradi.
 
 ## Ochiq masalalar

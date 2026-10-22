@@ -33,6 +33,17 @@ class JournalPage(CallbackData, prefix="jrn"):
     page: int = 0
 
 
+class JournalView(CallbackData, prefix="jrn_v"):
+    """Jurnallar javoni: bitta jurnal kartochkasi. page — orqaga qaytiladigan ro'yxat sahifasi."""
+    id: int
+    page: int = 0
+
+
+class JournalApply(CallbackData, prefix="jrn_a"):
+    """Foydalanuvchi jurnalga maqola chop etish uchun zayavka qoldiradi."""
+    id: int
+
+
 class LeadStatus(CallbackData, prefix="adm_l"):
     """Ariza holatini o'zgartirish. status: contacted, closed, rejected"""
     id: int
@@ -70,8 +81,17 @@ class AdminJournal(CallbackData, prefix="adm_j"):
     """Admin: jurnallar javonini boshqarish.
 
     action: directions, direction (id = direction_id), add (id = direction_id), journal (id = journal_id),
-            edit_title / edit_base / edit_url / delete / delete_yes (id = journal_id)
+            edit_title / edit_base / edit_url / edit_desc / delete / delete_yes (id = journal_id),
+            move (id = journal_id), move_to (id = journal_id, to = direction_id),
+            dir_add, dir_rename / dir_delete / dir_delete_yes (id = direction_id)
     """
+    action: str
+    id: int = 0
+    to: int = 0
+
+
+class AdminManage(CallbackData, prefix="adm_ad"):
+    """Admin: adminlarni boshqarish (/admins). action: list, add, remove, remove_yes (id = Telegram ID)"""
     action: str
     id: int = 0
 

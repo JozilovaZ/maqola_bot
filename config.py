@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 from environs import Env
 import logging
@@ -60,8 +60,12 @@ class DbConfig:
 @dataclass
 class TgBot:
     token: str
+    # Hamma adminlar: .env dagi ADMINS + /admins orqali qo'shilganlar (bot ishga tushganda bazadan qo'shiladi).
+    # Ro'yxat bot ishlab turganda ham o'zgaradi, shuning uchun hamma joyda shu ro'yxatning o'zi ishlatiladi.
     admin_ids: list[int]
     use_redis: bool
+    # Asosiy adminlar — faqat .env dagi ADMINS; ularni /admins orqali o'chirib bo'lmaydi
+    main_admin_ids: list[int] = field(default_factory=list)
 
     @staticmethod
     def from_env(env: Env):
@@ -74,7 +78,7 @@ class TgBot:
                 raise ValueError("BOT_TOKEN .env faylda topilmadi!")
             admin_ids = env.list("ADMINS", subcast=int, default=[])
             use_redis = env.bool("USE_REDIS", default=False)
-            return TgBot(token=token, admin_ids=admin_ids, use_redis=use_redis)
+            return TgBot(token=token, admin_ids=admin_ids, use_redis=use_redis, main_admin_ids=list(admin_ids))
         except Exception as e:
             logging.error(f"Bot sozlamalarini yuklashda xato: {e}")
             raise

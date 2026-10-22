@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from infrastructure.database.models import Direction, Field, Topic
-from keyboards.inline.callbacks import AdminTopic, Broadcast, BroadcastTarget, LeadStatus, MediaSlot
+from keyboards.inline.callbacks import AdminManage, AdminTopic, Broadcast, BroadcastTarget, LeadStatus, MediaSlot
 from misc import media
 from misc.media import PDF_SLOTS, PHOTO_SLOTS
 
@@ -123,5 +123,25 @@ def field_delete_kb(field_id: int) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
     keyboard.button(text="Ha, o‘chirish", callback_data=AdminTopic(action="field_delete_yes", id=field_id))
     keyboard.button(text="Yo‘q", callback_data=AdminTopic(action="field", id=field_id))
+    keyboard.adjust(2)
+    return keyboard.as_markup()
+
+
+# ---------- Adminlar (/admins) ----------
+
+def admins_kb(removable: list[tuple[int, str]]) -> InlineKeyboardMarkup:
+    """removable — o'chirsa bo'ladigan adminlar: (Telegram ID, ismi). .env dagi asosiy adminlar bu yerda yo'q."""
+    keyboard = InlineKeyboardBuilder()
+    for user_id, name in removable:
+        keyboard.button(text=f"❌ {name}", callback_data=AdminManage(action="remove", id=user_id))
+    keyboard.button(text="➕ Admin qo‘shish", callback_data=AdminManage(action="add"))
+    keyboard.adjust(1)
+    return keyboard.as_markup()
+
+
+def admin_remove_kb(user_id: int) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardBuilder()
+    keyboard.button(text="Ha, adminlikdan olish", callback_data=AdminManage(action="remove_yes", id=user_id))
+    keyboard.button(text="Yo‘q", callback_data=AdminManage(action="list"))
     keyboard.adjust(2)
     return keyboard.as_markup()
