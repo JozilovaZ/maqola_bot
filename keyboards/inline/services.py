@@ -8,10 +8,13 @@ SERVICE_BUTTONS = {
     "wos": "📝 Web of Science’da maqola chop etish",
     "oak": "🎓 OAK jurnallarida maqola chop etish",
     "diss": "📚 Dissertatsiyalar bo‘yicha xizmatlar",
-    "hirsh": "📈 Hirsh indeksini oshirish",
+    "hirsh": "📈 Ilmiy profil va Hirsh indeksi",
     "conf": "🎤 Konferensiya tezislarini chop etish",
     "edit": "✏️ Maqolani tahrirlash",
     "translate": "🌐 Maqolani tarjima qilish",
+    "board": "🏅 Tahririyatga a’zolik",
+    "isbn": "📕 ISBN va DOI olish",
+    "ehm": "💾 EHM dasturi guvohnomasi",
 }
 
 

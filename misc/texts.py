@@ -13,47 +13,43 @@ MAIN_MENU = GREETING + (
     "💬 Bepul maslahat olishingiz\n"
     "📚 Yo‘nalishingiz bo‘yicha jurnallar ro‘yxatini ko‘rishingiz\n"
     "🧾 Maqolangizni plagiatga tekshirtirishingiz\n"
-    "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz mumkin\n\n"
+    "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz\n"
+    "❓ Ko‘p beriladigan savollarga javob topishingiz mumkin\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
 )
 
 # ---------- Fihria Academic haqida ----------
 
 ABOUT = GREETING + (
-    "Xizmatni tanlashdan oldin Fihria Academic — jamoamiz, ish yondashuvimiz va mijozlar uchun "
-    "kafolatlarimiz bilan yaqindan tanishib chiqishni taklif qilaman.\n\n"
-    "Ilmiy maqolangizni, dissertatsiyangizni yoki boshqa muhim loyihangizni kimga ishonib topshirayotganingizni "
-    "yaxshi tushunishingiz biz uchun muhim.\n\n"
-    "Quyidagi bo‘limni tanlang — olimlar nima uchun Fihria Academic’ni tanlashlarini bilib oling 👇"
+    "Fihria Academic — tadqiqotchilarga ilmiy maqola tayyorlash, tahrirlash, tarjima qilish va ishonchli jurnal "
+    "tanlashda yordam beradigan jamoa.\n\n"
+    "Maqolani muallif bilan birga, uning o‘z tadqiqoti va ma’lumotlari asosida tayyorlaymiz. Har bir ish jurnal "
+    "talablariga moslab, muallif bilan kelishilgan holda bajariladi.\n\n"
+    "Quyidagi bo‘limni tanlang 👇"
 )
 
-# Originalda matn "bo‘y" so'zida kesilib qolgan — oxiri to'ldirildi
 ABOUT_WHY = (
-    "⭐ Nega olimlar Fihria Academic’ni tanlashadi?\n\n"
-    "Biz shaffof ishlaymiz, mijozlarni har bir bosqichda qo‘llab-quvvatlaymiz va hatto noodatiy ilmiy "
-    "vazifalar uchun ham yechim topishga yordam beramiz.\n\n"
-    "Bizning afzalliklarimiz:\n\n"
-    "• menejerlar doimo aloqada;\n"
-    "• halol va ochiq muloqot;\n"
-    "• shaffof narxlar va to‘lovni bosqichma-bosqich amalga oshirish imkoniyati;\n"
-    "• barcha jurnallar va materiallar yuborishdan oldin mijoz bilan kelishiladi;\n"
-    "• professional tahririy nazorat, plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshiruv;\n"
-    "• ishonchli jurnallarni tanlashda yordam va xavfli nashrlar haqida ogohlantirish;\n"
-    "• individual va noodatiy so‘rovlar bo‘yicha yordam."
+    "⭐ Nega Fihria Academic?\n\n"
+    "• mavzudan nashrga tayyor matngacha — maqola tayyorlash, plagiat tekshiruvi, tahrir va tarjima bir joyda;\n"
+    "• o‘zbek, rus va ingliz tillarida ishlaymiz;\n"
+    "• jurnal tanlashda yordam beramiz va soxta («o‘g‘irlangan») jurnallardan ogohlantiramiz;\n"
+    "• narx va muddat ish hajmi ko‘rilgach oldindan kelishiladi;\n"
+    "• oraliq variantlarni ko‘rsatib, izohlaringizni kiritamiz;\n"
+    "• yo‘nalishlar bo‘yicha ishonchli jurnallar ro‘yxati — «📚 Jurnallar javoni» bo‘limida."
 )
 
-# Originalda bu ikki tugma javob bermaydi — NAMUNA matn, o'zingiznikiga almashtiring
-ABOUT_GUARANTEES = (
-    "🛡 Bizning kafolatlarimiz\n\n"
-    "• hamkorlik rasmiy shartnoma asosida amalga oshiriladi;\n"
-    "• to‘lovni bosqichma-bosqich amalga oshirish mumkin;\n"
-    "• shartnoma shartlari bajarilmagan taqdirda mablag‘ qaytariladi;\n"
-    "• barcha materiallar maxfiy saqlanadi."
-)
-
-ABOUT_REVIEWS = (
-    "💬 Mijozlarimiz fikrlari\n\n"
-    "Bu yerga mijozlaringiz fikrlarini yozing."
+ABOUT_PROCESS = (
+    "🤝 Qanday ishlaymiz\n\n"
+    "1️⃣ <b>So‘rov yuborasiz</b> — xizmatni tanlab, mavzu va talablarni qisqacha yozasiz.\n"
+    "2️⃣ <b>Kelishamiz</b> — hajm, narx va muddatni aniqlab, ish rejasini tasdiqlaymiz.\n"
+    "3️⃣ <b>Birga ishlaymiz</b> — oraliq variantlarni ko‘rib, izohlaringizni kiritamiz.\n"
+    "4️⃣ <b>Tayyor natija</b> — jurnalga yuborishga tayyor matn va hisobotni olasiz.\n\n"
+    "Bizning tamoyillarimiz:\n\n"
+    "• maqola muallifning o‘z tadqiqoti, ma’lumotlari va ishtirokida tayyorlanadi;\n"
+    "• ilmiy halollik qoidalariga zid ishlar qabul qilinmaydi;\n"
+    "• materiallaringiz uchinchi shaxslarga berilmaydi;\n"
+    "• «3 kunda Scopus» yoki «100% kafolat» kabi va’dalar bermaymiz — nashr qarorini jurnal tahririyati va "
+    "taqrizchilar qabul qiladi."
 )
 
 # ---------- Xizmatlar ----------
@@ -61,133 +57,107 @@ ABOUT_REVIEWS = (
 SERVICES = (
     "Assalomu alaykum, {name}! 👋\n\n"
     "Men — Fihria Academic yordamchisiman.\n\n"
-    "Bu yerda nashr qilishni rejalashtirayotgan, hammualliflik izlayotgan yoki professional yordamga muhtoj "
-    "bo‘lganlar uchun barcha xizmatlarimiz jamlangan.\n\n"
-    "Menyudan kerakli xizmatni tanlang — batafsil ma’lumot, shartlar va keyingi qadamlar bilan tanishing."
+    "Bu yerda maqola tayyorlash, nashrga tayyorlash va ilmiy faoliyatingiz uchun barcha xizmatlarimiz "
+    "jamlangan.\n\n"
+    "Menyudan kerakli xizmatni tanlang — batafsil ma’lumot va keyingi qadamlar bilan tanishing."
 )
 
 SERVICE_TEXTS = {
     "scopus": (
         "📚 Scopus’da maqola chop etish\n\n"
-        "Scopus bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria Academic "
-        "maqola yozilishidan boshlab, uning Scopus bazasida indekslanishigacha bo‘lgan butun jarayonni kuzatib "
-        "boradi.\n\n"
+        "Scopus bazasidagi jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria Academic maqolani tayyorlashdan "
+        "tahririyatga yuborish va taqrizdan o‘tishgacha bo‘lgan jarayonda yoningizda bo‘ladi.\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
-        "• ilmiy maqolani yozish yoki professional auditdan o‘tkazish;\n"
-        "• mavzuingiz, mutaxassisligingiz va talab etiladigan percentilni inobatga olgan holda Scopus Q1–Q4 "
-        "jurnalini tanlash;\n"
-        "• matnni Turnitin orqali plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirish;\n"
-        "• maqolani topshirishdan oldin siz bilan kelishish;\n"
-        "• tahririyatga yuborish, taqriz jarayonini kuzatish va tuzatishlar kiritish;\n"
-        "• nashrni nazorat qilish hamda Scopus bazasida indekslanishini kafolatlash.\n\n"
-        "Hamkorlik rasmiy shartnoma asosida amalga oshiriladi. To‘lovni bosqichma-bosqich amalga oshirish mumkin; "
-        "shartnoma shartlari bajarilmagan taqdirda mablag‘ qaytarilishi nazarda tutiladi.\n\n"
-        "Nashrning taxminiy muddati soha va jurnal siyosatiga qarab 4 oydan 12 oygacha.\n\n"
-        "Maqola chop etishga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "• maqolani siz bilan birga tayyorlash yoki tayyor matnni professional auditdan o‘tkazish;\n"
+        "• mavzu va kerakli kvartilga (Q1–Q4) mos jurnalni tanlash — indeksatsiya Scopus Sources ro‘yxatidan "
+        "tekshiriladi;\n"
+        "• plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshiruv;\n"
+        "• matnni jurnal shabloni va talablariga moslash;\n"
+        "• tahririyatga yuborish, taqrizchi izohlariga javob xatini tayyorlash va tuzatishlar kiritish.\n\n"
+        "Nashr qarorini jurnal tahririyati qabul qiladi, muddat esa jurnalning taqriz jarayoniga bog‘liq. Narx va "
+        "muddatni ish hajmini ko‘rgach aniq aytamiz.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "wos": (
         "🔬 Web of Science’da maqola chop etish\n\n"
-        "Web of Science bazasida indekslanadigan jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria "
-        "Academic maqola yozilishidan boshlab, uning Web of Science bazasida indekslanishigacha bo‘lgan butun "
-        "jarayonni kuzatib boradi.\n\n"
-        "Xizmat quyidagilarni o‘z ichiga oladi:\n\n"
-        "• nashr talablarini hisobga olgan holda maqolani yozish yoki auditdan o‘tkazish;\n"
-        "• yo‘nalishingizga mos Web of Science jurnalini tanlash;\n"
-        "• matnni Turnitin orqali plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirish;\n"
-        "• yo‘nalishingiz bo‘yicha mutaxassis-muallifni tanlash;\n"
+        "Web of Science bazasidagi jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria Academic maqolani "
+        "tayyorlashdan tahririyatga yuborish va taqrizdan o‘tishgacha bo‘lgan jarayonda yoningizda bo‘ladi.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• maqolani siz bilan birga tayyorlash yoki tayyor matnni professional auditdan o‘tkazish;\n"
+        "• yo‘nalishingizga mos jurnalni tanlash — indeksatsiya Master Journal List’dan tekshiriladi;\n"
+        "• plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshiruv;\n"
+        "• matnni jurnal shabloni va talablariga moslash;\n"
         "• har bir bosqichda matn va jurnalni siz bilan kelishish;\n"
-        "• maqolani yuborish, tahririyat bilan muloqot qilish va taqrizdan keyingi tuzatishlarni kiritish;\n"
-        "• nashr va indekslanishgacha bo‘lgan jarayonni kuzatib borish.\n\n"
-        "Ish rasmiy shartnoma asosida olib boriladi. To‘lov ikki bosqichda — 50/50 shaklida amalga oshiriladi, "
-        "jurnal tanlashdan tortib matnning yakuniy versiyasigacha bo‘lgan barcha muhim qarorlar siz bilan "
-        "kelishiladi.\n\n"
-        "Maqola chop etishga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "• tahririyatga yuborish, taqrizchi izohlariga javob xatini tayyorlash va tuzatishlar kiritish.\n\n"
+        "Nashr qarorini jurnal tahririyati qabul qiladi, muddat esa jurnalning taqriz jarayoniga bog‘liq. Narx va "
+        "muddatni ish hajmini ko‘rgach aniq aytamiz.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "oak": (
         "🎓 OAK jurnallarida maqola chop etish\n\n"
-        "Oʻzbekiston Respublikasi OAKning amaldagi roʻyxatidagi jurnalda maqola chop etishni rejalashtiryapsizmi? "
-        "Fihria Academic material tayyorlashdan boshlab, maqolaning rasmiy nashr qilinishigacha bo‘lgan "
-        "butun jarayonni kuzatib boradi.\n\n"
+        "Oʻzbekiston Respublikasi OAK ro‘yxatidagi jurnalda maqola chop etishni rejalashtiryapsizmi? Fihria Academic "
+        "maqolani tayyorlashdan nashrgacha bo‘lgan jarayonda yordam beradi.\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
-        "• mavzuingiz bo‘yicha sifatli ilmiy maqola yozish yoki tayyor matnni professional auditdan o‘tkazish;\n"
+        "• maqolani siz bilan birga tayyorlash yoki tayyor matnni professional auditdan o‘tkazish;\n"
         "• OAKning amaldagi ro‘yxatidan yo‘nalishingizga mos jurnalni tanlash va uni siz bilan kelishish;\n"
-        "• maqolani plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirish;\n"
-        "• faqat barqaror obro‘ga ega, sinovdan o‘tgan nashrlar bilan ishlash;\n"
-        "• mavzu, muddat va narx belgilangan rasmiy shartnoma tuzish;\n"
-        "• maqolani jurnalga yuborish, taqriz jarayonini kuzatish va zarur tuzatishlarni kiritish;\n"
-        "• maqola OAK ro‘yxatidagi nashrda chop etilgungacha bo‘lgan jarayonni nazorat qilish.\n\n"
-        "Xizmat narxi — 2 400 000 UZSdan boshlanadi. Yakuniy narx mutaxassislik va tanlangan jurnalga bog‘liq.\n\n"
-        "Hamkorlik rasmiy shartnoma asosida amalga oshiriladi. To‘lovni 50/50 yoki 25/25/50 shaklida "
-        "bosqichma-bosqich amalga oshirish mumkin. Shartnoma shartlari bajarilmagan taqdirda mablag‘ qaytarilishi "
-        "nazarda tutiladi.\n\n"
-        "Maqola chop etishga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "• plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshiruv;\n"
+        "• matnni jurnal talablariga moslab rasmiylashtirish;\n"
+        "• maqolani jurnalga yuborish va zarur tuzatishlarni kiritish.\n\n"
+        "Jurnal OAK tomonidan tan olinishini doim OAK rasmiy ro‘yxatidan tekshiramiz. Narx va muddat yo‘nalish va "
+        "tanlangan jurnalga qarab belgilanadi.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "diss": (
         "🎓 Dissertatsiya bo‘yicha xizmatlar\n\n"
-        "Dissertatsiya bo‘yicha yordam kerakmi? Alohida bobga ham, mavzu tanlashdan himoyaga tayyorgarlikkacha "
-        "bo‘lgan kompleks yordamga ham buyurtma berishingiz mumkin.\n\n"
+        "Himoyaga tayyorlanyapsizmi? Dissertatsiya ustida ishlashning turli bosqichlarida yordam beramiz.\n\n"
         "Ish yo‘nalishlari:\n\n"
-        "• dissertatsiya mavzusini tanlash va asoslash;\n"
-        "• reja va tuzilmani ishlab chiqish;\n"
-        "• alohida boblarni yoki dissertatsiyani to‘liq tayyorlash;\n"
-        "• ilmiy tahrirlash va korrektura;\n"
-        "• bibliografiyani APA, GOST, MLA va boshqa uslublarda rasmiylashtirish;\n"
-        "• StrikePlagiarism / Turnitin orqali plagiat va sun’iy intellektdan foydalanish bo‘yicha tekshirish;\n"
-        "• matnning originalligini oshirish;\n"
-        "• avtoreferatga taqriz hamda retsenziyalarni tayyorlash;\n"
-        "• himoyagacha bo‘lgan tuzatishlarni kuzatib borish.\n\n"
-        "Ishlar maxfiy tarzda va shartnoma asosida olib boriladi. To‘lovni 50/50 yoki 25/25/50 shaklida "
-        "bosqichma-bosqich amalga oshirish mumkin.\n\n"
-        "Bir bobni tayyorlashning taxminiy muddati uning turi va hajmiga bog‘liq.\n\n"
-        "Dissertatsiya bo‘yicha xizmatga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "• mavzu, reja va tuzilma bo‘yicha maslahat;\n"
+        "• boblarni ilmiy tahrirlash va korrektura;\n"
+        "• bibliografiyani APA, GOST, IEEE va boshqa uslublarda rasmiylashtirish;\n"
+        "• plagiat tekshiruvi va o‘xshashlikni kamaytirish bo‘yicha tavsiyalar;\n"
+        "• himoya talablari bo‘yicha nashrlaringizni hisoblash va yetishmayotgan maqolalar uchun jurnal tanlash;\n"
+        "• matnlarni o‘zbek, rus va ingliz tillari o‘rtasida tarjima qilish.\n\n"
+        "Narx va muddat ish turi va hajmiga qarab kelishiladi.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "hirsh": (
-        "📈 Hirsh indeksini oshirish\n\n"
-        "Hirsh indeksi yoki h-indeks olimning ilmiy nufuzini uning nashrlari va iqtiboslari soni orqali "
-        "ko‘rsatadi.\n\n"
-        "Xizmat PhD darajasiga ega mutaxassislar, doktorantlar, tadqiqotchilar, grant tanlovlari ishtirokchilari "
-        "hamda ilmiy profilini mustahkamlashni istaganlar uchun mos.\n\n"
-        "Ish bosqichlari:\n\n"
-        "• Scopus, Web of Science yoki Google Scholar’dagi profilingizni tahlil qilish;\n"
-        "• maqsadli ko‘rsatkichni hisoblash;\n"
-        "• zarur iqtiboslar sonini aniqlash;\n"
-        "• mavzuga mos ilmiy nashrlarni tanlash;\n"
-        "• akademik iqtiboslarni sohangizga oid tadqiqotlarga integratsiya qilish;\n"
-        "• bajarilgan ishlar bo‘yicha oylik hisobotlarni taqdim etish.\n\n"
-        "Ko‘rsatkich oshishining taxminiy muddati — 4 oydan 16 oygacha.\n\n"
-        "Hirsh indeksingizni oshirmoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "📈 Ilmiy profil va Hirsh indeksi\n\n"
+        "Hirsh indeksi (h-indeks) nashrlaringiz va ularga qilingan iqtiboslar soniga qarab hisoblanadi. Profil "
+        "tartibsiz bo‘lsa — nashrlar biriktirilmagan, ism turlicha yozilgan, bir nechta profil ochilgan — "
+        "ko‘rsatkich haqiqiydan past chiqadi.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• ORCID, Google Scholar va Scopus profillarini ochish yoki tartibga keltirish;\n"
+        "• barcha nashrlaringizni profilga biriktirish;\n"
+        "• takroriy profillarni birlashtirish va ism yozilishini bir xillashtirish;\n"
+        "• attestatsiya va grantlar uchun profil ma’lumotlarini tayyorlash.\n\n"
+        "Iqtibos sotib olish kabi sun’iy usullar bilan ishlamaymiz.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "conf": (
         "🎤 Konferensiya tezislarini chop etish\n\n"
         "Ilmiy konferensiyada qatnashib, tezislarni chop ettirishingiz kerakmi? Materiallarni tayyorlash va ilmiy "
         "yo‘nalishingizga mos konferensiyani tanlashda yordam beramiz.\n\n"
-        "Siz quyidagilarga ega bo‘lasiz:\n\n"
-        "• sifatli konferensiya tezislarini yozish;\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• tezislarni siz bilan birga tayyorlash;\n"
         "• mos ilmiy konferensiyani tanlash;\n"
         "• materialni tashkiliy qo‘mita talablariga muvofiq rasmiylashtirish;\n"
-        "• konferensiya ishtirokchisi sertifikati;\n"
-        "• konferensiya materiallari to‘plamining PDF formatidagi nusxasi.\n\n"
-        "Tezislar — tadqiqot natijalarining qisqacha bayoni bo‘lib, odatda 1 dan 5 sahifagacha bo‘ladi va ilmiy "
-        "faolligingizni tasdiqlaydi.\n\n"
-        "Tezislarni chop etishga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
-        "Quyidagi kerakli tugmani tanlang 👇"
+        "• yuborish va tashkiliy qo‘mita bilan muloqot.\n\n"
+        "Ko‘plab konferensiyalar ishtirokchi sertifikati va to‘plamning elektron nusxasini beradi, lekin bu har bir "
+        "konferensiyaning o‘z qoidasiga bog‘liq — buyurtma vaqtida aniqlashtiramiz.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
     "edit": (
         "✏️ Maqolani tahrirlash\n\n"
         "Maqolangiz tayyor, lekin jurnal talablariga to‘liq javob berishiga ishonchingiz komil emasmi? Fihria "
-        "Academic mutaxassislari matnni ilmiy va texnik jihatdan tahrir qilib, nashrga tayyorlab beradi.\n\n"
+        "Academic mutaxassislari matnni ilmiy va texnik jihatdan tahrir qilib, jurnalga yuborishga tayyorlab beradi."
+        "\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
-        "• imlo, grammatika va uslub xatolarini tuzatish;\n"
+        "• ilmiy uslub, grammatika va mantiqiy izchillikni tuzatish;\n"
         "• ilmiy matn tuzilishini (IMRAD: kirish, usullar, natijalar, muhokama) takomillashtirish;\n"
-        "• annotatsiya, kalit so‘zlar va sarlavhani jurnal talablariga moslashtirish;\n"
-        "• adabiyotlar ro‘yxati va iqtiboslarni kerakli standartda (APA, Vancouver, GOST va b.) rasmiylashtirish;\n"
-        "• jadval, rasm va formulalarni tartibga keltirish;\n"
-        "• taqrizchilar izohlari bo‘yicha tuzatishlar kiritishda yordam.\n\n"
+        "• tanlangan jurnal shabloni va talablariga moslash;\n"
+        "• annotatsiya, kalit so‘zlar va sarlavhani kuchaytirish;\n"
+        "• adabiyotlar ro‘yxatini kerakli standartda (APA, IEEE, GOST va b.) formatlash;\n"
+        "• taqrizchi izohlariga javob xatini tayyorlash.\n\n"
         "Narx va muddat matn hajmi hamda tahrir darajasiga qarab belgilanadi.\n\n"
         "Tahrirga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
         "Quyidagi kerakli tugmani tanlang 👇"
@@ -195,16 +165,50 @@ SERVICE_TEXTS = {
     "translate": (
         "🌐 Maqolani tarjima qilish\n\n"
         "Maqolangizni xalqaro jurnalga yubormoqchimisiz? Fihria Academic ilmiy matnlarni soha terminologiyasini "
-        "saqlagan holda professional tarjima qiladi.\n\n"
+        "saqlagan holda tarjima qiladi.\n\n"
         "Xizmat tarkibiga quyidagilar kiradi:\n\n"
-        "• o‘zbek, rus va ingliz tillari o‘rtasida ilmiy tarjima;\n"
-        "• yo‘nalishingiz bo‘yicha mutaxassis-tarjimon tomonidan ishlash;\n"
-        "• ilmiy terminlarning to‘g‘ri va bir xil qo‘llanishini nazorat qilish;\n"
-        "• tarjimadan keyin akademik ingliz tilida yakuniy tahrir (proofreading);\n"
-        "• annotatsiya, kalit so‘zlar, jadval va rasmlar izohlarini ham tarjima qilish.\n\n"
+        "• o‘zbek, rus va ingliz tillari o‘rtasida ilmiy uslubda tarjima;\n"
+        "• soha terminologiyasiga mos aniq tarjima;\n"
+        "• annotatsiya va kalit so‘zlarni uch tilda tayyorlash;\n"
+        "• xalqaro jurnal talablariga mos akademik ingliz tili;\n"
+        "• tarjimadan keyin tahrir va korrektura.\n\n"
         "Narx va muddat matn hajmi va til juftligiga qarab belgilanadi.\n\n"
         "Tarjimaga buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? "
         "Quyidagi kerakli tugmani tanlang 👇"
+    ),
+    "board": (
+        "🏅 Tahririyatga a’zolik\n\n"
+        "Xalqaro jurnallar tahrir hay’ati yoki taqrizchilar safiga a’zo bo‘lishni xohlaysizmi? Arizangizni "
+        "tayyorlash va yuborishda yordam beramiz.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• ilmiy darajangiz va sohangizga mos jurnalni tanlash;\n"
+        "• akademik CV va ORCID profilini tayyorlash;\n"
+        "• tahririyat bilan muloqot va arizani yuborish;\n"
+        "• ariza tasdiqlangach, a’zolik sertifikatini olish.\n\n"
+        "A’zolik to‘g‘risidagi qarorni jurnal tahririyati qabul qiladi. Narx va muddat kelishiladi.\n\n"
+        "Ariza bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
+    ),
+    "isbn": (
+        "📕 ISBN va DOI olish\n\n"
+        "Monografiya, o‘quv qo‘llanma yoki maqolalar to‘plamini nashr qilyapsizmi? Rasmiy identifikatorlarni "
+        "olishda yordam beramiz.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• monografiya va o‘quv qo‘llanmalar uchun ISBN rasmiylashtirishga ko‘mak;\n"
+        "• maqola va to‘plamlar uchun DOI rasmiylashtirishga ko‘mak;\n"
+        "• kerakli hujjatlar va metama’lumotlarni tayyorlash.\n\n"
+        "Narx va muddat nashr turiga qarab kelishiladi.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
+    ),
+    "ehm": (
+        "💾 EHM dasturi va ma’lumotlar bazasi guvohnomasi\n\n"
+        "Kompyuter dasturi yoki ma’lumotlar bazasini yaratdingizmi? Uni rasmiy ro‘yxatdan o‘tkazish uchun "
+        "hujjatlarni tayyorlashda yordam beramiz.\n\n"
+        "Xizmat tarkibiga quyidagilar kiradi:\n\n"
+        "• ariza va dastur tavsifini tayyorlash;\n"
+        "• talab qilinadigan hujjatlar ro‘yxati bo‘yicha maslahat;\n"
+        "• hujjatlarni topshirishga tayyorlash.\n\n"
+        "Narx va muddat dastur hajmiga qarab kelishiladi.\n\n"
+        "Buyurtma bermoqchimisiz yoki bepul maslahat olmoqchimisiz? Quyidagi kerakli tugmani tanlang 👇"
     ),
 }
 
@@ -491,3 +495,52 @@ ARTICLE_ANNOUNCE = (
     "Hammuallif bo‘lishni istasangiz, quyidagi tugmani bosing — adminlarimiz siz bilan bog‘lanadi 👇"
 )
 ARTICLE_REJECTED = "❌ Afsuski, maqolangiz <b>#{id}</b> tasdiqlanmadi.\n\n«{title}»{reason}"
+
+# ---------- Ko'p beriladigan savollar ----------
+
+FAQ = "❓ <b>Ko‘p beriladigan savollar</b>\n\nSavolni tanlang 👇 Javob topa olmasangiz, bepul maslahat oling."
+
+# (tugma matni, javob)
+FAQ_ITEMS = [
+    (
+        "Soxta jurnalni qanday aniqlash mumkin?",
+        "• ISSN raqamini portal.issn.org saytida tekshiring — ro‘yxatda bo‘lmasa, ehtiyot bo‘ling.\n"
+        "• Scopus indeksatsiyasini faqat Scopus Sources ro‘yxatidan, Web of Science’ni Master Journal List’dan "
+        "tekshiring — jurnal saytidagi logotiplar dalil emas. Botdagi «🔎 Scopus’da jurnalni tekshirish» bo‘limidan "
+        "ham foydalanishingiz mumkin.\n"
+        "• Domen nomi taniqli jurnalnikiga juda o‘xshash, lekin biroz farq qilsa — bu «o‘g‘irlangan» (hijacked) "
+        "jurnal belgisi bo‘lishi mumkin.\n"
+        "• «3 kunda Scopus», «100% kafolat» kabi va’dalar va taqrizsiz nashr — jiddiy xavf belgisi.\n"
+        "• OAK tan olishini doim OAK rasmiy ro‘yxati va talablaridan tekshiring.",
+    ),
+    (
+        "Maqolani kim yozadi?",
+        "Maqola muallifning o‘z tadqiqoti, ma’lumotlari va ishtirokida tayyorlanadi. Biz reja, adabiyotlar sharhi, "
+        "tahlil, tahrir va rasmiylashtirishda yordam beramiz.",
+    ),
+    (
+        "Nashr qancha vaqt oladi?",
+        "Bu tanlangan jurnalning chiqish davriyligi va taqriz jarayoniga bog‘liq. Aniq muddatni buyurtma vaqtida "
+        "jurnal talablariga qarab aytamiz.",
+    ),
+    (
+        "Jurnallarni OAK tan oladimi?",
+        "Faqat OAK ro‘yxatiga kiritilgan nashrlar tan olinadi — har doim OAK rasmiy ro‘yxatidan tekshiring. Xalqaro "
+        "jurnallardan odatda Scopus va Web of Science bazalaridagilari hisobga olinadi.",
+    ),
+    (
+        "Plagiat foizi qancha bo‘lishi kerak?",
+        "Har bir jurnalning o‘z talabi bor. «🧾 Plagiatga tekshirish» xizmatimizda hisobot va o‘xshashlikni "
+        "kamaytirish bo‘yicha tavsiyalar beramiz.",
+    ),
+    (
+        "Sertifikat beriladimi?",
+        "Ko‘plab jurnal va konferensiyalar elektron sertifikat beradi, lekin bu har bir nashrning o‘z qoidasiga "
+        "bog‘liq. Buyurtma vaqtida aniqlashtiramiz.",
+    ),
+    (
+        "To‘lov qanday amalga oshiriladi?",
+        "Avval so‘rov qoldirasiz, menejer ish hajmi va narxni tasdiqlaydi, shundan keyin to‘lov tartibini "
+        "kelishasiz.",
+    ),
+]

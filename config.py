@@ -142,7 +142,9 @@ class Links:
         return Links(
             services={
                 key: env.str(f"URL_{key.upper()}", default="")
-                for key in ("scopus", "wos", "oak", "diss", "hirsh", "conf", "edit", "translate")
+                for key in (
+                    "scopus", "wos", "oak", "diss", "hirsh", "conf", "edit", "translate", "board", "isbn", "ehm",
+                )
             },
         )
 

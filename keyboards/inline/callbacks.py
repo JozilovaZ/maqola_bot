@@ -7,8 +7,13 @@ class Nav(CallbackData, prefix="nav"):
 
 
 class Service(CallbackData, prefix="svc"):
-    """key: scopus, wos, oak, diss, hirsh, conf"""
+    """key: keyboards.inline.services.SERVICE_BUTTONS dagi kalit (scopus, wos, oak ...)"""
     key: str
+
+
+class Faq(CallbackData, prefix="faq"):
+    """Ko'p beriladigan savollar: index — texts.FAQ_ITEMS dagi tartib raqami."""
+    index: int
 
 
 class Order(CallbackData, prefix="ord"):

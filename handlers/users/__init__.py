@@ -7,6 +7,7 @@ from handlers.users.admin_tools import admin_tools_router
 from handlers.users.coauthor import coauthor_router
 from handlers.users.contact import contact_router
 from handlers.users.echo import echo_router
+from handlers.users.faq import faq_router
 from handlers.users.journals import journals_router
 from handlers.users.plagiat import plagiat_router
 from handlers.users.registration import registration_router
@@ -28,6 +29,7 @@ routers_list = [
     scopus_router,
     journals_router,
     plagiat_router,
+    faq_router,
     contact_router,
     echo_router,
 ]

@@ -11,6 +11,7 @@ COMMANDS = [
     BotCommand(command="co_authorship", description="🤝 Scopus/WoS hammuallifligi"),
     BotCommand(command="journals", description="📚 Jurnallar javoni"),
     BotCommand(command="plagiat", description="🧾 Plagiatga tekshirish"),
+    BotCommand(command="faq", description="❓ Ko‘p beriladigan savollar"),
 ]
 
 

@@ -13,8 +13,7 @@ about_router = Router()
 
 SECTIONS = {
     "why": texts.ABOUT_WHY,
-    "guarantees": texts.ABOUT_GUARANTEES,
-    "reviews": texts.ABOUT_REVIEWS,
+    "process": texts.ABOUT_PROCESS,
 }
 
 
