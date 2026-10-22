@@ -255,7 +255,7 @@ async def cmd_export(message: Message, repo: RequestsRepo):
 
 MEDIA_LIST_TEXT = (
     "🖼 <b>Rasm va PDF'lar</b>\n\n"
-    "✅ — siz yuklagan, 🖼 — standart rasm, ➖ — yo‘q (bu joyda rasm yoki fayl yuborilmaydi).\n"
+    "✅ — yuklangan, ➖ — yo‘q (bu joyda rasm yoki fayl yuborilmaydi).\n"
     "Almashtirish yoki yuklash uchun tanlang:"
 )
 

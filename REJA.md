@@ -18,8 +18,7 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
 ```
 
 `.env` o'zgarsa ham `up -d` kerak (`restart` yangi `.env` ni o'qimaydi).
-Standart rasmlar (17 ta banner) git'dagi `media_default/` da — `git pull` bilan serverga tushadi.
-Admin `/media` orqali yuklagan rasmlar `media/` ga saqlanadi (git'ga kirmaydi) va standartdan ustun turadi.
+`media/` va `files/` git'ga kirmaydi — rasmlarni faqat admin `/media` orqali yuklaydi (yuklanmagan bo'limda rasm chiqmaydi).
 
 ## Hozirgi holat
 
@@ -49,12 +48,13 @@ Admin `/media` orqali yuklagan rasmlar `media/` ga saqlanadi (git'ga kirmaydi) v
 - /stat — statistika; /broadcast — hammaga yoki bitta yo'nalishga xabar.
 - /shelf — jurnallar javonini boshqarish; /articles, /article_N — hammualliflik maqolalari (tasdiqlash, rad etish,
   yopish, narxlarni o'zgartirish); /topics — eski hammualliflik mavzulari.
-- /media — rasm va PDF'larni yuklash (17 ta rasm joyi; ✅ yuklangan, 🖼 standart, ➖ yo'q).
+- /media — rasm va PDF'larni yuklash (17 ta rasm joyi).
 - Admin "✉️ Foydalanuvchidan xabar" yoki "🆕 Yangi ariza" xabariga reply qilsa, javob foydalanuvchiga boradi.
 
 ## Ochiq masalalar
 
 - [ ] **Scopus API kaliti** → serverdagi `.env` dagi `SCOPUS_API_KEY`
+- [ ] **Rasmlar** (ixtiyoriy) — kerak bo'lsa admin `/media` orqali yuklaydi
 - [ ] **Bot tokenini yangilash** (BotFather → /revoke), agar token biror joyda ko'ringan bo'lsa
 - [ ] **Hammualliflik:** eski mavzular tizimi (/topics) kerakmi; pullik o'rinlar "ilmiy halollik" tamoyiliga mosmi
 - [ ] **Xizmat havolalari** (ixtiyoriy, https) → `.env`: URL_SCOPUS, URL_WOS, ... (bo'sh bo'lsa tugma chiqmaydi)
