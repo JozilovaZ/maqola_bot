@@ -14,5 +14,6 @@ def main_menu_kb() -> InlineKeyboardMarkup:
     keyboard.button(text="🧾 Plagiatga tekshirish", callback_data=Nav(to="plagiat"))
     keyboard.button(text="🤝 Hammualliflik", callback_data=Nav(to="coauth"))
     keyboard.button(text="❓ Savollar", callback_data=Nav(to="faq"))
-    keyboard.adjust(1, 2, 1, 2, 2)
+    keyboard.button(text="🔤 Yangi alifboga o‘girish", callback_data=Nav(to="alphabet"))
+    keyboard.adjust(1, 2, 1, 2, 2, 1)
     return keyboard.as_markup()

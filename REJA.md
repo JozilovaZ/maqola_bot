@@ -36,6 +36,9 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
   va «Zayavka qoldirish»; sayt havolasi zayavka qabul qilingandan keyin beriladi. Ma'lumot /shelf orqali yoziladi.
   Boshlang'ich 200 ta nashr "Ilmiy nashrlar javoni" katalogidan (migratsiya `b9e2f4a6c8d1`).
 - **Plagiatga tekshirish** (/plagiat): .doc/.docx/.pdf fayl adminlarga to'liq profil bilan boradi.
+- **Yangi alifboga o'girish** (/alifbo, bepul, ariza yaratmaydi): .docx (formatlash saqlanadi), .txt yoki matn →
+  oʻ→ö, gʻ→ğ, sh→ş, ch→ç (OʻRQ–1184). Inglizcha xatboshi va inglizcha ko'rinishdagi so'zlar o'tkazib yuboriladi
+  (services/alphabet.py, taxminiy). Kirill matn o'girilmaydi.
 - **Hammualliflik** (/co_authorship): foydalanuvchi maqola joylaydi (sarlavha → yo'nalish → baza → annotatsiya →
   o'rinlar narxi → fayl), admin tasdiqlaydi; boshqalar yo'nalish bo'yicha ko'rib "Hammuallif bo'lish"ni bosadi.
   Tasdiqlangan maqola haqida shu yo'nalishdagilarga xabar yuboriladi. Eski mavzular tizimi (/topics) ham turibdi.

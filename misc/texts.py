@@ -13,6 +13,7 @@ MAIN_MENU = GREETING + (
     "💬 Bepul maslahat olishingiz\n"
     "📚 Yo‘nalishingiz bo‘yicha jurnallar ro‘yxatini ko‘rishingiz\n"
     "🧾 Maqolangizni plagiatga tekshirtirishingiz\n"
+    "🔤 Maqolangizni yangi o‘zbek alifbosiga o‘girishingiz\n"
     "🤝 Scopus/Web of Science’da hammualliflik mavzularini ko‘rib chiqishingiz\n"
     "❓ Ko‘p beriladigan savollarga javob topishingiz mumkin\n\n"
     "Kerakli bo‘limni tanlang — men sizga mamnuniyat bilan yordam beraman."
@@ -431,6 +432,37 @@ JOURNAL_UNAVAILABLE = "Bu jurnal javondan olib tashlangan."
 JOURNAL_SITE ="🔗 Kutish davomida jurnal sayti bilan tanishib chiqishingiz mumkin:"
 
 # ---------- Plagiatga tekshirish ----------
+
+ALPHABET = (
+    "🔤 <b>Yangi alifboga o‘girish</b>\n\n"
+    "Maqolangizni yangi o‘zbek lotin alifbosiga bepul o‘girib beramiz "
+    "(2026-yil 21-oktyabrdagi OʻRQ–1184-son Qonun).\n\n"
+    "Almashtiriladi: <b>oʻ → ö</b>, <b>gʻ → ğ</b>, <b>sh → ş</b>, <b>ch → ç</b>. "
+    "Tutuq belgisi (maʼlumot, sanʼat) va «ng» o‘zgarmaydi.\n\n"
+    "📎 <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring (20 MB gacha) yoki matnni shu yerga yozing. "
+    "Word faylda shrift, jadval va rasmlar joyida qoladi."
+)
+ALPHABET_WRONG = (
+    "Iltimos, <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring yoki matnni yozing.\n\n"
+    "Eski <b>.doc</b> faylni Word’da ochib, «Saqlash» → <b>.docx</b> qilib saqlang. "
+    "PDF’dan matnni formatlashsiz o‘girish uchun uni nusxalab shu yerga yozing."
+)
+ALPHABET_TOO_BIG = "Fayl 20 MB dan katta. Iltimos, kichikroq fayl yuboring."
+ALPHABET_BROKEN = "Faylni ochib bo‘lmadi. U buzilmaganini tekshirib, qaytadan yuboring."
+ALPHABET_DONE = (
+    "✅ Tayyor! {changed} ta so‘z yangi alifboga o‘girildi.\n\n"
+    "⚠️ Inglizcha matn (adabiyotlar ro‘yxati, annotatsiya) o‘zgartirilmaydi, lekin o‘zbekcha gap ichidagi "
+    "chet so‘zlar va atoqli otlarni ko‘zdan kechiring.\n\n"
+    "Yana fayl yoki matn yuborishingiz mumkin."
+)
+ALPHABET_NOTHING = (
+    "Matnda o‘zgartiradigan harf topilmadi (oʻ, gʻ, sh, ch).\n\n"
+    "Matn allaqachon yangi alifboda yoki inglizcha bo‘lishi mumkin."
+)
+ALPHABET_CYRILLIC = (
+    "Matn <b>kirill</b> yozuvida ko‘rinadi. Hozircha bot faqat amaldagi lotin yozuvidagi matnni yangi "
+    "alifboga o‘giradi."
+)
 
 PLAGIAT = (
     "🧾 <b>Plagiatga tekshirish</b>\n\n"

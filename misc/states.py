@@ -32,6 +32,11 @@ class PlagiatCheck(StatesGroup):
     file = State()
 
 
+class AlphabetConvert(StatesGroup):
+    """Yangi alifboga o'girish: fayl yoki matn kutilmoqda (bir nechta ketma-ket yuborish mumkin)."""
+    text = State()
+
+
 class AddJournal(StatesGroup):
     title = State()
     base = State()
