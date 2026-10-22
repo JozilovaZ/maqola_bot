@@ -137,6 +137,22 @@ class Scopus:
 
 
 @dataclass
+class Savodxon:
+    """Imlo tekshiruvi (Claude API, console.anthropic.com). Kalit bo'sh bo'lsa, xizmat "vaqtincha ishlamayapti"."""
+    api_key: str
+    model: str
+    daily_limit: int  # bitta foydalanuvchi kuniga necha marta tekshira oladi (adminlarga cheklov yo'q)
+
+    @staticmethod
+    def from_env(env: Env):
+        return Savodxon(
+            api_key=env.str("ANTHROPIC_API_KEY", default=""),
+            model=env.str("SAVODXON_MODEL", default="claude-opus-5-5"),
+            daily_limit=env.int("SAVODXON_DAILY_LIMIT", default=5),
+        )
+
+
+@dataclass
 class Links:
     """Mini App (web app) havolalari. https bo'lishi shart; bo'sh bo'lsa tugma ko'rsatilmaydi."""
     services: dict[str, str]
@@ -159,6 +175,7 @@ class Config:
     misc: Miscellaneous
     links: Links
     scopus: Scopus
+    savodxon: Savodxon
     db: Optional[DbConfig] = None
     redis: Optional[RedisConfig] = None
 
@@ -178,6 +195,7 @@ def load_config(path: str = None) -> Config:
             misc=Miscellaneous(),
             links=Links.from_env(env),
             scopus=Scopus.from_env(env),
+            savodxon=Savodxon.from_env(env),
             db=DbConfig.from_env(env),
             # redis=RedisConfig.from_env(env),  # Agar Redis ishlatilsa
         )

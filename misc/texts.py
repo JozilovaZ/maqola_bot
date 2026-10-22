@@ -438,7 +438,8 @@ TEXT_TOOLS = (
     "✏️ <b>Maqolani tahrirlash</b> — ilmiy uslub, grammatika va jurnal talablariga moslash (mutaxassis bajaradi).\n"
     "🌐 <b>Maqolani tarjima qilish</b> — o‘zbek, rus va ingliz tillari o‘rtasida (mutaxassis bajaradi).\n"
     "🔤 <b>Yangi alifboga o‘girish</b> — bepul, bir zumda.\n"
-    "🔁 <b>Lotin ↔ Kirill</b> — bepul, bir zumda.\n\n"
+    "🔁 <b>Lotin ↔ Kirill</b> — bepul, bir zumda.\n"
+    "📝 <b>Savodxon</b> — imlo xatolarini topib tuzatish, bepul.\n\n"
     "Kerakli xizmatni tanlang 👇"
 )
 
@@ -477,6 +478,31 @@ ALPHABET_DONE = (
     "(masalan, litsey → лицей) va atoqli otlarni ko‘zdan kechiring.\n\n"
     "Yana fayl yoki matn yuborishingiz mumkin."
 )
+SAVODXON = (
+    "📝 <b>Savodxon — imlo tekshiruvi</b>\n\n"
+    "Matningizdagi imlo xatolarini sun’iy intellekt yordamida topib, tuzatib beramiz: harfi tushib qolgan "
+    "so‘zlar, qo‘shib va ajratib yozish, tutuq belgisi va boshqalar. Lotin, yangi alifbo va kirill yozuvidagi "
+    "matnlar tekshiriladi. Uslub va tinish belgilari tekshirilmaydi.\n\n"
+    "Word faylda tuzatilgan so‘zlar <b>sariq rang</b> bilan belgilanadi.\n\n"
+    "📎 <b>Word (.docx)</b> yoki <b>.txt</b> fayl yuboring (taxminan 25 betgacha) yoki matnni shu yerga yozing. "
+    "Kuniga {limit} marta bepul."
+)
+SAVODXON_WAIT = "⏳ Matn tekshirilmoqda, bu bir-ikki daqiqa olishi mumkin…"
+SAVODXON_BUSY = "⏳ Oldingi matn hali tekshirilmoqda. Tugashini kuting."
+SAVODXON_DONE = (
+    "✅ Tekshiruv tugadi: {total} joyda imlo xatosi tuzatildi.\n\n"
+    "{items}\n\n"
+    "⚠️ Sun’iy intellekt ham adashishi mumkin — tuzatishlarni ko‘zdan kechiring."
+)
+SAVODXON_MORE = "… va yana {count} ta"
+SAVODXON_CLEAN = "✅ Imlo xatosi topilmadi."
+SAVODXON_LIMIT = (
+    "Bugungi bepul tekshiruvlar tugadi ({limit} ta). Ertaga yana urinib ko‘ring yoki "
+    "«✏️ Maqolani tahrirlash» xizmatidan foydalaning — mutaxassis matnni to‘liq tahrir qiladi."
+)
+SAVODXON_TOO_LONG = "Matn juda uzun (taxminan 25 betdan ko‘p). Iltimos, uni qismlarga bo‘lib yuboring."
+SAVODXON_OFF = "Imlo tekshiruvi vaqtincha ishlamayapti. Birozdan keyin urinib ko‘ring."
+
 ALPHABET_NOTHING = (
     "Matnda o‘giradigan so‘z topilmadi.\n\n"
     "Matn allaqachon kerakli yozuvda yoki inglizcha bo‘lishi mumkin."

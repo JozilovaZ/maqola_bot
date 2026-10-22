@@ -38,6 +38,11 @@ class AlphabetConvert(StatesGroup):
     text = State()
 
 
+class SavodxonCheck(StatesGroup):
+    """Imlo tekshiruvi: fayl yoki matn kutilmoqda."""
+    text = State()
+
+
 class AddJournal(StatesGroup):
     title = State()
     base = State()

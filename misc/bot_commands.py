@@ -14,6 +14,7 @@ COMMANDS = [
     BotCommand(command="matn", description="✍️ Matn bilan ishlash: tahrir, tarjima, alifbo"),
     BotCommand(command="alifbo", description="🔤 Maqolani yangi alifboga o‘girish"),
     BotCommand(command="kirill", description="🔁 Lotin ↔ Kirill"),
+    BotCommand(command="savodxon", description="📝 Imlo xatolarini tekshirish"),
     BotCommand(command="faq", description="❓ Ko‘p beriladigan savollar"),
 ]
 

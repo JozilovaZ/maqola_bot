@@ -42,6 +42,10 @@ cd ~/maqola_bot && git pull && docker compose up -d --build
   - /alifbo — yangi alifbo: oʻ→ö, gʻ→ğ, sh→ş, ch→ç (OʻRQ–1184); kirill matn ham to'g'ridan-to'g'ri yangi alifboga.
   - /kirill — Lotin ↔ Kirill, yo'nalish matnning qaysi yozuvi ko'pligiga qarab.
   Inglizcha xatboshi/so'zlar, havolalar, email, ISSN/DOI o'tkazib yuboriladi (services/alphabet.py, taxminiy).
+  - /savodxon — imlo tekshiruvi (Claude API, `ANTHROPIC_API_KEY`; kalit bo'lmasa "vaqtincha ishlamayapti").
+    Model faqat xatolar ro'yxatini qaytaradi, bot ularni o'zi qo'yadi: Word'da formatlash saqlanadi, tuzatilgan
+    so'z sariq. ~25 betgacha, 8000 belgili bo'laklar parallel; kuniga `SAVODXON_DAILY_LIMIT` marta (adminlarga
+    cheklovsiz, hisob xotirada — qayta ishga tushganda nolga qaytadi). Model: `SAVODXON_MODEL`.
 - **Hammualliflik** (/co_authorship): foydalanuvchi maqola joylaydi (sarlavha → yo'nalish → baza → annotatsiya →
   o'rinlar narxi → fayl), admin tasdiqlaydi; boshqalar yo'nalish bo'yicha ko'rib "Hammuallif bo'lish"ni bosadi.
   Tasdiqlangan maqola haqida shu yo'nalishdagilarga xabar yuboriladi. Eski mavzular tizimi (/topics) ham turibdi.
