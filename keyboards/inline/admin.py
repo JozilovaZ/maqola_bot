@@ -10,7 +10,7 @@ from misc.media import PDF_SLOTS, PHOTO_SLOTS
 def media_list_kb() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
     for key, label in {**PHOTO_SLOTS, **PDF_SLOTS}.items():
-        mark = "✅" if media.find(key) else "➖"
+        mark = "✅" if media.uploaded(key) else "🖼" if media.default(key) else "➖"
         keyboard.button(text=f"{mark} {label}", callback_data=MediaSlot(action="open", key=key))
     keyboard.adjust(1)
     return keyboard.as_markup()
@@ -18,8 +18,9 @@ def media_list_kb() -> InlineKeyboardMarkup:
 
 def media_slot_kb(key: str) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
-    if media.find(key):
-        keyboard.button(text="🗑 O‘chirish", callback_data=MediaSlot(action="delete", key=key))
+    if media.uploaded(key):
+        text = "🗑 O‘chirish (standart rasm qaytadi)" if media.default(key) else "🗑 O‘chirish"
+        keyboard.button(text=text, callback_data=MediaSlot(action="delete", key=key))
     keyboard.button(text="⬅️ Ro‘yxat", callback_data=MediaSlot(action="list"))
     keyboard.adjust(1)
     return keyboard.as_markup()

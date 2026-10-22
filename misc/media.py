@@ -1,7 +1,8 @@
 """Rasm va fayllarni yuborish hamda admin yuklagan fayllarni saqlash.
 
 Rasmlar media/ papkasida, PDF'lar files/ papkasida nomi bo'yicha qidiriladi (hero.jpg, hero.png —
-kengaytmasi farqi yo'q). Fayl bo'lmasa, hech narsa yuborilmaydi.
+kengaytmasi farqi yo'q). media/ da rasm bo'lmasa, git'dagi media_default/ dan standart rasm olinadi;
+u ham bo'lmasa, hech narsa yuborilmaydi.
 PDF admin yuklagan asl nomi bilan saqlanadi: <joy>__<asl nom>.pdf — foydalanuvchi asl nomni ko'radi.
 Telegram qaytargan file_id keshlanadi, fayl qayta yuklanmaydi.
 """
@@ -14,6 +15,8 @@ from aiogram.types import FSInputFile, Message
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_DIR = BASE_DIR / "media"
 FILES_DIR = BASE_DIR / "files"
+# Standart rasmlar (git'da saqlanadi): admin /media orqali yuklagan rasm ulardan ustun turadi
+DEFAULT_DIR = BASE_DIR / "media_default"
 
 # /media da ko'rinadigan joylar: nom → admin uchun tavsif
 PHOTO_SLOTS = {
@@ -51,9 +54,21 @@ def _all_files(name: str) -> list[Path]:
     return sorted(p for p in found if p.is_file())
 
 
+def uploaded(name: str) -> bool:
+    """Admin /media orqali yuklagan fayl bormi (standart rasm hisobga olinmaydi)."""
+    return bool(_all_files(name))
+
+
+def default(name: str) -> Optional[Path]:
+    if name not in PHOTO_SLOTS:
+        return None
+    files = sorted(p for p in DEFAULT_DIR.glob(f"{name}.*") if p.is_file())
+    return files[0] if files else None
+
+
 def find(name: str) -> Optional[Path]:
     files = _all_files(name)
-    return files[0] if files else None
+    return files[0] if files else default(name)
 
 
 def _display_name(path: Path) -> str:
