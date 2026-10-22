@@ -19,13 +19,18 @@ def journal_directions_kb(directions: list[Direction], counts: dict[int, int]) -
     return keyboard.as_markup()
 
 
-def journals_page_kb(direction_id: int, page: int, has_next: bool) -> InlineKeyboardMarkup:
+def journals_page_kb(
+    direction_id: int, page: int, has_next: bool, links: list[tuple[int, Journal]]
+) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
+    # Matndagi yashirin havola "Ochilsinmi?" deb so'raydi, URL tugma esa darhol ochiladi
+    for number, journal in links:
+        keyboard.button(text=f"{number}. {journal.title}", url=journal.url)
     if page > 0:
         keyboard.button(text="⬅️ Oldingi", callback_data=JournalPage(direction_id=direction_id, page=page - 1))
     if has_next:
         keyboard.button(text="Keyingi ➡️", callback_data=JournalPage(direction_id=direction_id, page=page + 1))
-    keyboard.adjust(2)
+    keyboard.adjust(*[1] * len(links), 2)
     keyboard.row(InlineKeyboardButton(text="💬 Bepul maslahat", callback_data=Nav(to="consult").pack()))
     keyboard.row(InlineKeyboardButton(text="📚 Yo‘nalishlar", callback_data=Nav(to="journals").pack()))
     return keyboard.as_markup()
