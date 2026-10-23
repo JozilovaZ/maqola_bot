@@ -111,6 +111,6 @@ async def journal_apply(
         call.message, state, user, repo, bot, config, texts.JOURNAL_APPLY, reason="journal",
         details=f"Jurnal #{journal.id}: {journal.title} ({journal.base})",
     )
-    # Sayt havolasi zayavka qabul qilingandan keyin beriladi (raqam bazada bo'lsa ariza darhol yaratiladi)
+    # Sayt havolasi ariza qabul qilingandan keyin beriladi (raqam bazada bo'lsa ariza darhol yaratiladi)
     if user.phone and journal.url:
         await call.message.answer(texts.JOURNAL_SITE, reply_markup=journal_site_kb(journal))

@@ -20,7 +20,7 @@ REASON_TITLES = {
     "audit": "📝 Maqola auditi (Scopus tekshiruvidan)",
     "plagiat": "🧾 Plagiatga tekshirish",
     "coauth_article": "🤝 Maqolaga hammuallif bo‘lish",
-    "journal": "📚 Jurnalga zayavka",
+    "journal": "📚 Jurnalga ariza",
 }
 
 STATUS_TITLES = {

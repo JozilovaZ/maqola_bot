@@ -18,7 +18,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 # «Ilmiy nashrlar javoni» katalogidan: (jurnal nomi, kartochkadagi ma'lumot) —
 # tavsif, qisqartma, toifa, davriylik, indeksatsiya, DOI, til, hamkor muassasalar.
-# Sayt havolasi va nashriyot domeni ataylab yozilmagan (havola zayavkadan keyin beriladi).
+# Sayt havolasi va nashriyot domeni ataylab yozilmagan (havola arizadan keyin beriladi).
 DESCRIPTIONS = [
     ('American Journal of Public Diplomacy and International Studies', 'Jamoatchilik diplomatiyasi, xalqaro munosabatlar, mediatadqiqotlar va milliy brending boʻyicha ochiq kirishli jurnal.\n\n🔤 Qisqartma: AJPDIS\n🌍 Toifa: Xalqaro nashr'),
     ('American Journal of Pediatric Medicine and Health Sciences', 'Bolalar va oʻsmirlar kasalliklari tashxisi, davolash va profilaktikasi.\n\n🔤 Qisqartma: AJPMHS\n🌍 Toifa: Xalqaro nashr'),

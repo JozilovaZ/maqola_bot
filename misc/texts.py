@@ -421,7 +421,7 @@ JOURNALS = (
 )
 JOURNALS_EMPTY = "Bu yo‘nalish bo‘yicha hozircha jurnal qo‘shilmagan. Tez orada to‘ldiriladi."
 JOURNALS_HINT = (
-    "\nJurnal haqida batafsil ma’lumot olish va zayavka qoldirish uchun uni pastdan tanlang.\n\n"
+    "\nJurnal haqida batafsil ma’lumot olish va ariza qoldirish uchun uni pastdan tanlang.\n\n"
     "Mos jurnal tanlashda yordam kerakmi? Bepul maslahat oling 👇"
 )
 JOURNAL_NO_DESCRIPTION = "Bu jurnal haqida qisqacha ma’lumot hali kiritilmagan."
@@ -431,8 +431,8 @@ JOURNAL_CARD_HELP = (
     "• Maqolani jurnal shabloni va talablariga moslashtirishda yordam beramiz.\n"
     "• Tarjima, tahrir va plagiat tekshiruvi xizmatlaridan ham foydalanishingiz mumkin."
 )
-JOURNAL_CARD_HINT = "Shu jurnalda maqola chop etmoqchimisiz? Zayavka qoldiring 👇"
-JOURNAL_APPLY = "📝 Jurnalga zayavka qoldirish uchun telefon raqamingizni qoldiring 👇"
+JOURNAL_CARD_HINT = "Shu jurnalda maqola chop etmoqchimisiz? Ariza qoldiring 👇"
+JOURNAL_APPLY = "📝 Jurnalga ariza qoldirish uchun telefon raqamingizni qoldiring 👇"
 JOURNAL_UNAVAILABLE = "Bu jurnal javondan olib tashlangan."
 JOURNAL_SITE ="🔗 Kutish davomida jurnal sayti bilan tanishib chiqishingiz mumkin:"
 

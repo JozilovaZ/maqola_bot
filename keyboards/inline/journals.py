@@ -23,7 +23,7 @@ def journals_page_kb(
     direction_id: int, page: int, has_next: bool, journals: list[tuple[int, Journal]]
 ) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
-    # Tugma jurnal kartochkasini ochadi: avval ma'lumot va zayavka, sayt — zayavkadan keyin
+    # Tugma jurnal kartochkasini ochadi: avval ma'lumot va ariza, sayt — arizadan keyin
     for number, journal in journals:
         keyboard.button(text=f"{number}. {journal.title}", callback_data=JournalView(id=journal.id, page=page))
     if page > 0:
@@ -38,7 +38,7 @@ def journals_page_kb(
 
 def journal_card_kb(journal: Journal, page: int) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
-    keyboard.button(text="📝 Zayavka qoldirish", callback_data=JournalApply(id=journal.id))
+    keyboard.button(text="📝 Ariza qoldirish", callback_data=JournalApply(id=journal.id))
     keyboard.button(text="💬 Bepul maslahat", callback_data=Nav(to="consult"))
     keyboard.button(text="⬅️ Ro‘yxatga qaytish", callback_data=JournalPage(direction_id=journal.direction_id, page=page))
     keyboard.adjust(1)

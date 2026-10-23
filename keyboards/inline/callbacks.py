@@ -40,7 +40,7 @@ class JournalView(CallbackData, prefix="jrn_v"):
 
 
 class JournalApply(CallbackData, prefix="jrn_a"):
-    """Foydalanuvchi jurnalga maqola chop etish uchun zayavka qoldiradi."""
+    """Foydalanuvchi jurnalga maqola chop etish uchun ariza qoldiradi."""
     id: int
 
 
