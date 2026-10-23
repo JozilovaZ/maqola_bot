@@ -424,7 +424,13 @@ JOURNALS_HINT = (
     "\nJurnal haqida batafsil ma’lumot olish va zayavka qoldirish uchun uni pastdan tanlang.\n\n"
     "Mos jurnal tanlashda yordam kerakmi? Bepul maslahat oling 👇"
 )
-JOURNAL_NO_DESCRIPTION = "Jurnalning talablari, nashr muddatlari va narxi haqida menejerimiz batafsil ma’lumot beradi."
+JOURNAL_NO_DESCRIPTION = "Bu jurnal haqida qisqacha ma’lumot hali kiritilmagan."
+JOURNAL_CARD_HELP = (
+    "✍️ <b>Muallifga</b>\n"
+    "• Jurnal talablari, nashr muddatlari va narxi haqida menejerimiz batafsil ma’lumot beradi.\n"
+    "• Maqolani jurnal shabloni va talablariga moslashtirishda yordam beramiz.\n"
+    "• Tarjima, tahrir va plagiat tekshiruvi xizmatlaridan ham foydalanishingiz mumkin."
+)
 JOURNAL_CARD_HINT = "Shu jurnalda maqola chop etmoqchimisiz? Zayavka qoldiring 👇"
 JOURNAL_APPLY = "📝 Jurnalga zayavka qoldirish uchun telefon raqamingizni qoldiring 👇"
 JOURNAL_UNAVAILABLE = "Bu jurnal javondan olib tashlangan."

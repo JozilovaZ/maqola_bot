@@ -33,6 +33,8 @@ def render_card(journal: Journal, direction_title: str) -> str:
         "",
         escape(journal.description) if journal.description else texts.JOURNAL_NO_DESCRIPTION,
         "",
+        texts.JOURNAL_CARD_HELP,
+        "",
         texts.JOURNAL_CARD_HINT,
     ])
 
